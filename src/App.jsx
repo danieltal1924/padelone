@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import * as THREE from "three";
 
 // ─── TRANSLATIONS ─────────────────────────────────────────────────────────────
 const LANG = {
@@ -69,74 +68,157 @@ const LANG = {
   }
 };
 
-// ─── 3D COURT ────────────────────────────────────────────────────────────────
+// ─── 3D COURT (Three.js via CDN) ─────────────────────────────────────────────
 function PadelCourtCanvas() {
   const mountRef = useRef(null);
+
   useEffect(() => {
     const mount = mountRef.current;
     if (!mount) return;
-    let renderer, animId;
-    try {
-      const w = window.innerWidth, h = window.innerHeight;
-      renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-      renderer.setSize(w, h);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-      mount.appendChild(renderer.domElement);
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 100);
-      camera.position.set(0, 8, 14); camera.lookAt(0, 0, 0);
-      scene.add(new THREE.AmbientLight(0x0a1628, 1));
-      const spots = [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].map(([x,y,z]) => {
-        const s = new THREE.SpotLight(0xdde8ff, 2.5, 28, Math.PI/5, 0.4);
-        s.position.set(x,y,z); scene.add(s); return s;
-      });
-      scene.add(Object.assign(new THREE.PointLight(0x2244aa,1.2,18), {position:{x:0,y:1,z:0}}));
-      const court = new THREE.Group(); scene.add(court);
-      const mesh = (geo,mat,x=0,y=0,z=0) => { const m=new THREE.Mesh(geo,mat); m.position.set(x,y,z); court.add(m); return m; };
-      mesh(new THREE.BoxGeometry(10,0.12,20), new THREE.MeshStandardMaterial({color:0x060f20,roughness:0.4}));
-      const lm = new THREE.MeshStandardMaterial({color:0xe0ecff,emissive:0x8899cc,emissiveIntensity:0.5});
-      mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,-4.9,0,0); mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,4.9,0,0);
-      mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-9.9); mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,9.9);
-      mesh(new THREE.BoxGeometry(0.07,0.13,10),lm); mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-3.3); mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,3.3);
-      mesh(new THREE.BoxGeometry(10,0.85,0.05), new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.3,wireframe:true}), 0,0.47,0);
-      const gm = new THREE.MeshStandardMaterial({color:0x0a1e3a,transparent:true,opacity:0.13});
-      mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,-9.85); mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,9.85);
-      mesh(new THREE.BoxGeometry(0.08,3,20),gm,-4.85,1.5,0); mesh(new THREE.BoxGeometry(0.08,3,20),gm,4.85,1.5,0);
-      const sm = new THREE.MeshStandardMaterial({color:0xbbd0f0,emissive:0x6688bb,emissiveIntensity:1.8});
-      mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,-4.88,3,0); mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,4.88,3,0);
-      mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,-9.88); mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,9.88);
-      const pm = new THREE.MeshStandardMaterial({color:0x1a2a3a,metalness:0.85});
-      const fm = new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xddeeff,emissiveIntensity:2});
-      [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].forEach(([x,,z]) => {
-        mesh(new THREE.CylinderGeometry(0.05,0.07,7,6),pm,x,3.5,z);
-        mesh(new THREE.BoxGeometry(0.5,0.09,0.18),fm,x,7.15,z);
-      });
-      const ball = mesh(new THREE.SphereGeometry(0.19,16,16), new THREE.MeshStandardMaterial({color:0xd0e0f8,metalness:0.6,roughness:0.2,emissive:0x3355aa,emissiveIntensity:0.4}), 1.5,2.5,-2);
-      ball.add(new THREE.PointLight(0x5577cc,1.2,5));
-      const pArr = new Float32Array(60*3);
-      for(let i=0;i<60;i++){pArr[i*3]=(Math.random()-.5)*22;pArr[i*3+1]=Math.random()*10;pArr[i*3+2]=(Math.random()-.5)*26;}
-      const pg = new THREE.BufferGeometry(); pg.setAttribute("position",new THREE.BufferAttribute(pArr,3));
-      const pts = new THREE.Points(pg, new THREE.PointsMaterial({color:0x7799bb,size:0.055,transparent:true,opacity:0.4}));
-      scene.add(pts);
-      court.rotation.x = -0.18;
-      let t2 = 0;
-      const animate = () => {
-        animId = requestAnimationFrame(animate); t2+=0.006;
-        court.rotation.y = Math.sin(t2*0.28)*0.24;
-        ball.position.y = 2+Math.sin(t2*2)*0.55;
-        ball.position.x = Math.cos(t2*1.1)*2.2;
-        ball.rotation.x += 0.018;
-        spots.forEach((s,i)=>{ s.intensity=2.3+Math.sin(t2*1.1+i*.7)*.3; });
-        pts.rotation.y += 0.0005;
-        renderer.render(scene,camera);
-      };
-      animate();
-      const onResize = () => { const nw=window.innerWidth,nh=window.innerHeight; camera.aspect=nw/nh; camera.updateProjectionMatrix(); renderer.setSize(nw,nh); };
-      window.addEventListener("resize",onResize);
-      return () => { cancelAnimationFrame(animId); window.removeEventListener("resize",onResize); try{if(mount.contains(renderer.domElement))mount.removeChild(renderer.domElement);renderer.dispose();}catch(e){} };
-    } catch(e) { console.error("3D error:",e); }
-  },[]);
-  return <div ref={mountRef} style={{position:"fixed",inset:0,zIndex:0,opacity:0.35,pointerEvents:"none"}}/>;
+
+    // Load Three.js from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      const THREE = window.THREE;
+      if (!THREE) return;
+
+      let renderer, animId;
+      try {
+        const w = window.innerWidth, h = window.innerHeight;
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(w, h);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+        mount.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 100);
+        camera.position.set(0, 8, 14);
+        camera.lookAt(0, 0, 0);
+
+        scene.add(new THREE.AmbientLight(0x0a1628, 1));
+
+        const spots = [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].map(([x,y,z]) => {
+          const s = new THREE.SpotLight(0xdde8ff, 2.5, 28, Math.PI/5, 0.4);
+          s.position.set(x, y, z);
+          scene.add(s);
+          return s;
+        });
+
+        const rim = new THREE.PointLight(0x2244aa, 1.2, 18);
+        rim.position.set(0, 1, 0);
+        scene.add(rim);
+
+        const court = new THREE.Group();
+        scene.add(court);
+
+        const mesh = (geo, mat, x=0, y=0, z=0) => {
+          const m = new THREE.Mesh(geo, mat);
+          m.position.set(x, y, z);
+          court.add(m);
+          return m;
+        };
+
+        mesh(new THREE.BoxGeometry(10,0.12,20), new THREE.MeshStandardMaterial({color:0x060f20,roughness:0.4}));
+
+        const lm = new THREE.MeshStandardMaterial({color:0xe0ecff,emissive:0x8899cc,emissiveIntensity:0.5});
+        mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,-4.9,0,0);
+        mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,4.9,0,0);
+        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-9.9);
+        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,9.9);
+        mesh(new THREE.BoxGeometry(0.07,0.13,10),lm);
+        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-3.3);
+        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,3.3);
+
+        mesh(new THREE.BoxGeometry(10,0.85,0.05),
+          new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.3,wireframe:true}),
+          0,0.47,0);
+
+        const gm = new THREE.MeshStandardMaterial({color:0x0a1e3a,transparent:true,opacity:0.13});
+        mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,-9.85);
+        mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,9.85);
+        mesh(new THREE.BoxGeometry(0.08,3,20),gm,-4.85,1.5,0);
+        mesh(new THREE.BoxGeometry(0.08,3,20),gm,4.85,1.5,0);
+
+        const sm = new THREE.MeshStandardMaterial({color:0xbbd0f0,emissive:0x6688bb,emissiveIntensity:1.8});
+        mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,-4.88,3,0);
+        mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,4.88,3,0);
+        mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,-9.88);
+        mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,9.88);
+
+        const pm = new THREE.MeshStandardMaterial({color:0x1a2a3a,metalness:0.85});
+        const fm = new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xddeeff,emissiveIntensity:2});
+        [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].forEach(([x,,z]) => {
+          mesh(new THREE.CylinderGeometry(0.05,0.07,7,6),pm,x,3.5,z);
+          mesh(new THREE.BoxGeometry(0.5,0.09,0.18),fm,x,7.15,z);
+        });
+
+        const ball = mesh(
+          new THREE.SphereGeometry(0.19,16,16),
+          new THREE.MeshStandardMaterial({color:0xd0e0f8,metalness:0.6,roughness:0.2,emissive:0x3355aa,emissiveIntensity:0.4}),
+          1.5, 2.5, -2
+        );
+        ball.add(new THREE.PointLight(0x5577cc,1.2,5));
+
+        const pArr = new Float32Array(60*3);
+        for(let i=0;i<60;i++){
+          pArr[i*3]=(Math.random()-.5)*22;
+          pArr[i*3+1]=Math.random()*10;
+          pArr[i*3+2]=(Math.random()-.5)*26;
+        }
+        const pg = new THREE.BufferGeometry();
+        pg.setAttribute("position", new THREE.BufferAttribute(pArr,3));
+        const pts = new THREE.Points(pg, new THREE.PointsMaterial({color:0x7799bb,size:0.055,transparent:true,opacity:0.4}));
+        scene.add(pts);
+
+        court.rotation.x = -0.18;
+        let t2 = 0;
+
+        const animate = () => {
+          animId = requestAnimationFrame(animate);
+          t2 += 0.006;
+          court.rotation.y = Math.sin(t2*0.28)*0.24;
+          ball.position.y = 2+Math.sin(t2*2)*0.55;
+          ball.position.x = Math.cos(t2*1.1)*2.2;
+          ball.rotation.x += 0.018;
+          spots.forEach((s,i) => { s.intensity = 2.3+Math.sin(t2*1.1+i*.7)*.3; });
+          pts.rotation.y += 0.0005;
+          renderer.render(scene, camera);
+        };
+        animate();
+
+        const onResize = () => {
+          const nw=window.innerWidth, nh=window.innerHeight;
+          camera.aspect=nw/nh;
+          camera.updateProjectionMatrix();
+          renderer.setSize(nw,nh);
+        };
+        window.addEventListener("resize", onResize);
+
+        mount._cleanup = () => {
+          cancelAnimationFrame(animId);
+          window.removeEventListener("resize", onResize);
+          try { if(mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement); renderer.dispose(); } catch(e){}
+        };
+
+      } catch(e) { console.error("3D error:", e); }
+    };
+
+    return () => {
+      if(mount._cleanup) mount._cleanup();
+      if(script.parentNode) script.parentNode.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <div ref={mountRef} style={{
+      position:"fixed", inset:0, zIndex:0, opacity:0.35, pointerEvents:"none",
+      background:"radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10,20,50,0.95) 0%, #04080f 70%)",
+    }}/>
+  );
 }
 
 
