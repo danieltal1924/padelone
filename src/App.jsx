@@ -215,7 +215,7 @@ function PadelCourtCanvas() {
 
   return (
     <div ref={mountRef} style={{
-      position:"fixed", inset:0, zIndex:0, opacity:0.35, pointerEvents:"none",
+      position:"fixed", inset:0, zIndex:0, opacity:1, pointerEvents:"none",
       background:"radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10,20,50,0.95) 0%, #04080f 70%)",
     }}/>
   );
@@ -869,9 +869,9 @@ export default function PadelIsrael() {
               <span className="pulse" style={{width:6,height:6,background:SILVER,borderRadius:"50%",display:"inline-block"}} />
               <span style={{color:SILVER,fontSize:11,fontWeight:600,letterSpacing:2}}>PADEL·ONE — {t.badge}</span>
             </div>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6}}>{t.h1a}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6,color:"#ffffff"}}>{t.h1a}</h1>
             <h1 className="sglow" style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",color:SILVER,letterSpacing:-1,marginBottom:6}}>{t.h1b}</h1>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32}}>{t.h1c}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32,color:"#ffffff"}}>{t.h1c}</h1>
             <p style={{color:DIM,fontSize:17,lineHeight:1.8,marginBottom:40,fontWeight:300}}>{t.sub}</p>
             <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:24,justifyContent:"center"}}>
               <button className="btn-silver" onClick={()=>scrollTo("tournaments")}>{t.btn1}</button>
