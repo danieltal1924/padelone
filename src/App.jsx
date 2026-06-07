@@ -507,7 +507,7 @@ function LiveNewsSection({t}) {
         "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
       ];
 
-      const results = await Promise.allSettled(feeds.map(url => fetch(url).then(r=>r.json())));
+      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); const results = [{status:"fulfilled",value:{items:apiData.articles||[]}}];
       
       const articles = [];
       results.forEach(r => {
