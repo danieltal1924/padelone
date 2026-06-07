@@ -215,7 +215,7 @@ function PadelCourtCanvas() {
 
   return (
     <div ref={mountRef} style={{
-      position:"fixed", inset:0, zIndex:0, opacity:1, pointerEvents:"none",
+      position:"fixed", inset:0, zIndex:0, opacity:0.35, pointerEvents:"none",
       background:"radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10,20,50,0.95) 0%, #04080f 70%)",
     }}/>
   );
@@ -500,16 +500,63 @@ function LiveNewsSection({t}) {
     let mi = 0; setLoadingMsg(msgs[0]);
     const iv = setInterval(() => { mi=(mi+1)%msgs.length; setLoadingMsg(msgs[mi]); }, 1800);
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:600,tools:[{type:"web_search_20250305",name:"web_search"}],
-          messages:[{role:"user",content:"Search latest padel world news today. Return ONLY valid JSON array:\n[{\"title\":\"title in Hebrew\",\"time\":\"time ago\",\"category\":\"world\",\"hot\":true,\"url\":\"https://...\"},...]\nExactly 6 items. Hebrew titles. Real URLs."}]})
+      // RSS feeds from padel sites via rss2json API (free, no CORS issues)
+      const feeds = [
+        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelfip.com%2Ffeed%2F&count=3",
+        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelmagazine.fr%2Ffeed%2F&count=3",
+        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
+      ];
+
+      const results = await Promise.allSettled(feeds.map(url => fetch(url).then(r=>r.json())));
+      
+      const articles = [];
+      results.forEach(r => {
+        if(r.status==="fulfilled" && r.value.items) {
+          r.value.items.forEach(item => {
+            if(item.title && item.link) {
+              // Calculate time ago
+              const pub = new Date(item.pubDate || Date.now());
+              const diff = Date.now() - pub.getTime();
+              const hours = Math.floor(diff/3600000);
+              const days = Math.floor(hours/24);
+              const timeStr = days > 0 ? `לפני ${days} ימים` : hours > 0 ? `לפני ${hours} שעות` : "לפני זמן קצר";
+              
+              articles.push({
+                title: item.title,
+                time: timeStr,
+                category: "עולם",
+                hot: hours < 24,
+                url: item.link,
+              });
+            }
+          });
+        }
       });
-      const data = await res.json();
-      const text = data.content.map(i=>i.text||"").filter(Boolean).join("");
-      const m = text.match(/\[[\s\S]*\]/);
-      if(m){const parsed=JSON.parse(m[0]); if(Array.isArray(parsed)&&parsed.length>0){setWorldNews(parsed);setLastUpdated(new Date().toLocaleTimeString("he-IL"));}}
-    } catch(e){console.error(e);}
+
+      if(articles.length > 0) {
+        // Sort by recency (hot first)
+        articles.sort((a,b) => b.hot - a.hot);
+        setWorldNews(articles.slice(0,6));
+        setLastUpdated(new Date().toLocaleTimeString("he-IL"));
+      } else {
+        // Fallback: use GNews API with padel keyword
+        const gnews = await fetch("https://gnews.io/api/v4/search?q=padel&lang=en&max=6&apikey=demo");
+        if(gnews.ok) {
+          const gdata = await gnews.json();
+          if(gdata.articles && gdata.articles.length > 0) {
+            const mapped = gdata.articles.map(a => ({
+              title: a.title,
+              time: "לאחרונה",
+              category: "עולם",
+              hot: false,
+              url: a.url,
+            }));
+            setWorldNews(mapped);
+            setLastUpdated(new Date().toLocaleTimeString("he-IL"));
+          }
+        }
+      }
+    } catch(e){ console.error("Fetch error:", e); }
     clearInterval(iv); setLoadingMsg(""); setLoading(false);
   };
 
@@ -869,9 +916,9 @@ export default function PadelIsrael() {
               <span className="pulse" style={{width:6,height:6,background:SILVER,borderRadius:"50%",display:"inline-block"}} />
               <span style={{color:SILVER,fontSize:11,fontWeight:600,letterSpacing:2}}>PADEL·ONE — {t.badge}</span>
             </div>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6,color:"#ffffff"}}>{t.h1a}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6}}>{t.h1a}</h1>
             <h1 className="sglow" style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",color:SILVER,letterSpacing:-1,marginBottom:6}}>{t.h1b}</h1>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32,color:"#ffffff"}}>{t.h1c}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32}}>{t.h1c}</h1>
             <p style={{color:DIM,fontSize:17,lineHeight:1.8,marginBottom:40,fontWeight:300}}>{t.sub}</p>
             <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:24,justifyContent:"center"}}>
               <button className="btn-silver" onClick={()=>scrollTo("tournaments")}>{t.btn1}</button>
@@ -905,31 +952,20 @@ export default function PadelIsrael() {
       {/* TOURNAMENTS */}
       <section id="tournaments" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">TOURNAMENTS</span>
-        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_tournaments}</h2>
+        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_tournaments}</h2>
         <div className="sline"/>
-        <div className="g2">
-          {TOURNAMENTS.map((tr,i) => (
-            <Card3D key={i}>
-              <Glass style={{borderRadius:3,padding:24,cursor:"pointer",position:"relative",overflow:"hidden"}}>
-                <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:tr.spots===0?"rgba(239,68,68,0.5)":"linear-gradient(90deg,#c8d8f0,#8aa0c0)"}} />
-                <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16}}>
-                  <span style={{fontSize:32}}>{tr.icon}</span>
-                  <SBadge style={tr.spots===0?{color:"#ef4444",borderColor:"rgba(239,68,68,0.3)"}:{}}>{tr.spots===0?t.full:`${tr.spots} ${t.spots}`}</SBadge>
-                </div>
-                <h3 style={{fontWeight:700,fontSize:16,marginBottom:10}}>{tr.name}</h3>
-                <div style={{display:"flex",gap:16,marginBottom:16}}>
-                  <span style={{color:DIM,fontSize:13}}>📅 {tr.date}</span>
-                  <span style={{color:DIM,fontSize:13}}>📍 {tr.location}</span>
-                </div>
-                <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                  <SBadge>{tr.level}</SBadge>
-                  <button className="btn-silver" style={{padding:"7px 18px",fontSize:11,letterSpacing:1}} disabled={tr.spots===0}>{tr.spots===0?t.waitlist:t.register}</button>
-                </div>
-              </Glass>
-            </Card3D>
-          ))}
+        <div style={{textAlign:"center",padding:"80px 24px"}}>
+          <div style={{fontSize:64,marginBottom:24}}>🏆</div>
+          <h3 style={{fontWeight:800,fontSize:28,marginBottom:12,color:SILVER}}>{t.comingSoon}</h3>
+          <p style={{color:DIM,fontSize:16,maxWidth:480,margin:"0 auto 24px",lineHeight:1.7,fontWeight:300}}>
+            {lang==="he" ? "תחרויות פאדל ישראליות — בקרוב! רוצה לפרסם תחרות? צור קשר." : "Israeli padel tournaments — coming soon! Want to publish a tournament? Contact us."}
+          </p>
+          <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>
+              {lang==="he" ? "💬 פרסם תחרות" : "💬 Publish Tournament"}
+            </button>
+          </a>
         </div>
-        <div style={{textAlign:"center",marginTop:36}}><button className="btn-ghost" style={{letterSpacing:2}}>{t.allTournaments}</button></div>
       </section>
 
       {/* CLUBS */}  {/* CLUBS */}
@@ -938,7 +974,7 @@ export default function PadelIsrael() {
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginBottom:44,flexWrap:"wrap",gap:20}}>
             <div>
               <span className="stag">CLUBS</span>
-              <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_clubs}</h2>
+              <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_clubs}</h2>
               <div className="sline"/>
             </div>
             <input className="inp" placeholder={t.searchClub} value={search} onChange={e=>setSearch(e.target.value)} />
@@ -1036,7 +1072,7 @@ export default function PadelIsrael() {
       <section id="travel" style={{padding:"100px 0",background:"rgba(4,8,15,0.72)",borderTop:`1px solid ${BORDER}`,position:"relative",zIndex:1}}>
         <div style={{maxWidth:1200,margin:"0 auto",padding:"0 32px"}}>
           <span className="stag">TRAVEL</span>
-          <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_travel}</h2>
+          <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_travel}</h2>
           <div className="sline"/>
           <div style={{textAlign:"center",padding:"80px 24px"}}>
             <div style={{fontSize:64,marginBottom:24}}>✈️</div>
@@ -1053,7 +1089,7 @@ export default function PadelIsrael() {
       {/* WORLD */}
       <section id="world" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">WORLD</span>
-        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_world}</h2>
+        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_world}</h2>
         <div className="sline"/>
         <p style={{color:DIM,fontSize:15,marginBottom:36,fontWeight:300}}>{t.worldSub}</p>
         <div style={{display:"flex",flexDirection:"column",gap:14}}>
@@ -1105,7 +1141,7 @@ export default function PadelIsrael() {
       {/* RANKINGS */}
       <section id="rankings" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">RANKINGS</span>
-        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_rankings}</h2>
+        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_rankings}</h2>
         <div className="sline"/>
         <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>עדכון: 1 יוני 2026 · מקור: FIP Official Rankings</p>
         <RankingsSection t={t}/>
@@ -1114,7 +1150,7 @@ export default function PadelIsrael() {
       {/* NEWS */}
       <section id="news" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">NEWS</span>
-        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900}}>{t.s_news}</h2>
+        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_news}</h2>
         <div className="sline"/>
         <LiveNewsSection t={t}/>
       </section>
