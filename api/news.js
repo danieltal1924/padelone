@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   try {
-    const r = await fetch('https://gnews.io/api/v4/search?q=padel&lang=en&max=6&apikey=5c09a0b8a7b4b9c3a7c1b2d4e5f6a7b8');
+    const r = await fetch('https://gnews.io/api/v4/search?q=padel&lang=en&max=6&apikey=28182fe75d9e7b8a6e7f9c177ba7acb3');
     const d = await r.json();
     if(d.articles?.length > 0) {
       const articles = d.articles.map(a => {
