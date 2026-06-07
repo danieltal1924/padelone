@@ -507,7 +507,7 @@ function LiveNewsSection({t}) {
         "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
       ];
 
-      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); const results = [{status:"fulfilled",value:{items:apiData.articles||[]}}];
+      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); if(apiData.articles?.length>0){setWorldNews(apiData.articles);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
       
       const articles = [];
       results.forEach(r => {
