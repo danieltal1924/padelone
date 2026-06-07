@@ -1063,7 +1063,7 @@ export default function PadelIsrael() {
             <div style={{marginBottom:12,display:"flex",justifyContent:"center"}}><BallSVG size={36}/></div>
             <h3 style={{fontWeight:700,fontSize:18,marginBottom:8}}>{t.sellTitle}</h3>
             <p style={{color:DIM,fontSize:13,marginBottom:20,fontWeight:300}}>{t.sellSub}</p>
-            <button className="btn-silver" style={{padding:"11px 36px",letterSpacing:2}}>{t.sellBtn}</button>
+            <a href="https://wa.me/972545157773?text=שלום%2C%20אני%20רוצה%20לפרסם%20מודעה%20ביד-2%20של%20Padel%20One%20🎾" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}><button className="btn-silver" style={{padding:"11px 36px",letterSpacing:2}}>{t.sellBtn}</button></a>
           </Glass>
         </div>
       </section>
