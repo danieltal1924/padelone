@@ -897,7 +897,7 @@ export default function PadelIsrael() {
               <button key={l} onClick={()=>setLang(l)} style={{padding:"6px 12px",border:"none",cursor:"pointer",fontSize:12,fontWeight:700,fontFamily:"Heebo,sans-serif",letterSpacing:1,background:lang===l?"linear-gradient(135deg,#c8d8f0,#8aa0c0)":"transparent",color:lang===l?"#04080f":DIM,transition:"all .2s"}}>{l==="he"?"עב":"EN"}</button>
             ))}
           </div>
-          <button className="btn-silver hm" style={{padding:"8px 22px",fontSize:11,letterSpacing:2}}>{t.join}</button>
+
         </div>
       </nav>
 
