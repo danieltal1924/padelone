@@ -801,7 +801,7 @@ function Modal({type,onClose,lang}) {
             ))}
           </div>
           <p style={{color:"#6a8ab0",fontSize:13,marginBottom:20}}>{isEn?"For details — contact us on WhatsApp.":"לפרטים — צרו קשר בוואטסאפ."}</p>
-          <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+          <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>
               {isEn?"💬 Contact for Advertising":"💬 צור קשר לפרסום"}
             </button>
@@ -960,7 +960,7 @@ export default function PadelIsrael() {
           <p style={{color:DIM,fontSize:16,maxWidth:480,margin:"0 auto 24px",lineHeight:1.7,fontWeight:300}}>
             {lang==="he" ? "תחרויות פאדל ישראליות — בקרוב! רוצה לפרסם תחרות? צור קשר." : "Israeli padel tournaments — coming soon! Want to publish a tournament? Contact us."}
           </p>
-          <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+          <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>
               {lang==="he" ? "💬 פרסם תחרות" : "💬 Publish Tournament"}
             </button>
@@ -1040,7 +1040,7 @@ export default function PadelIsrael() {
             </div>
           </div>
           <a
-            href="https://wa.me/972500000000"
+            href="https://wa.me/972545157773"
             target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,whiteSpace:"nowrap"}}>
               💬 {lang==="en"?"Contact Us":"צור קשר בוואטסאפ"}
@@ -1079,7 +1079,7 @@ export default function PadelIsrael() {
             <h3 style={{fontWeight:800,fontSize:28,marginBottom:12,color:SILVER}}>{t.comingSoon}</h3>
             <p style={{color:DIM,fontSize:16,maxWidth:480,margin:"0 auto 16px",lineHeight:1.7,fontWeight:300}}>{t.travelSub}</p>
             <p style={{color:DIM,fontSize:14,maxWidth:480,margin:"0 auto 32px",fontWeight:300}}>{t.travelContact}</p>
-            <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
               <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>{t.travelBtn}</button>
             </a>
           </div>
