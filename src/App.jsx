@@ -328,30 +328,35 @@ const WORLD_TOURNAMENTS = [
   {name:"Mexico Major — Acapulco",series:"Premier Padel",location:"אקפולקו, מקסיקו 🇲🇽",dates:"23–29 נובמבר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32"},
   {name:"Barcelona Finals 🏆",series:"Premier Padel",location:"ברצלונה, ספרד 🇪🇸",dates:"7–13 דצמבר",status:"upcoming",prize:"Finals",url:"https://www.redbull.tv/en/events",players:"Top 16 בעולם בלבד"},
 ];
+// ─── דירוג FIP (עדכון ידני) ──────────────────────────────────────────────────
+// לעדכון: היכנס ל-https://www.padelfip.com/fip-rankings , והעתק את 10 הראשונים
+// בכל קטגוריה. עדכן name / country / points / change. הדירוג הרשמי אישי (לא זוגי),
+// כך שלכל שחקן נקודות משלו. עדכון רשמי שבועי (24ש' אחרי טורניר).
+// change: "▲" עלה  "▼" ירד  "—" ללא שינוי
 const RANKINGS = {
   men:[
     {rank:1,name:"Arturo Coello",country:"🇪🇸",partner:"Agustín Tapia",partnerCountry:"🇦🇷",points:"20,397",change:"—"},
     {rank:2,name:"Agustín Tapia",country:"🇦🇷",partner:"Arturo Coello",partnerCountry:"🇪🇸",points:"20,397",change:"—"},
-    {rank:3,name:"Alejandro Galán",country:"🇦🇷",partner:"Federico Chingotto",partnerCountry:"🇦🇷",points:"17,320",change:"▲"},
-    {rank:4,name:"Federico Chingotto",country:"🇦🇷",partner:"Alejandro Galán",partnerCountry:"🇦🇷",points:"17,320",change:"▲"},
-    {rank:5,name:"Juan Lebrón",country:"🇪🇸",partner:"Leo Augsburger",partnerCountry:"🇦🇷",points:"12,840",change:"▼"},
-    {rank:6,name:"Leo Augsburger",country:"🇦🇷",partner:"Juan Lebrón",partnerCountry:"🇪🇸",points:"12,840",change:"▼"},
-    {rank:7,name:"Franco Stupaczuk",country:"🇦🇷",partner:"Mike Yanguas",partnerCountry:"🇪🇸",points:"11,200",change:"▲"},
-    {rank:8,name:"Paquito Navarro",country:"🇪🇸",partner:"Fran Guerrero",partnerCountry:"🇪🇸",points:"9,850",change:"—"},
-    {rank:9,name:"Javi Leal",country:"🇪🇸",partner:"Pablo Cardona",partnerCountry:"🇪🇸",points:"8,640",change:"▲"},
-    {rank:10,name:"Momo González",country:"🇦🇷",partner:"Martín Di Nenno",partnerCountry:"🇦🇷",points:"7,920",change:"▼"},
+    {rank:3,name:"Alejandro Galán",country:"🇪🇸",partner:"Federico Chingotto",partnerCountry:"🇦🇷",points:"18,134",change:"—"},
+    {rank:4,name:"Federico Chingotto",country:"🇦🇷",partner:"Alejandro Galán",partnerCountry:"🇪🇸",points:"18,134",change:"—"},
+    {rank:5,name:"Juan Lebrón",country:"🇪🇸",partner:"Leo Augsburger",partnerCountry:"🇦🇷",points:"7,440",change:"—"},
+    {rank:6,name:"Franco Stupaczuk",country:"🇦🇷",partner:"Mike Yanguas",partnerCountry:"🇪🇸",points:"7,290",change:"—"},
+    {rank:7,name:"Mike Yanguas",country:"🇪🇸",partner:"Franco Stupaczuk",partnerCountry:"🇦🇷",points:"6,909",change:"—"},
+    {rank:8,name:"Leo Augsburger",country:"🇦🇷",partner:"Juan Lebrón",partnerCountry:"🇪🇸",points:"6,164",change:"▲"},
+    {rank:9,name:"Jorge Nieto",country:"🇪🇸",partner:"Paquito Navarro",partnerCountry:"🇪🇸",points:"5,869",change:"▲"},
+    {rank:10,name:"Paquito Navarro",country:"🇪🇸",partner:"Jorge Nieto",partnerCountry:"🇪🇸",points:"5,824",change:"▼"},
   ],
   women:[
-    {rank:1,name:"Gemma Triay",country:"🇪🇸",partner:"Delfina Brea",partnerCountry:"🇦🇷",points:"18,009",change:"—"},
-    {rank:2,name:"Delfina Brea",country:"🇦🇷",partner:"Gemma Triay",partnerCountry:"🇪🇸",points:"18,009",change:"—"},
-    {rank:3,name:"Ariana Sánchez",country:"🇪🇸",partner:"Andrea Ustero",partnerCountry:"🇪🇸",points:"13,970",change:"▲"},
-    {rank:4,name:"Paula Josemaría",country:"🇪🇸",partner:"Bea González",partnerCountry:"🇪🇸",points:"13,880",change:"▲"},
-    {rank:5,name:"Beatriz González",country:"🇪🇸",partner:"Paula Josemaría",partnerCountry:"🇪🇸",points:"13,350",change:"▲"},
-    {rank:6,name:"Claudia Fernández",country:"🇪🇸",partner:"Sofia Araújo",partnerCountry:"🇵🇹",points:"12,530",change:"—"},
-    {rank:7,name:"Andrea Ustero",country:"🇪🇸",partner:"Ariana Sánchez",partnerCountry:"🇪🇸",points:"7,355",change:"▲"},
-    {rank:8,name:"Tamara Icardo",country:"🇪🇸",partner:"Claudia Jensen",partnerCountry:"🇩🇰",points:"6,210",change:"—"},
-    {rank:9,name:"Marta Ortega",country:"🇪🇸",partner:"Martina Calvo",partnerCountry:"🇪🇸",points:"5,760",change:"▼"},
-    {rank:10,name:"Alejandra Salazar",country:"🇪🇸",partner:"Ale Alonso",partnerCountry:"🇪🇸",points:"5,110",change:"▼"},
+    {rank:1,name:"Gemma Triay",country:"🇪🇸",partner:"Delfina Brea",partnerCountry:"🇦🇷",points:"17,757",change:"—"},
+    {rank:2,name:"Delfina Brea",country:"🇦🇷",partner:"Gemma Triay",partnerCountry:"🇪🇸",points:"17,757",change:"—"},
+    {rank:3,name:"Beatriz González",country:"🇪🇸",partner:"Claudia Fernández",partnerCountry:"🇪🇸",points:"14,719",change:"▲"},
+    {rank:4,name:"Paula Josemaría",country:"🇪🇸",partner:"Ariana Sánchez",partnerCountry:"🇪🇸",points:"14,634",change:"▼"},
+    {rank:5,name:"Ariana Sánchez",country:"🇪🇸",partner:"Paula Josemaría",partnerCountry:"🇪🇸",points:"12,824",change:"—"},
+    {rank:6,name:"Claudia Fernández",country:"🇪🇸",partner:"Beatriz González",partnerCountry:"🇪🇸",points:"11,909",change:"—"},
+    {rank:7,name:"Andrea Ustero",country:"🇪🇸",partner:"Sofia Araújo",partnerCountry:"🇵🇹",points:"7,657",change:"—"},
+    {rank:8,name:"Sofia Araújo",country:"🇵🇹",partner:"Andrea Ustero",partnerCountry:"🇪🇸",points:"6,914",change:"—"},
+    {rank:9,name:"Tamara Icardo",country:"🇪🇸",partner:"Claudia Jensen",partnerCountry:"🇦🇷",points:"6,274",change:"—"},
+    {rank:10,name:"Marta Ortega",country:"🇪🇸",partner:"Martina Calvo",partnerCountry:"🇪🇸",points:"6,004",change:"—"},
   ],
 };
 const ISRAEL_NEWS = [
@@ -507,7 +512,7 @@ function LiveNewsSection({t}) {
         "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
       ];
 
-      const results = await Promise.allSettled(feeds.map(url => fetch(url).then(r=>r.json())));
+      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); if(apiData.articles?.length>0){setWorldNews(apiData.articles);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
       
       const articles = [];
       results.forEach(r => {
@@ -801,7 +806,7 @@ function Modal({type,onClose,lang}) {
             ))}
           </div>
           <p style={{color:"#6a8ab0",fontSize:13,marginBottom:20}}>{isEn?"For details — contact us on WhatsApp.":"לפרטים — צרו קשר בוואטסאפ."}</p>
-          <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+          <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>
               {isEn?"💬 Contact for Advertising":"💬 צור קשר לפרסום"}
             </button>
@@ -897,7 +902,7 @@ export default function PadelIsrael() {
               <button key={l} onClick={()=>setLang(l)} style={{padding:"6px 12px",border:"none",cursor:"pointer",fontSize:12,fontWeight:700,fontFamily:"Heebo,sans-serif",letterSpacing:1,background:lang===l?"linear-gradient(135deg,#c8d8f0,#8aa0c0)":"transparent",color:lang===l?"#04080f":DIM,transition:"all .2s"}}>{l==="he"?"עב":"EN"}</button>
             ))}
           </div>
-          <button className="btn-silver hm" style={{padding:"8px 22px",fontSize:11,letterSpacing:2}}>{t.join}</button>
+
         </div>
       </nav>
 
@@ -916,9 +921,9 @@ export default function PadelIsrael() {
               <span className="pulse" style={{width:6,height:6,background:SILVER,borderRadius:"50%",display:"inline-block"}} />
               <span style={{color:SILVER,fontSize:11,fontWeight:600,letterSpacing:2}}>PADEL·ONE — {t.badge}</span>
             </div>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6}}>{t.h1a}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:6,color:"#ffffff"}}>{t.h1a}</h1>
             <h1 className="sglow" style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",color:SILVER,letterSpacing:-1,marginBottom:6}}>{t.h1b}</h1>
-            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32}}>{t.h1c}</h1>
+            <h1 style={{fontWeight:900,fontSize:"clamp(44px,8vw,80px)",lineHeight:1.04,marginBottom:32,color:"#ffffff"}}>{t.h1c}</h1>
             <p style={{color:DIM,fontSize:17,lineHeight:1.8,marginBottom:40,fontWeight:300}}>{t.sub}</p>
             <div style={{display:"flex",gap:12,flexWrap:"wrap",marginBottom:24,justifyContent:"center"}}>
               <button className="btn-silver" onClick={()=>scrollTo("tournaments")}>{t.btn1}</button>
@@ -960,7 +965,7 @@ export default function PadelIsrael() {
           <p style={{color:DIM,fontSize:16,maxWidth:480,margin:"0 auto 24px",lineHeight:1.7,fontWeight:300}}>
             {lang==="he" ? "תחרויות פאדל ישראליות — בקרוב! רוצה לפרסם תחרות? צור קשר." : "Israeli padel tournaments — coming soon! Want to publish a tournament? Contact us."}
           </p>
-          <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+          <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>
               {lang==="he" ? "💬 פרסם תחרות" : "💬 Publish Tournament"}
             </button>
@@ -1040,7 +1045,7 @@ export default function PadelIsrael() {
             </div>
           </div>
           <a
-            href="https://wa.me/972500000000"
+            href="https://wa.me/972545157773"
             target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
             <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,whiteSpace:"nowrap"}}>
               💬 {lang==="en"?"Contact Us":"צור קשר בוואטסאפ"}
@@ -1063,7 +1068,7 @@ export default function PadelIsrael() {
             <div style={{marginBottom:12,display:"flex",justifyContent:"center"}}><BallSVG size={36}/></div>
             <h3 style={{fontWeight:700,fontSize:18,marginBottom:8}}>{t.sellTitle}</h3>
             <p style={{color:DIM,fontSize:13,marginBottom:20,fontWeight:300}}>{t.sellSub}</p>
-            <button className="btn-silver" style={{padding:"11px 36px",letterSpacing:2}}>{t.sellBtn}</button>
+            <a href="https://wa.me/972545157773?text=שלום%2C%20אני%20רוצה%20לפרסם%20מודעה%20ביד-2%20של%20Padel%20One%20🎾" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}><button className="btn-silver" style={{padding:"11px 36px",letterSpacing:2}}>{t.sellBtn}</button></a>
           </Glass>
         </div>
       </section>
@@ -1079,7 +1084,7 @@ export default function PadelIsrael() {
             <h3 style={{fontWeight:800,fontSize:28,marginBottom:12,color:SILVER}}>{t.comingSoon}</h3>
             <p style={{color:DIM,fontSize:16,maxWidth:480,margin:"0 auto 16px",lineHeight:1.7,fontWeight:300}}>{t.travelSub}</p>
             <p style={{color:DIM,fontSize:14,maxWidth:480,margin:"0 auto 32px",fontWeight:300}}>{t.travelContact}</p>
-            <a href="https://wa.me/972500000000" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <a href="https://wa.me/972545157773" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
               <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"12px 28px",borderRadius:3,fontWeight:700,fontSize:14,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>{t.travelBtn}</button>
             </a>
           </div>
