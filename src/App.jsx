@@ -95,7 +95,10 @@ function PadelCourtCanvas() {
         mount.appendChild(renderer.domElement);
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 100);
+        // cinematic depth — distant geometry melts into the navy background
+        scene.fog = new THREE.FogExp2(0x04080f, 0.03);
+
+        const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 140);
         camera.position.set(0, 8, 14);
         camera.lookAt(0, 0, 0);
 
@@ -112,6 +115,13 @@ function PadelCourtCanvas() {
         rim.position.set(0, 1, 0);
         scene.add(rim);
 
+        // ── tech grid floor — stretches outward and fades into the fog ──
+        const grid = new THREE.GridHelper(90, 90, 0x2f4f96, 0x16294d);
+        grid.position.y = -0.03;
+        grid.material.transparent = true;
+        grid.material.opacity = 0.55;
+        scene.add(grid);
+
         const court = new THREE.Group();
         scene.add(court);
 
@@ -124,7 +134,7 @@ function PadelCourtCanvas() {
 
         mesh(new THREE.BoxGeometry(10,0.12,20), new THREE.MeshStandardMaterial({color:0x060f20,roughness:0.4}));
 
-        const lm = new THREE.MeshStandardMaterial({color:0xe0ecff,emissive:0x8899cc,emissiveIntensity:0.5});
+        const lm = new THREE.MeshStandardMaterial({color:0xe0ecff,emissive:0x8899cc,emissiveIntensity:0.85});
         mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,-4.9,0,0);
         mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,4.9,0,0);
         mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-9.9);
@@ -143,7 +153,7 @@ function PadelCourtCanvas() {
         mesh(new THREE.BoxGeometry(0.08,3,20),gm,-4.85,1.5,0);
         mesh(new THREE.BoxGeometry(0.08,3,20),gm,4.85,1.5,0);
 
-        const sm = new THREE.MeshStandardMaterial({color:0xbbd0f0,emissive:0x6688bb,emissiveIntensity:1.8});
+        const sm = new THREE.MeshStandardMaterial({color:0xbbd0f0,emissive:0x6688bb,emissiveIntensity:2.3});
         mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,-4.88,3,0);
         mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,4.88,3,0);
         mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,-9.88);
@@ -163,15 +173,18 @@ function PadelCourtCanvas() {
         );
         ball.add(new THREE.PointLight(0x5577cc,1.2,5));
 
-        const pArr = new Float32Array(60*3);
-        for(let i=0;i<60;i++){
-          pArr[i*3]=(Math.random()-.5)*22;
-          pArr[i*3+1]=Math.random()*10;
-          pArr[i*3+2]=(Math.random()-.5)*26;
+        const PCOUNT = 90;
+        const pArr = new Float32Array(PCOUNT*3);
+        const pSpeed = new Float32Array(PCOUNT);
+        for(let i=0;i<PCOUNT;i++){
+          pArr[i*3]=(Math.random()-.5)*30;
+          pArr[i*3+1]=Math.random()*12;
+          pArr[i*3+2]=(Math.random()-.5)*30;
+          pSpeed[i]=0.004+Math.random()*0.011;
         }
         const pg = new THREE.BufferGeometry();
         pg.setAttribute("position", new THREE.BufferAttribute(pArr,3));
-        const pts = new THREE.Points(pg, new THREE.PointsMaterial({color:0x7799bb,size:0.055,transparent:true,opacity:0.4}));
+        const pts = new THREE.Points(pg, new THREE.PointsMaterial({color:0x9fc0ec,size:0.05,transparent:true,opacity:0.5,depthWrite:false}));
         scene.add(pts);
 
         court.rotation.x = -0.18;
@@ -180,12 +193,23 @@ function PadelCourtCanvas() {
         const animate = () => {
           animId = requestAnimationFrame(animate);
           t2 += 0.006;
-          court.rotation.y = Math.sin(t2*0.28)*0.24;
+          court.rotation.y = Math.sin(t2*0.28)*0.22;
           ball.position.y = 2+Math.sin(t2*2)*0.55;
           ball.position.x = Math.cos(t2*1.1)*2.2;
           ball.rotation.x += 0.018;
           spots.forEach((s,i) => { s.intensity = 2.3+Math.sin(t2*1.1+i*.7)*.3; });
-          pts.rotation.y += 0.0005;
+          // drifting "data" particles rising upward, looping back down
+          const pos = pg.attributes.position.array;
+          for(let i=0;i<PCOUNT;i++){
+            pos[i*3+1] += pSpeed[i];
+            if(pos[i*3+1] > 12) pos[i*3+1] = 0;
+          }
+          pg.attributes.position.needsUpdate = true;
+          pts.rotation.y += 0.0004;
+          // slow cinematic camera drift
+          camera.position.x = Math.sin(t2*0.15)*1.7;
+          camera.position.y = 8 + Math.sin(t2*0.22)*0.5;
+          camera.lookAt(0, 1.2, 0);
           renderer.render(scene, camera);
         };
         animate();
