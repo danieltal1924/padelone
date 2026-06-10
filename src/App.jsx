@@ -238,7 +238,7 @@ function PadelCourtCanvas() {
   }, []);
 
   return (
-    <div ref={mountRef} style={{
+    <div ref={mountRef} className="cyber-bg" style={{
       position:"fixed", inset:0, zIndex:0, opacity:0.35, pointerEvents:"none",
       background:"radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10,20,50,0.95) 0%, #04080f 70%)",
     }}/>
@@ -858,6 +858,99 @@ function Modal({type,onClose,lang}) {
 // ─── APP ───────────────────────────────────────────────────────────────────────
 const NAV_IDS = ["home","tournaments","clubs","marketplace","world","rankings","travel","news"];
 
+// ─── ACCESSIBILITY MENU ─────────────────────────────────────────────────────
+function AccessibilityMenu(){
+  const [open,setOpen]=useState(false);
+  const [font,setFont]=useState(0);
+  const [f,setF]=useState({contrast:false,readable:false,links:false,bigcursor:false,stopmotion:false});
+
+  useEffect(()=>{
+    try{
+      const s=JSON.parse(localStorage.getItem("a11y")||"null");
+      if(s){ setFont(s.font||0); if(s.f) setF(p=>({...p,...s.f})); }
+    }catch(e){}
+  },[]);
+
+  useEffect(()=>{
+    document.documentElement.style.zoom = font===0 ? "" : String(1+font*0.1);
+    const h=document.documentElement;
+    h.classList.toggle("a11y-contrast",f.contrast);
+    h.classList.toggle("a11y-readable",f.readable);
+    h.classList.toggle("a11y-links",f.links);
+    h.classList.toggle("a11y-bigcursor",f.bigcursor);
+    h.classList.toggle("a11y-stopmotion",f.stopmotion);
+    try{ localStorage.setItem("a11y",JSON.stringify({font,f})); }catch(e){}
+  },[font,f]);
+
+  const tog=(k)=>setF(p=>({...p,[k]:!p[k]}));
+  const reset=()=>{ setFont(0); setF({contrast:false,readable:false,links:false,bigcursor:false,stopmotion:false}); };
+
+  const item=(label,active,onClick)=>(
+    <button onClick={onClick} style={{
+      display:"flex",justifyContent:"space-between",alignItems:"center",width:"100%",
+      padding:"11px 13px",margin:"5px 0",borderRadius:10,cursor:"pointer",
+      border:"1px solid "+(active?"#c8a96e":"rgba(120,160,220,0.25)"),
+      background:active?"rgba(200,169,110,0.16)":"rgba(8,18,36,0.6)",
+      color:"#e6eefc",fontSize:15,fontFamily:"inherit",textAlign:"right",
+    }}>
+      <span aria-hidden="true" style={{color:active?"#c8a96e":"#8fb0e0",fontWeight:700}}>{active?"●":"○"}</span>
+      <span>{label}</span>
+    </button>
+  );
+
+  return (
+    <>
+      <style>{`
+        html.a11y-contrast body, html.a11y-contrast body *{background-color:#000 !important;color:#fff !important;border-color:#fff !important;}
+        html.a11y-contrast a, html.a11y-contrast a *{color:#ffea00 !important;}
+        html.a11y-contrast .cyber-bg{display:none !important;}
+        html.a11y-readable *{font-family:Arial,"Helvetica Neue",sans-serif !important;letter-spacing:.4px !important;line-height:1.7 !important;}
+        html.a11y-links a{text-decoration:underline !important;outline:2px solid #c8a96e !important;outline-offset:2px;}
+        html.a11y-bigcursor, html.a11y-bigcursor *{cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 24 24'><path fill='black' stroke='white' stroke-width='1.5' d='M4 2l16 9-7 1 4 8-3 1-4-8-6 5z'/></svg>") 4 2, auto !important;}
+        html.a11y-stopmotion *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+        html.a11y-stopmotion .cyber-bg{display:none !important;}
+        .a11y-fab:focus-visible, .a11y-panel button:focus-visible{outline:3px solid #c8a96e !important;outline-offset:2px;}
+      `}</style>
+
+      <button className="a11y-fab" aria-label="פתיחת תפריט נגישות" aria-expanded={open}
+        onClick={()=>setOpen(o=>!o)}
+        style={{position:"fixed",bottom:18,left:18,zIndex:9999,width:54,height:54,borderRadius:"50%",
+          cursor:"pointer",border:"2px solid #c8d8f0",background:"#0a1830",color:"#c8d8f0",
+          fontSize:26,lineHeight:1,boxShadow:"0 6px 20px rgba(0,0,0,0.5)",
+          display:"flex",alignItems:"center",justifyContent:"center"}}>
+        <span aria-hidden="true">♿</span>
+      </button>
+
+      {open && (
+        <div className="a11y-panel" role="dialog" aria-label="אפשרויות נגישות" dir="rtl"
+          style={{position:"fixed",bottom:82,left:18,zIndex:9999,width:270,maxWidth:"86vw",
+            background:"rgba(6,14,28,0.97)",border:"1px solid rgba(120,160,220,0.3)",borderRadius:16,
+            padding:16,boxShadow:"0 16px 50px rgba(0,0,0,0.6)",fontFamily:"inherit"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+            <button onClick={()=>setOpen(false)} aria-label="סגירת התפריט" style={{background:"none",border:"none",color:"#8fb0e0",fontSize:22,cursor:"pointer",lineHeight:1}}>×</button>
+            <strong style={{color:"#c8d8f0",fontSize:16}}>תפריט נגישות</strong>
+          </div>
+
+          <div style={{display:"flex",gap:8,margin:"6px 0 10px"}}>
+            <button onClick={()=>setFont(v=>Math.max(v-1,-2))} aria-label="הקטנת טקסט" style={{flex:1,padding:"9px",borderRadius:10,border:"1px solid rgba(120,160,220,0.25)",background:"rgba(8,18,36,0.6)",color:"#e6eefc",fontSize:18,cursor:"pointer"}}>א−</button>
+            <button onClick={()=>setFont(v=>Math.min(v+1,5))} aria-label="הגדלת טקסט" style={{flex:1,padding:"9px",borderRadius:10,border:"1px solid rgba(120,160,220,0.25)",background:"rgba(8,18,36,0.6)",color:"#e6eefc",fontSize:18,cursor:"pointer"}}>א+</button>
+          </div>
+
+          {item("ניגודיות גבוהה",f.contrast,()=>tog("contrast"))}
+          {item("גופן קריא",f.readable,()=>tog("readable"))}
+          {item("הדגשת קישורים",f.links,()=>tog("links"))}
+          {item("סמן עכבר גדול",f.bigcursor,()=>tog("bigcursor"))}
+          {item("עצירת אנימציות",f.stopmotion,()=>tog("stopmotion"))}
+
+          <button onClick={reset} style={{width:"100%",marginTop:8,padding:"10px",borderRadius:10,border:"1px solid rgba(200,80,80,0.4)",background:"rgba(60,20,20,0.4)",color:"#ffd0d0",fontSize:14,cursor:"pointer"}}>איפוס הגדרות</button>
+
+          <p style={{margin:"11px 2px 0",fontSize:11,color:"#6a84a0",lineHeight:1.5}}>נתקלתם בבעיית נגישות? כתבו לנו: onepadel24@gmail.com</p>
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function PadelIsrael() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -899,6 +992,7 @@ export default function PadelIsrael() {
     <div dir={t.dir} style={{fontFamily:"Heebo,sans-serif",background:BG,color:"#e8edf8",minHeight:"100vh",overflowX:"hidden",position:"relative"}}>
       <style>{css}</style>
       <PadelCourtCanvas />
+      <AccessibilityMenu />
       <div style={{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",background:"radial-gradient(ellipse 120% 80% at 50% 40%,transparent 15%,rgba(4,8,15,.78) 100%)"}} />
       <Modal type={modal} onClose={()=>setModal(null)} lang={lang} />
       <ClubModal club={selectedClub} onClose={()=>setSelectedClub(null)} />
