@@ -95,120 +95,83 @@ function PadelCourtCanvas() {
         mount.appendChild(renderer.domElement);
 
         const scene = new THREE.Scene();
-        // cinematic depth — distant geometry melts into the navy background
-        scene.fog = new THREE.FogExp2(0x04080f, 0.03);
+        scene.fog = new THREE.FogExp2(0x04080f, 0.02);
 
-        const camera = new THREE.PerspectiveCamera(42, w/h, 0.1, 140);
-        camera.position.set(0, 8, 14);
-        camera.lookAt(0, 0, 0);
+        const camera = new THREE.PerspectiveCamera(45, w/h, 0.1, 200);
+        camera.position.set(0, 5, 16);
+        camera.lookAt(0, 1.2, 0);
 
-        scene.add(new THREE.AmbientLight(0x0a1628, 1));
-
-        const spots = [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].map(([x,y,z]) => {
-          const s = new THREE.SpotLight(0xdde8ff, 2.5, 28, Math.PI/5, 0.4);
-          s.position.set(x, y, z);
+        scene.add(new THREE.AmbientLight(0x223355, 1.1));
+        [[-6,9,4],[6,9,4],[0,9,-7]].forEach((p) => {
+          const s = new THREE.SpotLight(0x88aaff, 2.2, 40, 0.6, 0.5);
+          s.position.set(p[0], p[1], p[2]);
           scene.add(s);
-          return s;
         });
 
-        const rim = new THREE.PointLight(0x2244aa, 1.2, 18);
-        rim.position.set(0, 1, 0);
-        scene.add(rim);
+        // court line segments [x1,z1,x2,z2]
+        const SEG = [
+          [-5,-10,5,-10],[5,-10,5,10],[5,10,-5,10],[-5,10,-5,-10],
+          [-5,0,5,0],[-5,3,5,3],[-5,-3,5,-3],[0,0,0,3],[0,0,0,-3]
+        ];
 
-        // ── tech grid floor — stretches outward and fades into the fog ──
-        const grid = new THREE.GridHelper(90, 90, 0x2f4f96, 0x16294d);
-        grid.position.y = -0.03;
-        grid.material.transparent = true;
-        grid.material.opacity = 0.55;
-        scene.add(grid);
+        // ── hologram court (cyan wireframe) ──
+        const holo = new THREE.Group();
+        holo.rotation.x = -0.15;
+        scene.add(holo);
 
-        const court = new THREE.Group();
-        scene.add(court);
+        const wirePts = [];
+        SEG.forEach((s) => wirePts.push(s[0],0,s[1], s[2],0,s[3]));
+        const wireGeo = new THREE.BufferGeometry();
+        wireGeo.setAttribute("position", new THREE.Float32BufferAttribute(wirePts, 3));
+        holo.add(new THREE.LineSegments(wireGeo, new THREE.LineBasicMaterial({color:0x35e0ff, transparent:true, opacity:0.95})));
 
-        const mesh = (geo, mat, x=0, y=0, z=0) => {
-          const m = new THREE.Mesh(geo, mat);
-          m.position.set(x, y, z);
-          court.add(m);
-          return m;
-        };
-
-        mesh(new THREE.BoxGeometry(10,0.12,20), new THREE.MeshStandardMaterial({color:0x060f20,roughness:0.4}));
-
-        const lm = new THREE.MeshStandardMaterial({color:0xe0ecff,emissive:0x8899cc,emissiveIntensity:0.85});
-        mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,-4.9,0,0);
-        mesh(new THREE.BoxGeometry(0.07,0.13,20),lm,4.9,0,0);
-        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-9.9);
-        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,9.9);
-        mesh(new THREE.BoxGeometry(0.07,0.13,10),lm);
-        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,-3.3);
-        mesh(new THREE.BoxGeometry(10,0.13,0.07),lm,0,0,3.3);
-
-        mesh(new THREE.BoxGeometry(10,0.85,0.05),
-          new THREE.MeshStandardMaterial({color:0xffffff,transparent:true,opacity:0.3,wireframe:true}),
-          0,0.47,0);
-
-        const gm = new THREE.MeshStandardMaterial({color:0x0a1e3a,transparent:true,opacity:0.13});
-        mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,-9.85);
-        mesh(new THREE.BoxGeometry(10,3,0.08),gm,0,1.5,9.85);
-        mesh(new THREE.BoxGeometry(0.08,3,20),gm,-4.85,1.5,0);
-        mesh(new THREE.BoxGeometry(0.08,3,20),gm,4.85,1.5,0);
-
-        const sm = new THREE.MeshStandardMaterial({color:0xbbd0f0,emissive:0x6688bb,emissiveIntensity:2.3});
-        mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,-4.88,3,0);
-        mesh(new THREE.BoxGeometry(0.04,0.04,20),sm,4.88,3,0);
-        mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,-9.88);
-        mesh(new THREE.BoxGeometry(10,0.04,0.04),sm,0,3,9.88);
-
-        const pm = new THREE.MeshStandardMaterial({color:0x1a2a3a,metalness:0.85});
-        const fm = new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xddeeff,emissiveIntensity:2});
-        [[-5.5,9,-9],[5.5,9,-9],[-5.5,9,9],[5.5,9,9]].forEach(([x,,z]) => {
-          mesh(new THREE.CylinderGeometry(0.05,0.07,7,6),pm,x,3.5,z);
-          mesh(new THREE.BoxGeometry(0.5,0.09,0.18),fm,x,7.15,z);
-        });
-
-        const ball = mesh(
-          new THREE.SphereGeometry(0.19,16,16),
-          new THREE.MeshStandardMaterial({color:0xd0e0f8,metalness:0.6,roughness:0.2,emissive:0x3355aa,emissiveIntensity:0.4}),
-          1.5, 2.5, -2
+        const walls = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(10,3,20)),
+          new THREE.LineBasicMaterial({color:0x35e0ff, transparent:true, opacity:0.5})
         );
-        ball.add(new THREE.PointLight(0x5577cc,1.2,5));
+        walls.position.y = 1.5;
+        holo.add(walls);
 
-        const PCOUNT = 90;
-        const pArr = new Float32Array(PCOUNT*3);
-        const pSpeed = new Float32Array(PCOUNT);
-        for(let i=0;i<PCOUNT;i++){
-          pArr[i*3]=(Math.random()-.5)*30;
-          pArr[i*3+1]=Math.random()*12;
-          pArr[i*3+2]=(Math.random()-.5)*30;
-          pSpeed[i]=0.004+Math.random()*0.011;
-        }
-        const pg = new THREE.BufferGeometry();
-        pg.setAttribute("position", new THREE.BufferAttribute(pArr,3));
-        const pts = new THREE.Points(pg, new THREE.PointsMaterial({color:0x9fc0ec,size:0.05,transparent:true,opacity:0.5,depthWrite:false}));
-        scene.add(pts);
+        const fgrid = new THREE.GridHelper(40, 20, 0x1c6a86, 0x123a52);
+        fgrid.material.transparent = true;
+        fgrid.material.opacity = 0.32;
+        fgrid.position.y = -0.02;
+        holo.add(fgrid);
 
-        court.rotation.x = -0.18;
+        // ── glowing padel balls (site colors: silver-blue body, subtle gold seam) ──
+        const balls = [];
+        [[-2.6,-4],[2.4,4.5],[3.2,-6],[-3,7]].forEach((p) => {
+          const g = new THREE.Group();
+          g.add(new THREE.Mesh(
+            new THREE.SphereGeometry(0.24,24,24),
+            new THREE.MeshStandardMaterial({color:0xdce8ff,emissive:0x4a9eff,emissiveIntensity:1.2,roughness:0.4})
+          ));
+          const seam = new THREE.Mesh(
+            new THREE.TorusGeometry(0.24,0.014,8,44),
+            new THREE.MeshStandardMaterial({color:0xd8cba0,emissive:0xc8a96e,emissiveIntensity:0.22,transparent:true,opacity:0.45})
+          );
+          seam.rotation.x = Math.PI/2.4;
+          g.add(seam);
+          g.add(new THREE.PointLight(0x6fb0ff,0.8,5.5));
+          g.userData = {base:1.6+Math.random()*0.8, amp:0.5+Math.random()*0.5, ph:Math.random()*6, spin:0.01+Math.random()*0.02};
+          g.position.set(p[0], g.userData.base, p[1]);
+          holo.add(g);
+          balls.push(g);
+        });
+
         let t2 = 0;
-
         const animate = () => {
           animId = requestAnimationFrame(animate);
           t2 += 0.006;
-          court.rotation.y = Math.sin(t2*0.28)*0.22;
-          ball.position.y = 2+Math.sin(t2*2)*0.55;
-          ball.position.x = Math.cos(t2*1.1)*2.2;
-          ball.rotation.x += 0.018;
-          spots.forEach((s,i) => { s.intensity = 2.3+Math.sin(t2*1.1+i*.7)*.3; });
-          // drifting "data" particles rising upward, looping back down
-          const pos = pg.attributes.position.array;
-          for(let i=0;i<PCOUNT;i++){
-            pos[i*3+1] += pSpeed[i];
-            if(pos[i*3+1] > 12) pos[i*3+1] = 0;
-          }
-          pg.attributes.position.needsUpdate = true;
-          pts.rotation.y += 0.0004;
-          // slow cinematic camera drift
-          camera.position.x = Math.sin(t2*0.15)*1.7;
-          camera.position.y = 8 + Math.sin(t2*0.22)*0.5;
+          holo.rotation.y = t2 * 0.14;
+          balls.forEach((m) => {
+            const u = m.userData;
+            m.position.y = u.base + Math.abs(Math.sin(t2*1.05+u.ph))*u.amp*2;
+            m.rotation.x += u.spin*0.6;
+            m.rotation.y += u.spin*0.45;
+          });
+          camera.position.x = Math.sin(t2*0.1)*2;
+          camera.position.y = 5 + Math.sin(t2*0.2)*0.4;
           camera.lookAt(0, 1.2, 0);
           renderer.render(scene, camera);
         };
@@ -239,7 +202,7 @@ function PadelCourtCanvas() {
 
   return (
     <div ref={mountRef} className="cyber-bg" style={{
-      position:"fixed", inset:0, zIndex:0, opacity:0.35, pointerEvents:"none",
+      position:"fixed", inset:0, zIndex:0, opacity:0.5, pointerEvents:"none",
       background:"radial-gradient(ellipse 80% 60% at 50% 30%, rgba(10,20,50,0.95) 0%, #04080f 70%)",
     }}/>
   );
