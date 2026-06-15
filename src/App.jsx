@@ -322,8 +322,8 @@ const WORLD_TOURNAMENTS = [
 // change: "▲" עלה  "▼" ירד  "—" ללא שינוי
 const RANKINGS = {
   men:[
-    {rank:1,name:"Arturo Coello",country:"🇪🇸",partner:"Agustín Tapia",partnerCountry:"🇦🇷",points:"20,397",change:"—"},
-    {rank:2,name:"Agustín Tapia",country:"🇦🇷",partner:"Arturo Coello",partnerCountry:"🇪🇸",points:"20,397",change:"—"},
+    {rank:1,name:"Arturo Coello",country:"🇪🇸",partner:"Agustín Tapia",partnerCountry:"🇦🇷",points:"21,126",change:"—"},
+    {rank:2,name:"Agustín Tapia",country:"🇦🇷",partner:"Arturo Coello",partnerCountry:"🇪🇸",points:"21,126",change:"—"},
     {rank:3,name:"Alejandro Galán",country:"🇪🇸",partner:"Federico Chingotto",partnerCountry:"🇦🇷",points:"18,134",change:"—"},
     {rank:4,name:"Federico Chingotto",country:"🇦🇷",partner:"Alejandro Galán",partnerCountry:"🇪🇸",points:"18,134",change:"—"},
     {rank:5,name:"Juan Lebrón",country:"🇪🇸",partner:"Leo Augsburger",partnerCountry:"🇦🇷",points:"7,440",change:"—"},
@@ -334,16 +334,16 @@ const RANKINGS = {
     {rank:10,name:"Paquito Navarro",country:"🇪🇸",partner:"Jorge Nieto",partnerCountry:"🇪🇸",points:"5,824",change:"▼"},
   ],
   women:[
-    {rank:1,name:"Gemma Triay",country:"🇪🇸",partner:"Delfina Brea",partnerCountry:"🇦🇷",points:"17,757",change:"—"},
-    {rank:2,name:"Delfina Brea",country:"🇦🇷",partner:"Gemma Triay",partnerCountry:"🇪🇸",points:"17,757",change:"—"},
-    {rank:3,name:"Beatriz González",country:"🇪🇸",partner:"Claudia Fernández",partnerCountry:"🇪🇸",points:"14,719",change:"▲"},
-    {rank:4,name:"Paula Josemaría",country:"🇪🇸",partner:"Ariana Sánchez",partnerCountry:"🇪🇸",points:"14,634",change:"▼"},
-    {rank:5,name:"Ariana Sánchez",country:"🇪🇸",partner:"Paula Josemaría",partnerCountry:"🇪🇸",points:"12,824",change:"—"},
-    {rank:6,name:"Claudia Fernández",country:"🇪🇸",partner:"Beatriz González",partnerCountry:"🇪🇸",points:"11,909",change:"—"},
-    {rank:7,name:"Andrea Ustero",country:"🇪🇸",partner:"Sofia Araújo",partnerCountry:"🇵🇹",points:"7,657",change:"—"},
-    {rank:8,name:"Sofia Araújo",country:"🇵🇹",partner:"Andrea Ustero",partnerCountry:"🇪🇸",points:"6,914",change:"—"},
-    {rank:9,name:"Tamara Icardo",country:"🇪🇸",partner:"Claudia Jensen",partnerCountry:"🇦🇷",points:"6,274",change:"—"},
-    {rank:10,name:"Marta Ortega",country:"🇪🇸",partner:"Martina Calvo",partnerCountry:"🇪🇸",points:"6,004",change:"—"},
+    {rank:1,name:"Gemma Triay",country:"🇪🇸",partner:"Delfina Brea",partnerCountry:"🇦🇷",points:"17,757",change:"▼"},
+    {rank:2,name:"Delfina Brea",country:"🇦🇷",partner:"Gemma Triay",partnerCountry:"🇪🇸",points:"17,757",change:"▼"},
+    {rank:3,name:"Bea González",country:"🇪🇸",partner:"Paula Josemaría",partnerCountry:"🇪🇸",points:"14,690",change:"—"},
+    {rank:4,name:"Paula Josemaría",country:"🇪🇸",partner:"Bea González",partnerCountry:"🇪🇸",points:"14,690",change:"—"},
+    {rank:5,name:"Ariana Sánchez",country:"🇪🇸",partner:"Andrea Ustero",partnerCountry:"🇪🇸",points:"13,050",change:"▲"},
+    {rank:6,name:"Andrea Ustero",country:"🇪🇸",partner:"Ariana Sánchez",partnerCountry:"🇪🇸",points:"13,050",change:"▲"},
+    {rank:7,name:"Claudia Fernández",country:"🇪🇸",partner:"Sofía Araújo",partnerCountry:"🇵🇹",points:"11,900",change:"▲"},
+    {rank:8,name:"Sofía Araújo",country:"🇵🇹",partner:"Claudia Fernández",partnerCountry:"🇪🇸",points:"11,900",change:"▲"},
+    {rank:9,name:"Tamara Icardo",country:"🇪🇸",partner:"Claudia Jensen",partnerCountry:"🇩🇰",points:"6,300",change:"—"},
+    {rank:10,name:"Claudia Jensen",country:"🇩🇰",partner:"Tamara Icardo",partnerCountry:"🇪🇸",points:"6,300",change:"—"},
   ],
 };
 const ISRAEL_NEWS = [
@@ -351,7 +351,7 @@ const ISRAEL_NEWS = [
   {title:"מאקו: מגרשי הפאדל כובשים את ערי ישראל — רעננה, רמת גן, אילת ועוד",time:"דצמבר 2025",category:"ישראל",hot:false,url:"https://www.mako.co.il/living-architecture/local/Article-1c0734d09362b91026.htm"},
 ];
 const WORLD_NEWS = [
-  {title:"🔴 LIVE: BNL Italy Major Rome — שמינית גמר היום, גמר ב-7 יוני 18:30",time:"עכשיו",category:"טורניר",hot:true,url:"https://www.redbull.tv/en/events"},
+  {title:"🏆 ולנסיה P1: קואלו/טאפיה ניצחו את גלאן/צ׳ינגוטו בקאמבק דרמטי 6-7,6-1,7-6 — תואר רביעי ב-2026",time:"14 יוני 2026",category:"טורניר",hot:true,url:"https://premierpadel.com/en/news/coello-and-tapia-complete-epic-comeback-as-snchez-and-ustero-triumph-at-valencia-premier-padel-p1"},
   {title:"פרידה מרגשת: למפרטי שיחק משחקו האחרון בבואנוס איירס מול 13,000 אוהדים",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.padelfip.com/2026/05/day4-top-four-pairs-in-the-semi-finals-emotional-farewell-for-lamperti/"},
   {title:"גלאן וצ׳ינגוטו: 29 ניצחונות מתוך 32 ב-2026 — המועדפים ברומא",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.redbull.tv/en/events"},
   {title:"נדאל משחק פאדל — אימון עם מאמנו לשעבר קרלוס מויה",time:"2025",category:"עולם",hot:false,url:"https://www.sportskeeda.com/tennis/news-rafael-nadal-post-retirement-life-spaniard-turns-padel-joins-ex-coach-carlos-moya-fun-session-academy"},
@@ -800,6 +800,28 @@ function Modal({type,onClose,lang}) {
           </a>
         </div>
       )
+    },
+    accessibility:{
+      title: isEn?"Accessibility Statement":"הצהרת נגישות",
+      body:(
+        <div style={{lineHeight:1.9,fontWeight:300,fontSize:14,color:"#7a96b8"}}>
+          <p style={{marginBottom:14,color:SILVER,fontSize:15,fontWeight:500}}>{isEn?"Padel One is committed to making its website accessible to all, including people with disabilities.":"Padel One מחויב להנגיש את האתר לכלל הציבור, לרבות אנשים עם מוגבלות."}</p>
+          <p style={{marginBottom:10}}>{isEn?"We strive to comply with the Israeli accessibility standard (IS 5568, based on WCAG 2.0 level AA).":"אנו פועלים בהתאם לתקן הישראלי 5568 (מבוסס על הנחיות WCAG 2.0 ברמה AA)."}</p>
+          <p style={{marginBottom:8,color:SILVER}}>{isEn?"The site includes an accessibility menu (the ♿ button, bottom-left) offering:":"באתר תפריט נגישות (כפתור ♿ בפינה השמאלית-תחתונה) המאפשר:"}</p>
+          <div style={{marginBottom:14}}>
+            <p style={{marginBottom:6}}>• {isEn?"Increase / decrease text size":"הגדלה והקטנה של גודל הטקסט"}</p>
+            <p style={{marginBottom:6}}>• {isEn?"High-contrast mode":"מצב ניגודיות גבוהה"}</p>
+            <p style={{marginBottom:6}}>• {isEn?"Readable font":"גופן קריא"}</p>
+            <p style={{marginBottom:6}}>• {isEn?"Link highlighting":"הדגשת קישורים"}</p>
+            <p style={{marginBottom:6}}>• {isEn?"Large cursor":"סמן עכבר גדול"}</p>
+            <p style={{marginBottom:6}}>• {isEn?"Stop animations (incl. the 3D background)":"עצירת אנימציות (כולל הרקע התלת-ממדי)"}</p>
+          </div>
+          <p style={{marginBottom:10}}>{isEn?"Despite our efforts, some areas may not yet be fully accessible. We are continuously working to improve.":"למרות מאמצינו, ייתכן שחלקים מסוימים באתר טרם הונגשו במלואם. אנו פועלים לשיפור מתמיד."}</p>
+          <p style={{marginBottom:6,color:SILVER}}>{isEn?"Found an accessibility issue? Contact our accessibility coordinator:":"נתקלתם בבעיית נגישות? צרו קשר עם רכז הנגישות:"}</p>
+          <p style={{marginBottom:14}}>✉️ <a href="mailto:onepadel24@gmail.com" style={{color:"#8fb0e0"}}>onepadel24@gmail.com</a></p>
+          <p style={{fontSize:12,color:"#5a7a98"}}>{isEn?"Statement last updated: June 2026":"הצהרת הנגישות עודכנה לאחרונה: יוני 2026"}</p>
+        </div>
+      )
     }
   };
   const c = CONTENT[type]; if(!c) return null;
@@ -911,6 +933,60 @@ function AccessibilityMenu(){
         </div>
       )}
     </>
+  );
+}
+
+// ─── 3D CLUB MAP ────────────────────────────────────────────────────────────
+function ClubMap3D({ clubs, onSelect, lang }){
+  const isEn = lang==="en";
+  const COORD = {
+    "תל אביב":[32.083,34.781], "רמת גן":[32.070,34.824], "חולון":[32.015,34.773],
+    "רמת השרון":[32.146,34.840], "בני ציון":[32.226,34.876],
+  };
+  const minLat=31.96, maxLat=32.30, minLng=34.72, maxLng=34.93;
+  const seen={};
+  const pins = clubs.map((c,i) => {
+    const base = COORD[c.city] || [32.08,34.80];
+    const n = (seen[c.city] = (seen[c.city]||0)+1) - 1;   // 0 for first in city
+    const lat = base[0] + (n? (n%2? 0.013 : -0.013)*Math.ceil(n/2) : 0);
+    const lng = base[1] + (n? (n%2? 0.018 : -0.018)*Math.ceil(n/2) : 0);
+    const x = 8 + (lng-minLng)/(maxLng-minLng)*84;
+    const y = 12 + (maxLat-lat)/(maxLat-minLat)*74;
+    return { c, x, y, i };
+  });
+  return (
+    <div style={{marginBottom:42}}>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}>
+        <span style={{color:"#8fb0e0",fontSize:13}}>🗺️ {isEn?"Interactive 3D map — tap a pin to view & book a court":"מפה תלת-ממדית — לחצו על סימון לצפייה והזמנת מגרש"}</span>
+        <span style={{color:"#4a6a88",fontSize:12}}>{clubs.length} {isEn?"clubs · Greater Tel Aviv":"מועדונים · גוש דן"}</span>
+      </div>
+      <div style={{perspective:"1100px",height:320,borderRadius:16,overflow:"hidden",position:"relative",
+        border:"1px solid rgba(53,224,255,0.22)",background:"#050f22",
+        boxShadow:"0 24px 60px rgba(0,0,0,0.45), inset 0 0 70px rgba(53,224,255,0.06)"}}>
+        <div style={{position:"absolute",left:"-12%",right:"-12%",top:"-10%",bottom:"-34%",transformStyle:"preserve-3d",
+          transform:"rotateX(52deg)",transformOrigin:"center 68%",
+          background:"repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(53,224,255,0.10) 30px,rgba(53,224,255,0.10) 31px), repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(53,224,255,0.10) 30px,rgba(53,224,255,0.10) 31px)"}}>
+          {/* coastline hint (west) */}
+          <div style={{position:"absolute",left:0,top:0,bottom:0,width:"13%",background:"linear-gradient(90deg,rgba(24,70,130,0.5),transparent)",borderRight:"1px dashed rgba(120,180,255,0.25)"}}/>
+          {pins.map(({c,x,y,i}) => (
+            <button key={i} onClick={()=>onSelect(c)} title={c.name} aria-label={c.name}
+              style={{position:"absolute",left:x+"%",top:y+"%",zIndex:Math.round(y),
+                transform:"translate(-50%,-100%) rotateX(-52deg)",transformOrigin:"bottom center",
+                background:"none",border:"none",cursor:"pointer",padding:0}}>
+              <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
+                <div style={{background:"rgba(8,20,40,0.94)",border:"1px solid rgba(53,224,255,0.55)",borderRadius:10,
+                  padding:"4px 9px",whiteSpace:"nowrap",boxShadow:"0 6px 16px rgba(0,0,0,0.55)",backdropFilter:"blur(2px)"}}>
+                  <span style={{fontSize:14,marginInlineEnd:5}}>{c.image}</span>
+                  <span style={{color:"#dce8ff",fontSize:11,fontWeight:700}}>{c.city}</span>
+                </div>
+                <div style={{width:0,height:0,borderLeft:"5px solid transparent",borderRight:"5px solid transparent",borderTop:"7px solid rgba(53,224,255,0.8)"}}/>
+                <div style={{width:9,height:9,borderRadius:"50%",background:"#35e0ff",boxShadow:"0 0 14px #35e0ff",marginTop:-1}}/>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -1065,6 +1141,7 @@ export default function PadelIsrael() {
             </div>
             <input className="inp" placeholder={t.searchClub} value={search} onChange={e=>setSearch(e.target.value)} />
           </div>
+          <ClubMap3D clubs={CLUBS} onSelect={setSelectedClub} lang={lang} />
           <div className="g3">
             {CLUBS.filter(c=>!search||c.name.includes(search)||c.city.includes(search)).map((c,i) => (
               <Card3D key={i}>
@@ -1229,7 +1306,7 @@ export default function PadelIsrael() {
         <span className="stag">RANKINGS</span>
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_rankings}</h2>
         <div className="sline"/>
-        <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>עדכון: 1 יוני 2026 · מקור: FIP Official Rankings</p>
+        <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>עדכון: 15 יוני 2026 (אחרי ולנסיה P1) · מקור: FIP / Premier Padel</p>
         <RankingsSection t={t}/>
       </section>
 
@@ -1273,7 +1350,7 @@ export default function PadelIsrael() {
             </div>
             <div>
               <h4 style={{fontWeight:700,marginBottom:16,color:SILVER,fontSize:11,letterSpacing:2.5}}>{t.fcomp}</h4>
-              {[{label:t.fl_about,action:()=>setModal("about")},{label:"✉️ onepadel24@gmail.com",action:()=>{window.location.href="mailto:onepadel24@gmail.com"}},{label:t.fl_advertise,action:()=>setModal("advertise")},{label:t.fl_terms,action:()=>setModal("terms")}].map((l,j) => (
+              {[{label:t.fl_about,action:()=>setModal("about")},{label:"✉️ onepadel24@gmail.com",action:()=>{window.location.href="mailto:onepadel24@gmail.com"}},{label:t.fl_advertise,action:()=>setModal("advertise")},{label:t.fl_terms,action:()=>setModal("terms")},{label:lang==="en"?"♿ Accessibility":"♿ הצהרת נגישות",action:()=>setModal("accessibility")}].map((l,j) => (
                 <div key={j} onClick={l.action} style={{color:DIM,fontSize:13,marginBottom:11,cursor:"pointer",transition:"color .2s",fontWeight:300}}
                   onMouseEnter={e=>e.currentTarget.style.color=SILVER}
                   onMouseLeave={e=>e.currentTarget.style.color=DIM}>{l.label}</div>
