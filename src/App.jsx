@@ -1186,7 +1186,7 @@ export default function PadelIsrael() {
               <div style={{color:SILVER,fontSize:14,marginBottom:4}}>🥇 {lang==="he"?"מקום ראשון: 3,000 ₪ במזומן":"1st place: ₪3,000 cash"}</div>
               <div style={{color:SILVER,fontSize:14}}>🥈 {lang==="he"?"מקום שני: 2 מקומות חינם לטורניר הבא":"2nd place: 2 free spots for next tournament"}</div>
             </div>
-            <a href="https://wa.me/972545157773?text=שלום%2C%20אני%20רוצה%20להירשם%20לטורניר%20הפאדל%20ברעננה%20(21.6)" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+            <a href="https://wa.me/972587224747?text=שלום%2C%20אני%20רוצה%20להירשם%20לטורניר%20הפאדל%20ברעננה%20(21.6)" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
               <button style={{background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",padding:"13px 40px",borderRadius:3,fontWeight:800,fontSize:15,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,width:"100%"}}>💬 {lang==="he"?"הרשמה לטורניר":"Register now"}</button>
             </a>
           </div>
