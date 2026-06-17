@@ -8,7 +8,7 @@ const LANG = {
     badge:"הפלטפורמה המובילה לפאדל בישראל",
     h1a:"הכל על", h1b:"פאדל", h1c:"בישראל 🇮🇱",
     sub:"תחרויות, מועדונים, ציוד, נסיעות לחול וחדשות מהעולם — הכל במקום אחד.",
-    btn1:"גלה תחרויות", btn2:"מצא מועדון", btn3:"יד-2", btn4:"🌍 תחרויות בחול", btn5:"✈️ נסיעות לחול", btn6:"📰 חדשות",
+    btn1:"גלה תחרויות", btn2:"מצא מועדון", btn3:"יד-2", btn4:"🌍 תחרויות בחול", btn5:"✈️ נסיעות לחול", btn6:"📰 חדשות", btn7:"מותגים",
     stats:["שחקנים רשומים ב-ILPA","מגרשים בישראל","תחרויות בשנה","מועדונים פעילים"],
     s_tournaments:"תחרויות קרובות 🏆", s_clubs:"מועדוני פאדל 📍", s_marketplace:"ציוד יד 2", s_brands:"מותגי פאדל 🎾", brandsSub:"המותגים המובילים בעולם הפאדל — מחבטים, דגמים ומחירים. רוצים לפרסם את המותג שלכם? דברו איתנו.", brandFeatured:"מקודם", brandVisit:"לאתר המותג", brandAdTitle:"המותג שלכם כאן", brandAdSub:"רוצים להציג את המחבטים והציוד שלכם בפני קהילת הפאדל הישראלית?", brandAdBtn:"פרסמו את המותג",
     s_world:"תחרויות עולמיות 🌍", s_rankings:"דירוג עולמי 🏅", s_travel:"טיולי פאדל לחול ✈️", s_news:"חדשות פאדל 📰",
@@ -40,7 +40,7 @@ const LANG = {
     badge:"Israel's Leading Padel Platform",
     h1a:"Everything about", h1b:"Padel", h1c:"in Israel 🇮🇱",
     sub:"Tournaments, clubs, gear, trips abroad and world news — all in one place.",
-    btn1:"Explore Tournaments", btn2:"Find a Club", btn3:"2nd Hand", btn4:"🌍 World Tournaments", btn5:"✈️ Travel Abroad", btn6:"📰 News",
+    btn1:"Explore Tournaments", btn2:"Find a Club", btn3:"2nd Hand", btn4:"🌍 World Tournaments", btn5:"✈️ Travel Abroad", btn6:"📰 News", btn7:"Brands",
     stats:["Registered Players (ILPA)","Courts in Israel","Tournaments/Year","Active Clubs"],
     s_tournaments:"Upcoming Tournaments 🏆", s_clubs:"Padel Clubs 📍", s_marketplace:"2nd Hand Gear", s_brands:"Padel Brands 🎾", brandsSub:"The world's leading padel brands — rackets, models and prices. Want to feature your brand? Talk to us.", brandFeatured:"Sponsored", brandVisit:"Visit brand", brandAdTitle:"Your brand here", brandAdSub:"Want to showcase your rackets and gear to the Israeli padel community?", brandAdBtn:"Advertise your brand",
     s_world:"World Tournaments 🌍", s_rankings:"World Rankings 🏅", s_travel:"Padel Travel ✈️", s_news:"Padel News 📰",
@@ -1138,7 +1138,7 @@ export default function PadelIsrael() {
               <button className="btn-ghost" onClick={()=>scrollTo("clubs")}>{t.btn2}</button>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:480,margin:"0 auto"}}>
-              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn5,icon:"✈️",id:"travel"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
+              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn5,icon:"✈️",id:"travel"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
                 <button key={i} onClick={()=>scrollTo(b.id)} style={{background:b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)",border:b.silver?"1px solid rgba(200,216,240,0.35)":`1px solid ${BORDER}`,color:SILVER,padding:"14px 10px",borderRadius:3,fontWeight:600,fontSize:12,cursor:"pointer",fontFamily:"Heebo,sans-serif",transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}
                   onMouseEnter={e=>{e.currentTarget.style.background="rgba(180,210,255,0.1)";e.currentTarget.style.borderColor="rgba(200,216,240,0.4)";e.currentTarget.style.transform="translateY(-2px)"}}
                   onMouseLeave={e=>{e.currentTarget.style.background=b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)";e.currentTarget.style.borderColor=b.silver?"rgba(200,216,240,0.35)":BORDER;e.currentTarget.style.transform="translateY(0)"}}>
