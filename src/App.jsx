@@ -1457,7 +1457,7 @@ export default function PadelIsrael() {
             </div>
             <div>
               <h4 style={{fontWeight:700,marginBottom:16,color:SILVER,fontSize:11,letterSpacing:2.5}}>{t.fcomp}</h4>
-              {[{label:t.fl_about,action:()=>setModal("about")},{label:"✉️ onepadel24@gmail.com",action:()=>{window.location.href="mailto:onepadel24@gmail.com"}},{label:t.fl_advertise,action:()=>setModal("advertise")},{label:t.fl_terms,action:()=>setModal("terms")},{label:lang==="en"?"♿ Accessibility":"♿ הצהרת נגישות",action:()=>setModal("accessibility")}].map((l,j) => (
+              {[{label:t.fl_about,action:()=>setModal("about")},{label:"✉️ onepadel24@gmail.com",action:()=>{window.location.href="mailto:onepadel24@gmail.com"}},{label:t.fl_advertise,action:()=>setModal("advertise")},{label:t.fl_terms,action:()=>window.open("/takanon.html","_blank","noopener")},{label:lang==="en"?"♿ Accessibility":"♿ הצהרת נגישות",action:()=>setModal("accessibility")}].map((l,j) => (
                 <div key={j} onClick={l.action} style={{color:DIM,fontSize:13,marginBottom:11,cursor:"pointer",transition:"color .2s",fontWeight:300}}
                   onMouseEnter={e=>e.currentTarget.style.color=SILVER}
                   onMouseLeave={e=>e.currentTarget.style.color=DIM}>{l.label}</div>
