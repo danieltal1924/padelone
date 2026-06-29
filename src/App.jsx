@@ -329,10 +329,10 @@ const WORLD_TOURNAMENTS = [
   {name:"Brussels P2",series:"Premier Padel",location:"בריסל, בלגיה 🇧🇪",dates:"20–26 אפריל",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Asunción P2",series:"Premier Padel",location:"אסונסיון, פרגוואי 🇵🇾",dates:"4–10 מאי",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Buenos Aires P1",series:"Premier Padel",location:"בואנוס איירס 🇦🇷",dates:"11–17 מאי",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",status:"done",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"טאפיה / קואלו ניצחו"},
+  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",status:"live",prize:"Major",url:"https://www.redbull.tv/en/events",players:"גמר ב-7/6 בשעה 18:30"},
+  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Valladolid P2",series:"Premier Padel",location:"ויאדוליד, ספרד 🇪🇸",dates:"22–28 יוני",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",status:"live",prize:"P2",url:"https://www.redbull.tv/en/events",players:"מתקיים כעת 🔴"},
+  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Málaga P1",series:"Premier Padel",location:"מלאגה, ספרד 🇪🇸",dates:"13–19 יולי",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Pretoria P2",series:"Premier Padel",location:"פרטוריה, דרום אפריקה 🇿🇦",dates:"27 יולי–2 אוג׳",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה באפריקה"},
   {name:"London P1",series:"Premier Padel",location:"לונדון, אנגליה 🇬🇧",dates:"3–9 אוגוסט",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה בלונדון"},
@@ -378,11 +378,11 @@ const RANKINGS = {
   ],
 };
 const ISRAEL_NEWS = [
-  {title:"כלכליסט: מינגלינג בין החבטות — 150 מגרשים, 35 מועדונים בישראל",time:"אוגוסט 2025",category:"ישראל",hot:true,url:"https://www.calcalist.co.il/style/article/r1sqjfecll"},
+  {title:"ONE: הענף העולה — הפאדל תופס תאוצה אצל הנשים בישראל",time:"יוני 2026",category:"ישראל",hot:true,url:"https://www.one.co.il/Article/526611.html"},
+  {title:"כלכליסט: מינגלינג בין החבטות — 150 מגרשים, 35 מועדונים בישראל",time:"אוגוסט 2025",category:"ישראל",hot:false,url:"https://www.calcalist.co.il/style/article/r1sqjfecll"},
   {title:"מאקו: מגרשי הפאדל כובשים את ערי ישראל — רעננה, רמת גן, אילת ועוד",time:"דצמבר 2025",category:"ישראל",hot:false,url:"https://www.mako.co.il/living-architecture/local/Article-1c0734d09362b91026.htm"},
 ];
 const WORLD_NEWS = [
-  {title:"🏆 ויאדוליד P2: קואלו/טאפיה ניצחו את גלאן/צ׳ינגוטו 6-4,6-2 — קואלו זוכה בעיר הולדתו בפעם השלישית ברציפות",time:"28 יוני 2026",category:"טורניר",hot:true,url:"https://www.padelfip.com/fip-rankings/"},
   {title:"🏆 ולנסיה P1: קואלו/טאפיה ניצחו את גלאן/צ׳ינגוטו בקאמבק דרמטי 6-7,6-1,7-6 — תואר רביעי ב-2026",time:"14 יוני 2026",category:"טורניר",hot:true,url:"https://premierpadel.com/en/news/coello-and-tapia-complete-epic-comeback-as-snchez-and-ustero-triumph-at-valencia-premier-padel-p1"},
   {title:"פרידה מרגשת: למפרטי שיחק משחקו האחרון בבואנוס איירס מול 13,000 אוהדים",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.padelfip.com/2026/05/day4-top-four-pairs-in-the-semi-finals-emotional-farewell-for-lamperti/"},
   {title:"גלאן וצ׳ינגוטו: 29 ניצחונות מתוך 32 ב-2026 — המועדפים ברומא",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.redbull.tv/en/events"},
