@@ -504,9 +504,15 @@ function ClubModal({ club, onClose }) {
           {club.phone && <a href={"tel:"+club.phone} style={{color:SILVER,fontSize:14,textDecoration:"none",display:"block",marginBottom:6}}>📞 {club.phone}</a>}
           {club.phoneDirect && <a href={"tel:"+club.phoneDirect} style={{color:DIM,fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>📱 {club.phoneDirect}</a>}
           {club.email && <a href={"mailto:"+club.email} style={{color:DIM,fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>✉️ {club.email}</a>}
+
         </div>
 
         {/* Booking button */}
+        {club.instagram && (
+          <a href={club.instagram} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none",marginBottom:10}}>
+            <button style={{width:"100%",padding:"12px 0",fontSize:14,background:"linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)",color:"#fff",border:"none",borderRadius:3,fontWeight:700,cursor:"pointer",fontFamily:"Heebo,sans-serif"}}>📸 עקבו באינסטגרם</button>
+          </a>
+        )}
         {club.bookingType==="lazuz" ? (
           <a href={club.bookingUrl} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
             <button className="btn-silver" style={{width:"100%",padding:"12px 0",fontSize:14,letterSpacing:1.5}}>🗓 הזמן מגרש — Lazuz</button>
