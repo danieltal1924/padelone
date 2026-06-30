@@ -208,7 +208,6 @@ function PadelCourtCanvas() {
   );
 }
 
-
 // ─── 3D CARD ──────────────────────────────────────────────────────────────────
 function Card3D({children,style}) {
   const ref = useRef(null);
@@ -270,10 +269,6 @@ const TOURNAMENTS = [
   {name:"U18 – גמר ארצי",date:"10 אוגוסט",location:"נתניה",level:"נוער",spots:4,icon:"⭐"},
 ];
 const CLUBS = [
-  {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
-  {name:"TERO X WILSON Padel Club",city:"תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–21:00",description:"6 מגרשים ברמה אחרת מבית מחור סט – המובילה את הפרמייר ליג.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
-  {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
-  {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
   {
     name:"פאדל אינדור בני ציון",
     city:"בני ציון",
@@ -308,6 +303,11 @@ const CLUBS = [
     bookingType:"lazuz",
     bookingUrl:"https://lazuz.co.il",
   },
+  {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
+  {name:"TERO X WILSON Padel Club",city:"תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–21:00",description:"6 מגרשים ברמה אחרת מבית מחור סט – המובילה את הפרמייר ליג.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
@@ -453,7 +453,6 @@ function RankingsSection({t}) {
     </div>
   );
 }
-
 
 // ─── CLUB MODAL ───────────────────────────────────────────────────────────────
 function ClubModal({ club, onClose }) {
@@ -672,7 +671,6 @@ function LiveNewsSection({t}) {
     </div>
   );
 }
-
 
 // ─── IMAGE GALLERY ────────────────────────────────────────────────────────────
 function ImageGallery({ images }) {
