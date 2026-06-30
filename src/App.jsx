@@ -280,13 +280,13 @@ const CLUBS = [
     courts:3,
     indoor:true,
     image:"🏠",
-    phone:"054-420-6666",
     phoneDirect:"052-900-8785",
+    phoneDirectLabel:"ראשי · וואטסאפ בלבד",
     email:"smashpointpadel@gmail.com",
     hours:"א׳–ה׳: 06:00–00:00 | ו׳–ש׳: 06:00–00:00",
     location:"שיזף 161, בני ציון",
     description:"המועדון Indoor היחיד בישראל! 2 מגרשי זוגות + מגרש יחידים ייחודי. בניהול עמית נאור — שחקן ומאמן נבחרת הטניס לשעבר.",
-    features:["Indoor — ללא תלות במזג האוויר","מגרש יחידים ייחודי בישראל","מקלחות מפנקות","השכרת ציוד אוטומטית","חדר כושר","מים קרים","נגישות","תאורת LED","חניה","חנות","מקלחות","בקרת כניסה"],
+    features:["❄️ ממוזג","Indoor — ללא תלות במזג האוויר","מגרש יחידים ייחודי בישראל","מקלחות מפנקות","השכרת ציוד אוטומטית","חדר כושר","מים קרים","נגישות","תאורת LED","חניה","חנות","מקלחות","בקרת כניסה"],
     verified:true,
     bookingType:"lazuz",
     bookingUrl:"https://lazuz.co.il",
@@ -502,7 +502,7 @@ function ClubModal({ club, onClose }) {
         {/* Contact */}
         <div style={{marginBottom:20}}>
           {club.phone && <a href={"tel:"+club.phone} style={{color:SILVER,fontSize:14,textDecoration:"none",display:"block",marginBottom:6}}>📞 {club.phone}</a>}
-          {club.phoneDirect && <a href={"tel:"+club.phoneDirect} style={{color:DIM,fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>📱 {club.phoneDirect}</a>}
+          {club.phoneDirect && <a href={"https://wa.me/972"+club.phoneDirect.replace(/[^0-9]/g,"").replace(/^0/,"")} target="_blank" rel="noopener noreferrer" style={{color:"#25d366",fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>💬 {club.phoneDirect}{club.phoneDirectLabel?" — "+club.phoneDirectLabel:""}</a>}
           {club.email && <a href={"mailto:"+club.email} style={{color:DIM,fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>✉️ {club.email}</a>}
 
         </div>
