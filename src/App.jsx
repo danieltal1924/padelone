@@ -292,6 +292,22 @@ const CLUBS = [
     bookingUrl:"https://lazuz.co.il",
     note:"Indoor בלעדי 🏠",
   },
+  {
+    name:"Maccabim Padel",
+    city:"מודיעין מכבים רעות",
+    courts:6,
+    indoor:false,
+    image:"🎾",
+    phone:"058-799-9992",
+    hours:"א׳–ה׳: 07:00–02:00 | ו׳: 07:00–20:00 | ש׳: 07:00–02:00",
+    location:"דרך ישראל פלד 1, מודיעין מכבים רעות",
+    description:"מועדון פאדל במודיעין. חנות ציוד ומקרר שתייה במקום. השכרת מחבטים ₪15, מחבטי פרו ₪50. הזמנות דרך Lazuz או דרך המשרד.",
+    features:["חנות ציוד","מקרר שתייה","השכרת מחבטים","מחבטי פרו","חניה"],
+    instagram:"https://www.instagram.com/maccabim.padel",
+    verified:true,
+    bookingType:"lazuz",
+    bookingUrl:"https://lazuz.co.il",
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
@@ -1309,7 +1325,6 @@ export default function PadelIsrael() {
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,display:"flex",alignItems:"center",gap:14}}>{t.s_brands}</h2>
         <div className="sline"/>
         <p style={{color:DIM,fontSize:15,marginBottom:32,fontWeight:300}}>{t.brandsSub}</p>
-        <PadexShowcase lang={lang}/>
         <div style={{textAlign:"center",marginTop:48}}>
           <Glass style={{display:"inline-block",borderRadius:3,padding:"28px 48px",border:"1px solid rgba(200,169,110,0.4)"}}>
             <div style={{fontSize:32,marginBottom:10}}>🎾</div>
