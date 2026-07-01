@@ -766,7 +766,7 @@ function MarketplaceSection({t}) {
                     <span style={{color:DIM,fontSize:11}}>👤 {item.seller}</span>
                   </div>
                   {item.phone ? (
-                    <a href={"https://wa.me/972"+item.phone.replace(/^0/,"")} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
+                    <a href={"https://wa.me/972"+item.phone.replace(/[^0-9]/g,"").replace(/^0/,"")} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
                       <button style={{width:"100%",padding:"9px 0",fontSize:12,background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",borderRadius:3,fontWeight:700,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>💬 WhatsApp</button>
                     </a>
                   ) : (
