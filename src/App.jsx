@@ -1218,12 +1218,28 @@ export default function PadelIsrael() {
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="racket"/>{lang==="he"?"קטגוריות: Open · מאסטרס 35+ · מאסטרס 50+":"Categories: Open · Master 35+ · Master 50+"}</span>
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="trophy"/>{lang==="he"?"כניסה חופשית לצפייה בתחרויות":"Free entry to watch the competitions"}</span>
             </div>
-            <div style={{background:"rgba(200,169,110,0.08)",border:"1px solid rgba(200,169,110,0.3)",borderRadius:8,padding:"14px 16px",marginBottom:24,textAlign:lang==="he"?"right":"left"}}>
-              <div style={{color:GOLD,fontSize:13,fontWeight:800,marginBottom:7}}>🎾 {lang==="he"?"בואו לעודד את הנבחרות!":"Come cheer on the teams!"}</div>
-              <div style={{color:SILVER,fontSize:14}}>{lang==="he"?"לוחות זמנים, תוצאות ותקנון מלא מחכים לכם בעמוד הרשמי של ענף הפאדל.":"Schedules, results and full regulations await on the official padel page."}</div>
+            <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(200,169,110,0.3)",borderRadius:8,padding:"16px 18px",marginBottom:24,textAlign:lang==="he"?"right":"left"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
+                <div style={{color:GOLD,fontSize:13,fontWeight:800,letterSpacing:1}}>🎾 {lang==="he"?"מצב הטורניר — שלב הבתים":"Tournament status — group stage"}</div>
+                <div style={{color:DIM,fontSize:11,fontWeight:300}}>{lang==="he"?"עודכן: 4.7":"Updated: Jul 4"}</div>
+              </div>
+              {[
+                {c:lang==="he"?"נשים Open":"Women Open", t:lang==="he"?<>‏<b style={{color:SILVER}}>פושקרבסקי/לויטין</b> ו<b style={{color:SILVER}}>אברמוביץ׳/מורבצ׳יק</b> בלי הפסד · מפגש צמרת: ראשון 20:30</>:<><b style={{color:SILVER}}>Pushkarevsky/Levitin</b> & <b style={{color:SILVER}}>Abramowicz/Muravchik</b> unbeaten · top clash Sun 20:30</>},
+                {c:lang==="he"?"גברים Open":"Men Open", t:lang==="he"?<>‏<b style={{color:SILVER}}>גלושקו/סימון</b>, <b style={{color:SILVER}}>האסקי/בואניש</b> ו<b style={{color:SILVER}}>כהן/כהן</b> שולטים בבתים</>:<><b style={{color:SILVER}}>Glushko/Simon</b>, <b style={{color:SILVER}}>Haski/Bouanish</b> & <b style={{color:SILVER}}>Cohen/Cohen</b> lead their groups</>},
+                {c:lang==="he"?"מאסטרס 35+":"Masters 35+", t:lang==="he"?<>‏<b style={{color:SILVER}}>פרידאב/אביטבול</b> ו<b style={{color:SILVER}}>אצ׳אר/אלפיה</b> מובילים ללא הפסד</>:<><b style={{color:SILVER}}>Fridaev/Abitbol</b> & <b style={{color:SILVER}}>Achar/Alfille</b> unbeaten</>},
+                {c:lang==="he"?"מאסטרס 50+":"Masters 50+", t:lang==="he"?<>‏<b style={{color:SILVER}}>בקמן/אטבול</b> ו<b style={{color:SILVER}}>צין/מור</b> בראש הבתים</>:<><b style={{color:SILVER}}>Bacman/Etbul</b> & <b style={{color:SILVER}}>Zinn/Mor</b> top their groups</>},
+              ].map((r,i)=>(
+                <div key={i} style={{display:"flex",gap:10,padding:"8px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.05)":"none",fontSize:13,lineHeight:1.5}}>
+                  <span style={{color:"#e8c88a",fontWeight:800,whiteSpace:"nowrap",minWidth:84}}>{r.c}</span>
+                  <span style={{color:"#c8d8f0",fontWeight:300}}>{r.t}</span>
+                </div>
+              ))}
             </div>
             <a href="https://www.maccabiah.com/sport/sports/padel" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
-              <button style={{background:"linear-gradient(135deg,#c8a96e,#e8c88a)",color:"#04080f",border:"none",padding:"14px 44px",borderRadius:3,fontWeight:800,fontSize:15,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,width:"100%"}}>🇮🇱 {lang==="he"?"לעמוד הפאדל במכביה":"Maccabiah Padel page"}</button>
+              <button style={{background:"linear-gradient(135deg,#c8a96e,#e8c88a)",color:"#04080f",border:"none",padding:"14px 44px",borderRadius:3,fontWeight:800,fontSize:15,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,width:"100%"}}>🇮🇱 {lang==="he"?"כל התוצאות המלאות — באתר המכביה":"Full results — Maccabiah site"}</button>
+            </a>
+            <a href="https://www.instagram.com/onepadeil" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginTop:10}}>
+              <button style={{background:"transparent",color:SILVER,border:"1px solid rgba(200,169,110,0.4)",padding:"12px 0",borderRadius:3,fontWeight:600,fontSize:13,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,width:"100%"}}>📸 {lang==="he"?"הסיקור המלא בעברית — באינסטגרם שלנו":"Full Hebrew coverage — on our Instagram"}</button>
             </a>
           </div>
         </div>
