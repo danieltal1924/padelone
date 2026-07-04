@@ -558,7 +558,13 @@ function LiveNewsSection({t}) {
         if(localJunk.some(w=>title.includes(w))) return false;
         return title.includes("padel") || title.includes("פאדל");
       };
-      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); const cleanApi = (apiData.articles||[]).filter(isRealPadelNews); if(cleanApi.length>0){setWorldNews(cleanApi);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
+      // מושך במקביל: ה-API שלנו + פידים ישירים ממקורות פאדל איכותיים
+      let cleanApi = [];
+      try {
+        const apiRes = await fetch("/api/news"); const apiData = await apiRes.json();
+        cleanApi = (apiData.articles||[]).filter(isRealPadelNews);
+      } catch(e){}
+      const results = await Promise.allSettled(feeds.map(f => fetch(f).then(r=>r.json())));
       
       const articles = [];
       results.forEach(r => {
@@ -584,10 +590,15 @@ function LiveNewsSection({t}) {
         }
       });
 
-      if(articles.length > 0) {
-        // Sort by recency (hot first)
-        articles.sort((a,b) => b.hot - a.hot);
-        setWorldNews(articles.slice(0,6));
+      // מאחד: כתבות RSS ממקורות רשמיים + תוצאות ה-API, מסיר כפילויות לפי כותרת
+      const seen = new Set();
+      const combined = [...articles, ...cleanApi].filter(a => {
+        const k = (a.title||"").slice(0,60);
+        if(seen.has(k)) return false; seen.add(k); return true;
+      });
+      if(combined.length > 0) {
+        combined.sort((a,b) => (b.hot?1:0) - (a.hot?1:0));
+        setWorldNews(combined.slice(0,6));
         setLastUpdated(new Date().toLocaleTimeString("he-IL"));
       } else {
         // Fallback: use GNews API with padel keyword
