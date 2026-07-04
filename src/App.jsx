@@ -608,6 +608,9 @@ function LiveNewsSection({t}) {
     clearInterval(iv); setLoadingMsg(""); setLoading(false);
   };
 
+  // משיכת חדשות טריות אוטומטית בטעינת הדף (פעם אחת)
+  useEffect(() => { fetchWorldNews(); }, []);
+
   const activeNews = tab==="israel" ? ISRAEL_NEWS : worldNews;
   return (
     <div>
