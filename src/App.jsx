@@ -541,11 +541,22 @@ function LiveNewsSection({t}) {
     const iv = setInterval(() => { mi=(mi+1)%msgs.length; setLoadingMsg(msgs[mi]); }, 1800);
     try {
       // RSS feeds from padel sites via rss2json API (free, no CORS issues)
+      // פידים ישירים ממקורות פאדל רשמיים — בלי rss2json (שדורש מפתח API)
       const feeds = [
-        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelfip.com%2Ffeed%2F&count=3",
-        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelmagazine.fr%2Ffeed%2F&count=3",
-        "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
+        "https://www.padelfip.com/feed/",
+        "https://padel-magazine.co.uk/feed/",
+        "https://www.padelnuestro.com/blog/feed/",
       ];
+      const fetchFeed = async (u) => {
+        const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(u));
+        const xml = await res.text();
+        const doc = new DOMParser().parseFromString(xml, "text/xml");
+        return { items: Array.from(doc.querySelectorAll("item")).slice(0,4).map(it => ({
+          title: (it.querySelector("title")||{}).textContent || "",
+          link: (it.querySelector("link")||{}).textContent || "",
+          pubDate: (it.querySelector("pubDate")||{}).textContent || "",
+        })) };
+      };
 
       // סינון איכות: רק כתבות שפאדל בכותרת שלהן, בלי אתרי חדשות מקומיים לא רלוונטיים
       const isRealPadelNews = (a) => {
@@ -564,7 +575,7 @@ function LiveNewsSection({t}) {
         const apiRes = await fetch("/api/news"); const apiData = await apiRes.json();
         cleanApi = (apiData.articles||[]).filter(isRealPadelNews);
       } catch(e){}
-      const results = await Promise.allSettled(feeds.map(f => fetch(f).then(r=>r.json())));
+      const results = await Promise.allSettled(feeds.map(fetchFeed));
       
       const articles = [];
       results.forEach(r => {
@@ -576,6 +587,7 @@ function LiveNewsSection({t}) {
               const diff = Date.now() - pub.getTime();
               const hours = Math.floor(diff/3600000);
               const days = Math.floor(hours/24);
+              if(days > 30) return; // כתבות ישנות לא נכנסות
               const timeStr = days > 0 ? `לפני ${days} ימים` : hours > 0 ? `לפני ${hours} שעות` : "לפני זמן קצר";
               
               articles.push({
