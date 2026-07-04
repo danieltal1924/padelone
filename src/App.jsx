@@ -394,10 +394,10 @@ const ISRAEL_NEWS = [
   {title:"מאקו: מגרשי הפאדל כובשים את ערי ישראל — רעננה, רמת גן, אילת ועוד",time:"דצמבר 2025",category:"ישראל",hot:false,url:"https://www.mako.co.il/living-architecture/local/Article-1c0734d09362b91026.htm"},
 ];
 const WORLD_NEWS = [
-  {title:"🏆 ולנסיה P1: קואלו/טאפיה ניצחו את גלאן/צ׳ינגוטו בקאמבק דרמטי 6-7,6-1,7-6 — תואר רביעי ב-2026",time:"14 יוני 2026",category:"טורניר",hot:true,url:"https://premierpadel.com/en/news/coello-and-tapia-complete-epic-comeback-as-snchez-and-ustero-triumph-at-valencia-premier-padel-p1"},
-  {title:"פרידה מרגשת: למפרטי שיחק משחקו האחרון בבואנוס איירס מול 13,000 אוהדים",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.padelfip.com/2026/05/day4-top-four-pairs-in-the-semi-finals-emotional-farewell-for-lamperti/"},
-  {title:"גלאן וצ׳ינגוטו: 29 ניצחונות מתוך 32 ב-2026 — המועדפים ברומא",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.redbull.tv/en/events"},
-  {title:"נדאל משחק פאדל — אימון עם מאמנו לשעבר קרלוס מויה",time:"2025",category:"עולם",hot:false,url:"https://www.sportskeeda.com/tennis/news-rafael-nadal-post-retirement-life-spaniard-turns-padel-joins-ex-coach-carlos-moya-fun-session-academy"},
+  {title:"🏆 ויאדוליד P2: קואלו/טאפיה עם התואר השלישי ברציפות — ניצחו את גלאן/צ׳ינגוטו 6-4, 6-2 בגמר",time:"29 יוני 2026",category:"טורניר",hot:true,url:"https://premierpadel.com/en/news"},
+  {title:"בea גונסאלס וחוסמריה עם התואר השישי העונה — ניצחון 6-4, 6-2 על סנצ׳ס/אוסטרו בוויאדוליד",time:"29 יוני 2026",category:"טורניר",hot:true,url:"https://premierpadel.com/en/news"},
+  {title:"קואלו וטאפיה מרחיבים את היתרון בראש דירוג ה-RACE לקראת בורדו",time:"יולי 2026",category:"עולם",hot:false,url:"https://www.padelfip.com/ranking-male/"},
+  {title:"הטורניר הבא: בורדו — Premier Padel ממשיך את עונת 2026",time:"יולי 2026",category:"עולם",hot:false,url:"https://premierpadel.com/en/calendar"},
   {title:"עדכון לוח 2026: קטאר בוטל, קובייט הוקפץ ל-Major, פרטוריה ל-P1",time:"מאי 2026",category:"עולם",hot:false,url:"https://www.padelfip.com/events/italy-major-2026/"},
   {title:"Star Point — שיטת הניקוד החדשה של Premier Padel 2026",time:"דצמבר 2025",category:"עולם",hot:false,url:"https://www.padelnuestro.com/int/blog/premier-padel-2026-calendar"},
 ];
@@ -551,8 +551,11 @@ function LiveNewsSection({t}) {
       const isRealPadelNews = (a) => {
         const title = (a.title||"").toLowerCase();
         const url = (a.url||a.link||"").toLowerCase();
-        const blocked = ["chroniclelive","planning-applications","dailymail","the-sun.","liverpoolecho","manchestereveningnews"];
-        if(blocked.some(b=>url.includes(b))) return false;
+        const blockedSites = ["chroniclelive","planning-applications","dailymail","the-sun.","liverpoolecho","manchestereveningnews","renfrewshire","dailyrecord","expressandstar","kentonline","yorkshirepost","lancs.live","walesonline","edinburghlive","glasgowlive","cheshire-live","stokesentinel","nottinghampost","leicestermercury","hulldailymail","bristolpost","plymouthherald","cornwalllive","devonlive","essexlive","hertfordshiremercury","cambridge-news","mylondon","getsurrey","hampshirelive","sussexlive"];
+        if(blockedSites.some(b=>url.includes(b))) return false;
+        // חסימת ידיעות תכנון/מועצות מקומיות — לא רלוונטי לקהל ישראלי
+        const localJunk = ["council","planning application","planning permission","plans to create","plans for","green light","approved by","unveils plan","proposal","residents","objection","neighbour","car park","leisure centre"];
+        if(localJunk.some(w=>title.includes(w))) return false;
         return title.includes("padel") || title.includes("פאדל");
       };
       const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); const cleanApi = (apiData.articles||[]).filter(isRealPadelNews); if(cleanApi.length>0){setWorldNews(cleanApi);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
