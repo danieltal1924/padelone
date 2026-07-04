@@ -266,7 +266,7 @@ const TOURNAMENTS = [
 const CLUBS = [
   {
     name:"פאדל אינדור בני ציון",
-    city:"בני ציון",
+    city:"בני ציון",region:"שרון",
     courts:3,
     indoor:true,
     image:"🏠",
@@ -284,7 +284,7 @@ const CLUBS = [
   },
   {
     name:"Maccabim Padel",
-    city:"מודיעין מכבים רעות",
+    city:"מודיעין מכבים רעות",region:"מרכז",
     courts:6,
     indoor:false,
     image:"🎾",
@@ -298,10 +298,10 @@ const CLUBS = [
     bookingType:"lazuz",
     bookingUrl:"https://lazuz.co.il",
   },
-  {name:"TERO X WILSON Padel Club",city:"תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
-  {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
-  {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
-  {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",region:"מרכז",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
+  {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",region:"מרכז",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",region:"שרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
 
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
@@ -547,13 +547,21 @@ function LiveNewsSection({t}) {
         "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.padelnuestro.com%2Fblog%2Ffeed%2F&count=3",
       ];
 
-      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); if(apiData.articles?.length>0){setWorldNews(apiData.articles);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
+      // סינון איכות: רק כתבות שפאדל בכותרת שלהן, בלי אתרי חדשות מקומיים לא רלוונטיים
+      const isRealPadelNews = (a) => {
+        const title = (a.title||"").toLowerCase();
+        const url = (a.url||a.link||"").toLowerCase();
+        const blocked = ["chroniclelive","planning-applications","dailymail","the-sun.","liverpoolecho","manchestereveningnews"];
+        if(blocked.some(b=>url.includes(b))) return false;
+        return title.includes("padel") || title.includes("פאדל");
+      };
+      const apiRes = await fetch("/api/news"); const apiData = await apiRes.json(); const cleanApi = (apiData.articles||[]).filter(isRealPadelNews); if(cleanApi.length>0){setWorldNews(cleanApi);setLastUpdated(new Date().toLocaleTimeString("he-IL"));} const results = [];
       
       const articles = [];
       results.forEach(r => {
         if(r.status==="fulfilled" && r.value.items) {
           r.value.items.forEach(item => {
-            if(item.title && item.link) {
+            if(item.title && item.link && isRealPadelNews({title:item.title,url:item.link})) {
               // Calculate time ago
               const pub = new Date(item.pubDate || Date.now());
               const diff = Date.now() - pub.getTime();
@@ -584,7 +592,7 @@ function LiveNewsSection({t}) {
         if(gnews.ok) {
           const gdata = await gnews.json();
           if(gdata.articles && gdata.articles.length > 0) {
-            const mapped = gdata.articles.map(a => ({
+            const mapped = gdata.articles.filter(isRealPadelNews).map(a => ({
               title: a.title,
               time: "לאחרונה",
               category: "עולם",
@@ -1085,6 +1093,7 @@ export default function PadelIsrael() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modal, setModal] = useState(null);
   const [search, setSearch] = useState("");
+  const [regionF, setRegionF] = useState("הכל");
   const [selectedClub, setSelectedClub] = useState(null);
   const [lang, setLang] = useState("he");
   const t = LANG[lang];
@@ -1260,9 +1269,20 @@ export default function PadelIsrael() {
             </div>
             <input className="inp" placeholder={t.searchClub} value={search} onChange={e=>setSearch(e.target.value)} />
           </div>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:24,justifyContent:"center"}}>
+            {["הכל","שרון","מרכז","ירושלים","דרום","צפון"].map(r=>(
+              <button key={r} onClick={()=>setRegionF(r)} style={{
+                background:regionF===r?"linear-gradient(135deg,#c8a96e,#e8c88a)":"transparent",
+                color:regionF===r?"#04080f":"#8fa3c0",
+                border:regionF===r?"none":"1px solid rgba(200,169,110,0.3)",
+                padding:"8px 22px",borderRadius:20,fontWeight:regionF===r?800:400,fontSize:13,
+                cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:0.5
+              }}>{r}</button>
+            ))}
+          </div>
           <ClubMap3D clubs={CLUBS} onSelect={setSelectedClub} lang={lang} />
           <div className="g3">
-            {CLUBS.filter(c=>!search||c.name.includes(search)||c.city.includes(search)).map((c,i) => (
+            {CLUBS.filter(c=>(regionF==="הכל"||c.region===regionF)&&(!search||c.name.includes(search)||c.city.includes(search))).map((c,i) => (
               <Card3D key={i}>
                 <Glass style={{borderRadius:3,padding:20,height:"100%",display:"flex",flexDirection:"column",position:"relative",overflow:"hidden"}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
