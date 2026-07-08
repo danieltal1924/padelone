@@ -298,18 +298,11 @@ const CLUBS = [
     bookingType:"lazuz",
     bookingUrl:"https://lazuz.co.il",
   },
-  {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",location:"שטרית 2, תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],instagram:"https://www.instagram.com/tero_x_wilson_padel_club_tlv",verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
   {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",region:"מרכז",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
   {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",region:"מרכז",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
   {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",region:"שרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
 
-  {
-    name:"מועדון הפאדל ירושלים",
-    city:"ירושלים",
-    region:"ירושלים",
-    phone:"072-372-6927",
-    basic:true,
-  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
@@ -338,35 +331,25 @@ const MARKETPLACE = [
 ];
 const CATEGORIES_HE = ["הכל","מחבט","נעליים","תיק","ביגוד"];
 const CONDITIONS_HE = ["הכל","חדש","כמו חדש","משומש"];
-// סטטוס טורניר מחושב אוטומטית מהתאריכים — אין צורך לעדכן ידנית
-const tourneyStatus = (t) => {
-  if(!t.start || !t.end) return t.status || "upcoming";
-  const now = new Date(); now.setHours(0,0,0,0);
-  const s = new Date(t.start), e = new Date(t.end); e.setHours(23,59,59);
-  if(now > e) return "done";
-  if(now >= s) return "live";
-  return "upcoming";
-};
-
 const WORLD_TOURNAMENTS = [
-  {name:"Riyadh Season P1",series:"Premier Padel",location:"ריאד, סעודיה 🇸🇦",dates:"9–14 פברואר",start:"2026-02-16",end:"2026-02-22",prize:"P1",url:"https://www.redbull.tv/en/events",players:"קואלו / טאפיה ניצחו"},
-  {name:"Gijón P2",series:"Premier Padel",location:"חיחון, ספרד 🇪🇸",dates:"2–8 מרץ",start:"2026-03-02",end:"2026-03-08",prize:"P2",url:"https://www.redbull.tv/en/events",players:"גלאן / צ׳ינגוטו ניצחו"},
-  {name:"Cancún P2",series:"Premier Padel",location:"קנקון, מקסיקו 🇲🇽",dates:"16–22 מרץ",start:"2026-03-16",end:"2026-03-22",prize:"P2",url:"https://www.redbull.tv/en/events",players:"טאפיה / קואלו ניצחו"},
-  {name:"Miami P1",series:"Premier Padel",location:"מיאמי, ארה״ב 🇺🇸",dates:"23–29 מרץ",start:"2026-03-23",end:"2026-03-29",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"NewGiza P2",series:"Premier Padel",location:"גיזה, מצרים 🇪🇬",dates:"13–18 אפריל",start:"2026-04-13",end:"2026-04-18",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Brussels P2",series:"Premier Padel",location:"בריסל, בלגיה 🇧🇪",dates:"20–26 אפריל",start:"2026-04-20",end:"2026-04-26",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Asunción P2",series:"Premier Padel",location:"אסונסיון, פרגוואי 🇵🇾",dates:"4–10 מאי",start:"2026-05-04",end:"2026-05-10",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Buenos Aires P1",series:"Premier Padel",location:"בואנוס איירס 🇦🇷",dates:"11–17 מאי",start:"2026-05-11",end:"2026-05-17",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",start:"2026-06-01",end:"2026-06-07",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",start:"2026-06-08",end:"2026-06-14",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Valladolid P2",series:"Premier Padel",location:"ויאדוליד, ספרד 🇪🇸",dates:"22–28 יוני",start:"2026-06-22",end:"2026-06-28",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",start:"2026-06-29",end:"2026-07-05",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הגמר: ראשון 5.7"},
-  {name:"Málaga P1",series:"Premier Padel",location:"מלאגה, ספרד 🇪🇸",dates:"13–19 יולי",start:"2026-07-13",end:"2026-07-19",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Pretoria P2",series:"Premier Padel",location:"פרטוריה, דרום אפריקה 🇿🇦",dates:"27 יולי–2 אוג׳",start:"2026-07-27",end:"2026-08-02",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה באפריקה"},
-  {name:"London P1",series:"Premier Padel",location:"לונדון, אנגליה 🇬🇧",dates:"3–9 אוגוסט",start:"2026-08-03",end:"2026-08-09",prize:"P1",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה בלונדון"},
-  {name:"Madrid P1",series:"Premier Padel",location:"מדריד, ספרד 🇪🇸",dates:"31 אוג׳–6 ספט׳",start:"2026-08-31",end:"2026-09-06",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Paris Major — Roland Garros",series:"Premier Padel",location:"פריז, צרפת 🇫🇷",dates:"7–13 ספטמבר",start:"2026-09-07",end:"2026-09-13",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32 — רולאן גארוס"},
-  {name:"Rotterdam P2",series:"Premier Padel",location:"רוטרדם, הולנד 🇳🇱",dates:"28 ספט׳–4 אוקט׳",start:"2026-09-28",end:"2026-10-04",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Riyadh Season P1",series:"Premier Padel",location:"ריאד, סעודיה 🇸🇦",dates:"9–14 פברואר",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"קואלו / טאפיה ניצחו"},
+  {name:"Gijón P2",series:"Premier Padel",location:"חיחון, ספרד 🇪🇸",dates:"2–8 מרץ",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"גלאן / צ׳ינגוטו ניצחו"},
+  {name:"Cancún P2",series:"Premier Padel",location:"קנקון, מקסיקו 🇲🇽",dates:"16–22 מרץ",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"טאפיה / קואלו ניצחו"},
+  {name:"Miami P1",series:"Premier Padel",location:"מיאמי, ארה״ב 🇺🇸",dates:"23–29 מרץ",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"NewGiza P2",series:"Premier Padel",location:"גיזה, מצרים 🇪🇬",dates:"13–18 אפריל",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Brussels P2",series:"Premier Padel",location:"בריסל, בלגיה 🇧🇪",dates:"20–26 אפריל",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Asunción P2",series:"Premier Padel",location:"אסונסיון, פרגוואי 🇵🇾",dates:"4–10 מאי",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Buenos Aires P1",series:"Premier Padel",location:"בואנוס איירס 🇦🇷",dates:"11–17 מאי",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",status:"done",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Valladolid P2",series:"Premier Padel",location:"ויאדוליד, ספרד 🇪🇸",dates:"22–28 יוני",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",status:"live",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הגמר: ראשון 5.7"},
+  {name:"Málaga P1",series:"Premier Padel",location:"מלאגה, ספרד 🇪🇸",dates:"13–19 יולי",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Pretoria P2",series:"Premier Padel",location:"פרטוריה, דרום אפריקה 🇿🇦",dates:"27 יולי–2 אוג׳",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה באפריקה"},
+  {name:"London P1",series:"Premier Padel",location:"לונדון, אנגליה 🇬🇧",dates:"3–9 אוגוסט",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה בלונדון"},
+  {name:"Madrid P1",series:"Premier Padel",location:"מדריד, ספרד 🇪🇸",dates:"31 אוג׳–6 ספט׳",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Paris Major — Roland Garros",series:"Premier Padel",location:"פריז, צרפת 🇫🇷",dates:"7–13 ספטמבר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32 — רולאן גארוס"},
+  {name:"Rotterdam P2",series:"Premier Padel",location:"רוטרדם, הולנד 🇳🇱",dates:"28 ספט׳–4 אוקט׳",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Germany P2",series:"Premier Padel",location:"דיסלדורף, גרמניה 🇩🇪",dates:"5–11 אוקטובר",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Milano P1",series:"Premier Padel",location:"מילאנו, איטליה 🇮🇹",dates:"12–18 אוקטובר",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Kuwait City Major",series:"Premier Padel",location:"כווית סיטי 🇰🇼",dates:"26–31 אוקטובר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
@@ -480,10 +463,10 @@ function ClubModal({ club, onClose }) {
         {/* Header */}
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:16}}>
           <div style={{display:"flex",alignItems:"center",gap:12}}>
-            <span style={{fontSize:40}}>{club.image||"🎾"}</span>
+            <span style={{fontSize:40}}>{club.image}</span>
             <div>
               <h2 style={{fontWeight:800,fontSize:18,color:SILVER,marginBottom:4}}>{club.name}</h2>
-              <p style={{color:DIM,fontSize:13}}>📍 {club.city}{club.courts?` · ${club.courts} מגרשים`:""}{club.courts?(club.indoor?" · 🏠 מקורה":" · ☀️ חוץ"):""}</p>
+              <p style={{color:DIM,fontSize:13}}>📍 {club.city} · {club.courts} מגרשים · {club.indoor?"🏠 מקורה":"☀️ חוץ"}</p>
             </div>
           </div>
           <button onClick={onClose} style={{background:"none",border:"none",color:DIM,fontSize:22,cursor:"pointer",padding:"0 4px"}}>✕</button>
@@ -501,7 +484,6 @@ function ClubModal({ club, onClose }) {
         )}
 
         {/* All Features */}
-        {club.features && club.features.length > 0 && (
         <div style={{marginBottom:20}}>
           <h4 style={{fontSize:11,color:DIM,letterSpacing:2,marginBottom:10}}>מה כולל המועדון</h4>
           <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
@@ -510,21 +492,13 @@ function ClubModal({ club, onClose }) {
             ))}
           </div>
         </div>
-        )}
 
         {/* Contact */}
         <div style={{marginBottom:20}}>
           {club.phone && <a href={"tel:"+club.phone} style={{color:SILVER,fontSize:14,textDecoration:"none",display:"block",marginBottom:6}}>📞 {club.phone}</a>}
           {club.phoneDirect && <a href={"https://wa.me/972"+club.phoneDirect.replace(/[^0-9]/g,"").replace(/^0/,"")} target="_blank" rel="noopener noreferrer" style={{color:"#25d366",fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>💬 {club.phoneDirect}{club.phoneDirectLabel?" — "+club.phoneDirectLabel:""}</a>}
           {club.email && <a href={"mailto:"+club.email} style={{color:DIM,fontSize:13,textDecoration:"none",display:"block",marginBottom:6}}>✉️ {club.email}</a>}
-          {club.basic && (
-            <a href={"https://wa.me/972545157773?text="+encodeURIComponent("היי, אני מ"+club.name+" ורוצה לשדרג את הכרטיס באתר")} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block",marginTop:12}}>
-              <div style={{background:"rgba(200,169,110,0.08)",border:`1px solid ${BORDER}`,borderRadius:3,padding:"12px 14px",textAlign:"center"}}>
-                <span style={{color:GOLD,fontSize:13,fontWeight:700}}>⭐ זה המועדון שלכם? שדרגו את הכרטיס</span>
-                <div style={{color:DIM,fontSize:11,marginTop:4}}>תמונות · שעות · קישור הזמנה · אינסטגרם ועוד</div>
-              </div>
-            </a>
-          )}
+
         </div>
 
         {/* Booking button */}
@@ -574,18 +548,8 @@ function LiveNewsSection({t}) {
         "https://www.padelnuestro.com/blog/feed/",
       ];
       const fetchFeed = async (u) => {
-        // מנסה שני פרוקסים — אם הראשון נופל, השני מגבה
-        let xml = "";
-        try {
-          const r1 = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(u));
-          if(r1.ok) xml = await r1.text();
-        } catch(e){}
-        if(!xml || !xml.includes("<item")) {
-          try {
-            const r2 = await fetch("https://corsproxy.io/?url=" + encodeURIComponent(u));
-            if(r2.ok) xml = await r2.text();
-          } catch(e){}
-        }
+        const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(u));
+        const xml = await res.text();
         const doc = new DOMParser().parseFromString(xml, "text/xml");
         return { items: Array.from(doc.querySelectorAll("item")).slice(0,4).map(it => ({
           title: (it.querySelector("title")||{}).textContent || "",
@@ -646,8 +610,7 @@ function LiveNewsSection({t}) {
       });
       if(combined.length > 0) {
         combined.sort((a,b) => (b.hot?1:0) - (a.hot?1:0));
-        // לא מחליפים תוצאה טובה בתוצאה דלה — רענון כושל לא דורס
-        setWorldNews(prev => (combined.length >= 3 || combined.length >= prev.length) ? combined.slice(0,6) : prev);
+        setWorldNews(combined.slice(0,6));
         setLastUpdated(new Date().toLocaleTimeString("he-IL"));
       } else {
         // Fallback: use GNews API with padel keyword
@@ -662,7 +625,7 @@ function LiveNewsSection({t}) {
               hot: false,
               url: a.url,
             }));
-            setWorldNews(prev => (mapped.length >= 3 || mapped.length >= prev.length) ? mapped : prev);
+            setWorldNews(mapped);
             setLastUpdated(new Date().toLocaleTimeString("he-IL"));
           }
         }
@@ -672,6 +635,7 @@ function LiveNewsSection({t}) {
   };
 
   // משיכת חדשות טריות אוטומטית בטעינת הדף (פעם אחת)
+  useEffect(() => { fetchWorldNews(); }, []);
 
   const activeNews = tab==="israel" ? ISRAEL_NEWS : worldNews;
   return (
@@ -1482,8 +1446,8 @@ export default function PadelIsrael() {
                 <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:tr.prize==="Major"?"linear-gradient(90deg,#c8a96e,#e8c88a,transparent)":tr.prize==="Finals"?"linear-gradient(90deg,#c8a0ff,#9060cc,transparent)":"linear-gradient(90deg,#c8d8f0,#8aa0c0,transparent)"}} />
                 <div style={{display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
                   <div style={{flexShrink:0}}>
-                    {tourneyStatus(tr)==="live"?(<span style={{display:"flex",alignItems:"center",gap:5,background:"rgba(239,68,68,0.15)",border:"1px solid rgba(239,68,68,0.3)",color:"#ef4444",fontSize:11,fontWeight:800,padding:"4px 10px",borderRadius:2,letterSpacing:1}}><span className="pulse" style={{width:6,height:6,background:"#ef4444",borderRadius:"50%",display:"inline-block"}}/>LIVE</span>)
-                    :tourneyStatus(tr)==="done"?(<span style={{background:"rgba(100,140,100,0.1)",border:"1px solid rgba(100,180,100,0.2)",color:"#6ab06a",fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>✓ הסתיים</span>)
+                    {tr.status==="live"?(<span style={{display:"flex",alignItems:"center",gap:5,background:"rgba(239,68,68,0.15)",border:"1px solid rgba(239,68,68,0.3)",color:"#ef4444",fontSize:11,fontWeight:800,padding:"4px 10px",borderRadius:2,letterSpacing:1}}><span className="pulse" style={{width:6,height:6,background:"#ef4444",borderRadius:"50%",display:"inline-block"}}/>LIVE</span>)
+                    :tr.status==="done"?(<span style={{background:"rgba(100,140,100,0.1)",border:"1px solid rgba(100,180,100,0.2)",color:"#6ab06a",fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>✓ הסתיים</span>)
                     :(<span style={{background:"rgba(180,210,255,0.07)",border:`1px solid ${BORDER}`,color:DIM,fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>UPCOMING</span>)}
                   </div>
                   <div style={{flex:1,minWidth:180}}>
