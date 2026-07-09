@@ -298,7 +298,7 @@ const CLUBS = [
     bookingType:"lazuz",
     bookingUrl:"https://lazuz.co.il",
   },
-  {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",location:"שטרית 2, תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il",instagram:"https://www.instagram.com/tero_x_wilson_padel_club_tlv"},
   {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",region:"מרכז",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
   {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",region:"מרכז",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
   {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",region:"שרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
@@ -487,7 +487,7 @@ function ClubModal({ club, onClose }) {
         <div style={{marginBottom:20}}>
           <h4 style={{fontSize:11,color:DIM,letterSpacing:2,marginBottom:10}}>מה כולל המועדון</h4>
           <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-            {club.features.map((f,i) => (
+            {(club.features||[]).map((f,i) => (
               <span key={i} style={{background:"rgba(100,140,200,0.07)",color:"#6a8ab0",fontSize:12,padding:"5px 12px",borderRadius:3,border:`1px solid ${BORDER}`}}>{f}</span>
             ))}
           </div>
@@ -1330,10 +1330,10 @@ export default function PadelIsrael() {
                   {c.phone&&<a href={"tel:"+c.phone} style={{color:SILVER,fontSize:12,textDecoration:"none",display:"block",marginBottom:3}}>📞 {c.phone}</a>}
                   {c.phoneDirect&&<a href={"tel:"+c.phoneDirect} style={{color:DIM,fontSize:11,textDecoration:"none",display:"block",marginBottom:10}}>📱 {c.phoneDirect}</a>}
                   <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:14}}>
-                    {c.features.slice(0,4).map((f,j) => <span key={j} style={{background:"rgba(100,140,200,0.07)",color:"#5a7aaa",fontSize:10,padding:"3px 8px",borderRadius:2,border:`1px solid ${BORDER}`}}>{f}</span>)}
-                    {c.features.length>4&&(
+                    {(c.features||[]).slice(0,4).map((f,j) => <span key={j} style={{background:"rgba(100,140,200,0.07)",color:"#5a7aaa",fontSize:10,padding:"3px 8px",borderRadius:2,border:`1px solid ${BORDER}`}}>{f}</span>)}
+                    {(c.features||[]).length>4&&(
                       <span onClick={()=>setSelectedClub(c)} style={{color:SILVER,fontSize:10,padding:"3px 10px",borderRadius:2,border:`1px solid rgba(200,216,240,0.3)`,cursor:"pointer",background:"rgba(180,210,255,0.07)",fontWeight:600}}>
-                        +{c.features.length-4} {t.moreFeatures} ›
+                        +{(c.features||[]).length-4} {t.moreFeatures} ›
                       </span>
                     )}
                   </div>
