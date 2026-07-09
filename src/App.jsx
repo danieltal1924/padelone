@@ -310,6 +310,13 @@ const CLUBS = [
     phone:"054-956-1313",
     basic:true,
   },
+  {
+    name:"מרכז הטניס והחינוך ירושלים",
+    city:"ירושלים",
+    region:"ירושלים",
+    phone:"02-6791866",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
