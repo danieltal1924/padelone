@@ -331,6 +331,13 @@ const CLUBS = [
     phone:"055-566-0300",
     basic:true,
   },
+  {
+    name:"The Padel Club",
+    city:"אזור",
+    region:"מרכז",
+    location:"ז'בוטינסקי 28, אזור",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
