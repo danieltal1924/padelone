@@ -1103,26 +1103,51 @@ function ClubMap3D({ clubs, onSelect, lang }){
   const isEn = lang==="en";
   const COORD = {
     "תל אביב":[32.083,34.781], "רמת גן":[32.070,34.824], "חולון":[32.015,34.773],
-    "רמת השרון":[32.146,34.840], "בני ציון":[32.226,34.876],
+    "רמת השרון":[32.146,34.840], "בני ציון":[32.226,34.876], "אזור":[32.024,34.804],
+    "מודיעין מכבים רעות":[31.898,35.010], "ירושלים":[31.768,35.214],
+    "אשדוד":[31.792,34.641], "שדרות":[31.525,34.596], "הרצליה":[32.166,34.844],
+    "נתניה":[32.328,34.858], "חדרה":[32.434,34.919], "קיסריה":[32.500,34.905],
+    "זכרון יעקב":[32.573,34.953], "חיפה":[32.794,34.990], "קריית ביאליק":[32.836,35.083],
+    "עכו":[32.928,35.075], "נהריה":[33.006,35.094], "כרמיאל":[32.916,35.296],
+    "עפולה":[32.610,35.289], "נצרת":[32.702,35.298], "טבריה":[32.792,35.345],
+    "באר שבע":[31.252,34.791], "אשקלון":[31.669,34.574], "ראשון לציון":[31.964,34.805],
+    "פתח תקווה":[32.084,34.887], "כפר סבא":[32.175,34.907], "רעננה":[32.184,34.871],
   };
-  const minLat=31.96, maxLat=32.30, minLng=34.72, maxLng=34.93;
+  const minLat=31.40, maxLat=33.10, minLng=34.50, maxLng=35.40;
   const seen={};
   const pins = clubs.map((c,i) => {
     const base = COORD[c.city] || [32.08,34.80];
     const n = (seen[c.city] = (seen[c.city]||0)+1) - 1;   // 0 for first in city
-    const lat = base[0] + (n? (n%2? 0.013 : -0.013)*Math.ceil(n/2) : 0);
-    const lng = base[1] + (n? (n%2? 0.018 : -0.018)*Math.ceil(n/2) : 0);
+    const lat = base[0] + (n? (n%2? 0.010 : -0.010)*Math.ceil(n/2) : 0);
+    const lng = base[1] + (n? (n%2? 0.014 : -0.014)*Math.ceil(n/2) : 0);
     const x = 8 + (lng-minLng)/(maxLng-minLng)*84;
-    const y = 12 + (maxLat-lat)/(maxLat-minLat)*74;
+    const y = 9 + (maxLat-lat)/(maxLat-minLat)*82;
     return { c, x, y, i };
   });
+  // declutter — gently push overlapping pins apart so labels stay readable
+  const MIN = 13;
+  for(let it=0; it<90; it++){
+    for(let a=0;a<pins.length;a++){
+      for(let b=a+1;b<pins.length;b++){
+        let dx=pins[b].x-pins[a].x, dy=pins[b].y-pins[a].y;
+        let d=Math.hypot(dx,dy);
+        if(d<0.001){ dx=((a%2)?0.6:-0.6); dy=((b%2)?0.6:-0.6); d=Math.hypot(dx,dy); }
+        if(d<MIN){
+          const push=(MIN-d)/2, ux=dx/d, uy=dy/d;
+          pins[a].x-=ux*push; pins[a].y-=uy*push;
+          pins[b].x+=ux*push; pins[b].y+=uy*push;
+        }
+      }
+    }
+  }
+  pins.forEach(p=>{ p.x=Math.max(7,Math.min(93,p.x)); p.y=Math.max(8,Math.min(91,p.y)); });
   return (
     <div style={{marginBottom:42}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}>
         <span style={{color:"#8fb0e0",fontSize:13}}>🗺️ {isEn?"Interactive 3D map — tap a pin to view & book a court":"מפה תלת-ממדית — לחצו על סימון לצפייה והזמנת מגרש"}</span>
-        <span style={{color:"#4a6a88",fontSize:12}}>{clubs.length} {isEn?"clubs · Greater Tel Aviv":"מועדונים · גוש דן"}</span>
+        <span style={{color:"#4a6a88",fontSize:12}}>{clubs.length} {isEn?"clubs · Israel":"מועדונים · ישראל"}</span>
       </div>
-      <div style={{perspective:"1100px",height:320,borderRadius:16,overflow:"hidden",position:"relative",
+      <div style={{perspective:"1100px",height:440,borderRadius:16,overflow:"hidden",position:"relative",
         border:"1px solid rgba(53,224,255,0.22)",background:"#050f22",
         boxShadow:"0 24px 60px rgba(0,0,0,0.45), inset 0 0 70px rgba(53,224,255,0.06)"}}>
         <div style={{position:"absolute",left:"-12%",right:"-12%",top:"-10%",bottom:"-34%",transformStyle:"preserve-3d",
