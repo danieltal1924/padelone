@@ -324,6 +324,13 @@ const CLUBS = [
     phone:"050-309-1233",
     basic:true,
   },
+  {
+    name:"Pádelia",
+    city:"אשדוד",
+    region:"דרום",
+    phone:"055-566-0300",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
