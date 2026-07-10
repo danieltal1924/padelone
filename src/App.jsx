@@ -317,6 +317,13 @@ const CLUBS = [
     phone:"02-6791866",
     basic:true,
   },
+  {
+    name:"Total Padel — שדרות",
+    city:"שדרות",
+    region:"דרום",
+    phone:"050-309-1233",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
