@@ -1335,23 +1335,27 @@ function ClubMap3D({ clubs, onSelect, lang }){
     const y = 9 + (maxLat-lat)/(maxLat-minLat)*82;
     return { c, x, y, i };
   });
-  // declutter — gently push overlapping pins apart so labels stay readable
-  const MIN = 13;
-  for(let it=0; it<90; it++){
+  // declutter — separate overlapping pins, but keep them anchored near true location
+  const MIN = 9;
+  pins.forEach(p => { p.ox = p.x; p.oy = p.y; });   // original (true) position
+  for(let it=0; it<120; it++){
     for(let a=0;a<pins.length;a++){
       for(let b=a+1;b<pins.length;b++){
         let dx=pins[b].x-pins[a].x, dy=pins[b].y-pins[a].y;
         let d=Math.hypot(dx,dy);
-        if(d<0.001){ dx=((a%2)?0.6:-0.6); dy=((b%2)?0.6:-0.6); d=Math.hypot(dx,dy); }
+        if(d<0.001){ dx=((a%2)?0.7:-0.7); dy=((b%2)?0.7:-0.7); d=Math.hypot(dx,dy); }
         if(d<MIN){
-          const push=(MIN-d)/2, ux=dx/d, uy=dy/d;
+          const push=(MIN-d)/2*0.5, ux=dx/d, uy=dy/d;
           pins[a].x-=ux*push; pins[a].y-=uy*push;
           pins[b].x+=ux*push; pins[b].y+=uy*push;
         }
       }
     }
+    // pull back toward true position so pins don't drift far from their real city
+    pins.forEach(p => { p.x += (p.ox-p.x)*0.06; p.y += (p.oy-p.y)*0.06; });
+    // clamp every iteration so nothing escapes the map
+    pins.forEach(p => { p.x=Math.max(9,Math.min(91,p.x)); p.y=Math.max(10,Math.min(89,p.y)); });
   }
-  pins.forEach(p=>{ p.x=Math.max(7,Math.min(93,p.x)); p.y=Math.max(8,Math.min(91,p.y)); });
   return (
     <div style={{marginBottom:42}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}>
