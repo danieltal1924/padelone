@@ -356,6 +356,13 @@ const CLUBS = [
     location:"ז'בוטינסקי 28, אזור",
     basic:true,
   },
+  {
+    name:"פאדל סנטר ראשון לציון",
+    city:"ראשון לציון",
+    region:"מרכז",
+    phone:"054-317-1163",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
