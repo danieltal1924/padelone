@@ -1140,6 +1140,96 @@ function AccessibilityMenu(){
 }
 
 // ─── 3D CLUB MAP ────────────────────────────────────────────────────────────
+function ClubCard({c, t, DIM, SILVER, BORDER, setSelectedClub}) {
+  return (
+    <Card3D>
+                <Glass style={{borderRadius:3,padding:20,height:"100%",display:"flex",flexDirection:"column",position:"relative",overflow:"hidden"}}>
+                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
+                    <span style={{fontSize:36}}>{c.image}</span>
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:4}}>
+                      {c.verified&&<SBadge>{t.verified}</SBadge>}
+                      {c.note&&<SBadge style={{color:"#88aade"}}>{c.note}</SBadge>}
+                      <span style={{color:DIM,fontSize:12}}>{c.indoor?t.indoor:t.outdoor}</span>
+                    </div>
+                  </div>
+                  <h3 style={{fontWeight:700,fontSize:15,marginBottom:4}}>{c.name}</h3>
+                  <p style={{color:DIM,fontSize:12,marginBottom:5}}>📍 {c.city} · {c.courts} {t.courts}</p>
+                  {c.location&&<p style={{color:DIM,fontSize:11,marginBottom:5}}>🗺️ {c.location}</p>}
+                  {c.hours&&<p style={{color:"#4a6a88",fontSize:11,marginBottom:8}}>🕐 {c.hours}</p>}
+                  {c.description&&<p style={{color:"#5a7a98",fontSize:11,marginBottom:11,lineHeight:1.6,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{c.description}</p>}
+                  {c.phone&&<a href={"tel:"+c.phone} style={{color:SILVER,fontSize:12,textDecoration:"none",display:"block",marginBottom:3}}>📞 {c.phone}</a>}
+                  {c.phoneDirect&&<a href={"tel:"+c.phoneDirect} style={{color:DIM,fontSize:11,textDecoration:"none",display:"block",marginBottom:10}}>📱 {c.phoneDirect}</a>}
+                  <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:14}}>
+                    {(c.features||[]).slice(0,4).map((f,j) => <span key={j} style={{background:"rgba(100,140,200,0.07)",color:"#5a7aaa",fontSize:10,padding:"3px 8px",borderRadius:2,border:`1px solid ${BORDER}`}}>{f}</span>)}
+                    {(c.features||[]).length>4&&(
+                      <span onClick={()=>setSelectedClub(c)} style={{color:SILVER,fontSize:10,padding:"3px 10px",borderRadius:2,border:`1px solid rgba(200,216,240,0.3)`,cursor:"pointer",background:"rgba(180,210,255,0.07)",fontWeight:600}}>
+                        +{(c.features||[]).length-4} {t.moreFeatures} ›
+                      </span>
+                    )}
+                  </div>
+                  <div style={{marginTop:"auto"}}>
+                    {c.bookingType==="lazuz"?(
+                      <a href={c.bookingUrl} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
+                        <button className="btn-silver" style={{width:"100%",padding:"9px 0",fontSize:12,letterSpacing:1.5}}>{t.bookLazuz}</button>
+                      </a>
+                    ):c.bookingType==="whatsapp"?(
+                      <a href={"https://wa.me/972"+c.bookingUrl} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
+                        <button style={{width:"100%",padding:"9px 0",fontSize:12,background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",borderRadius:3,fontWeight:700,cursor:"pointer",fontFamily:"Heebo,sans-serif"}}>{t.bookWA}</button>
+                      </a>
+                    ):(
+                      <button className="btn-ghost-w" onClick={()=>setSelectedClub(c)}>{t.details}</button>
+                    )}
+                  </div>
+                </Glass>
+              </Card3D>
+  );
+}
+
+function ClubsByRegion({clubs, t, DIM, SILVER, BORDER, setSelectedClub, lang}) {
+  const isEn = lang === "en";
+  const featured = clubs.filter(c => !c.basic).slice(0, 3);
+  const rest = clubs.filter(c => !featured.includes(c));
+  const ORDER = ["מרכז","שרון","ירושלים","דרום","צפון"];
+  const groups = ORDER.map(r => ({region:r, items: rest.filter(c => c.region === r)})).filter(g => g.items.length > 0);
+  const other = rest.filter(c => !ORDER.includes(c.region));
+  if (other.length) groups.push({region:"אחר", items: other});
+  const [closed, setClosed] = useState({});
+  const toggle = (r) => setClosed(o => ({...o, [r]: !o[r]}));
+
+  return (
+    <div>
+      {featured.length > 0 && (
+        <div style={{marginBottom:36}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:14}}>
+            <span style={{color:"#e8c88a",fontSize:13,fontWeight:800,letterSpacing:2}}>★ {isEn?"FEATURED":"מועדונים מקודמים"}</span>
+            <div style={{flex:1,height:1,background:"linear-gradient(90deg,rgba(200,169,110,0.35),transparent)"}}/>
+          </div>
+          <div className="g3">
+            {featured.map((c,i) => <ClubCard key={"f"+i} c={c} t={t} DIM={DIM} SILVER={SILVER} BORDER={BORDER} setSelectedClub={setSelectedClub} />)}
+          </div>
+        </div>
+      )}
+      {groups.map((g,gi) => {
+        const isOpen = !closed[g.region];
+        return (
+          <div key={gi} style={{marginBottom:26}}>
+            <div onClick={()=>toggle(g.region)} style={{display:"flex",alignItems:"center",gap:10,marginBottom:14,cursor:"pointer",userSelect:"none"}}>
+              <span style={{color:"#8fa3c0",fontSize:14,fontWeight:800,letterSpacing:1}}>{g.region} <span style={{color:DIM,fontWeight:400}}>({g.items.length})</span></span>
+              <div style={{flex:1,height:1,background:`linear-gradient(90deg,${BORDER},transparent)`}}/>
+              <span style={{color:DIM,fontSize:12,display:"inline-block",transform:isOpen?"rotate(180deg)":"none",transition:"transform .2s"}}>▾</span>
+            </div>
+            {isOpen && (
+              <div className="g3">
+                {g.items.map((c,i) => <ClubCard key={gi+"-"+i} c={c} t={t} DIM={DIM} SILVER={SILVER} BORDER={BORDER} setSelectedClub={setSelectedClub} />)}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function ClubMap3D({ clubs, onSelect, lang }){
   const isEn = lang==="en";
   const COORD = {
@@ -1411,50 +1501,10 @@ export default function PadelIsrael() {
             ))}
           </div>
           <ClubMap3D clubs={CLUBS} onSelect={setSelectedClub} lang={lang} />
-          <div className="g3">
-            {CLUBS.filter(c=>(regionF==="הכל"||c.region===regionF)&&(!search||c.name.includes(search)||c.city.includes(search))).map((c,i) => (
-              <Card3D key={i}>
-                <Glass style={{borderRadius:3,padding:20,height:"100%",display:"flex",flexDirection:"column",position:"relative",overflow:"hidden"}}>
-                  <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
-                    <span style={{fontSize:36}}>{c.image}</span>
-                    <div style={{display:"flex",flexDirection:"column",alignItems:"flex-end",gap:4}}>
-                      {c.verified&&<SBadge>{t.verified}</SBadge>}
-                      {c.note&&<SBadge style={{color:"#88aade"}}>{c.note}</SBadge>}
-                      <span style={{color:DIM,fontSize:12}}>{c.indoor?t.indoor:t.outdoor}</span>
-                    </div>
-                  </div>
-                  <h3 style={{fontWeight:700,fontSize:15,marginBottom:4}}>{c.name}</h3>
-                  <p style={{color:DIM,fontSize:12,marginBottom:5}}>📍 {c.city} · {c.courts} {t.courts}</p>
-                  {c.location&&<p style={{color:DIM,fontSize:11,marginBottom:5}}>🗺️ {c.location}</p>}
-                  {c.hours&&<p style={{color:"#4a6a88",fontSize:11,marginBottom:8}}>🕐 {c.hours}</p>}
-                  {c.description&&<p style={{color:"#5a7a98",fontSize:11,marginBottom:11,lineHeight:1.6,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{c.description}</p>}
-                  {c.phone&&<a href={"tel:"+c.phone} style={{color:SILVER,fontSize:12,textDecoration:"none",display:"block",marginBottom:3}}>📞 {c.phone}</a>}
-                  {c.phoneDirect&&<a href={"tel:"+c.phoneDirect} style={{color:DIM,fontSize:11,textDecoration:"none",display:"block",marginBottom:10}}>📱 {c.phoneDirect}</a>}
-                  <div style={{display:"flex",flexWrap:"wrap",gap:4,marginBottom:14}}>
-                    {(c.features||[]).slice(0,4).map((f,j) => <span key={j} style={{background:"rgba(100,140,200,0.07)",color:"#5a7aaa",fontSize:10,padding:"3px 8px",borderRadius:2,border:`1px solid ${BORDER}`}}>{f}</span>)}
-                    {(c.features||[]).length>4&&(
-                      <span onClick={()=>setSelectedClub(c)} style={{color:SILVER,fontSize:10,padding:"3px 10px",borderRadius:2,border:`1px solid rgba(200,216,240,0.3)`,cursor:"pointer",background:"rgba(180,210,255,0.07)",fontWeight:600}}>
-                        +{(c.features||[]).length-4} {t.moreFeatures} ›
-                      </span>
-                    )}
-                  </div>
-                  <div style={{marginTop:"auto"}}>
-                    {c.bookingType==="lazuz"?(
-                      <a href={c.bookingUrl} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
-                        <button className="btn-silver" style={{width:"100%",padding:"9px 0",fontSize:12,letterSpacing:1.5}}>{t.bookLazuz}</button>
-                      </a>
-                    ):c.bookingType==="whatsapp"?(
-                      <a href={"https://wa.me/972"+c.bookingUrl} target="_blank" rel="noopener noreferrer" style={{display:"block",textDecoration:"none"}}>
-                        <button style={{width:"100%",padding:"9px 0",fontSize:12,background:"linear-gradient(135deg,#25d366,#128c7e)",color:"#fff",border:"none",borderRadius:3,fontWeight:700,cursor:"pointer",fontFamily:"Heebo,sans-serif"}}>{t.bookWA}</button>
-                      </a>
-                    ):(
-                      <button className="btn-ghost-w" onClick={()=>setSelectedClub(c)}>{t.details}</button>
-                    )}
-                  </div>
-                </Glass>
-              </Card3D>
-            ))}
-          </div>
+          <ClubsByRegion
+            clubs={CLUBS.filter(c=>(regionF==="הכל"||c.region===regionF)&&(!search||c.name.includes(search)||c.city.includes(search)))}
+            t={t} DIM={DIM} SILVER={SILVER} BORDER={BORDER} setSelectedClub={setSelectedClub} lang={lang}
+          />
         </div>
 
         {/* כפתור פרסום מועדון */}
