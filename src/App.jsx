@@ -392,31 +392,42 @@ const MARKETPLACE = [
 const CATEGORIES_HE = ["הכל","מחבט","נעליים","תיק","ביגוד"];
 const CONDITIONS_HE = ["הכל","חדש","כמו חדש","משומש"];
 const WORLD_TOURNAMENTS = [
-  {name:"Riyadh Season P1",series:"Premier Padel",location:"ריאד, סעודיה 🇸🇦",dates:"9–14 פברואר",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"קואלו / טאפיה ניצחו"},
-  {name:"Gijón P2",series:"Premier Padel",location:"חיחון, ספרד 🇪🇸",dates:"2–8 מרץ",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"גלאן / צ׳ינגוטו ניצחו"},
-  {name:"Cancún P2",series:"Premier Padel",location:"קנקון, מקסיקו 🇲🇽",dates:"16–22 מרץ",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"טאפיה / קואלו ניצחו"},
-  {name:"Miami P1",series:"Premier Padel",location:"מיאמי, ארה״ב 🇺🇸",dates:"23–29 מרץ",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"NewGiza P2",series:"Premier Padel",location:"גיזה, מצרים 🇪🇬",dates:"13–18 אפריל",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Brussels P2",series:"Premier Padel",location:"בריסל, בלגיה 🇧🇪",dates:"20–26 אפריל",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Asunción P2",series:"Premier Padel",location:"אסונסיון, פרגוואי 🇵🇾",dates:"4–10 מאי",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Buenos Aires P1",series:"Premier Padel",location:"בואנוס איירס 🇦🇷",dates:"11–17 מאי",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",status:"done",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Valladolid P2",series:"Premier Padel",location:"ויאדוליד, ספרד 🇪🇸",dates:"22–28 יוני",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",status:"live",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הגמר: ראשון 5.7"},
-  {name:"Málaga P1",series:"Premier Padel",location:"מלאגה, ספרד 🇪🇸",dates:"13–19 יולי",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Pretoria P2",series:"Premier Padel",location:"פרטוריה, דרום אפריקה 🇿🇦",dates:"27 יולי–2 אוג׳",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה באפריקה"},
-  {name:"London P1",series:"Premier Padel",location:"לונדון, אנגליה 🇬🇧",dates:"3–9 אוגוסט",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה בלונדון"},
-  {name:"Madrid P1",series:"Premier Padel",location:"מדריד, ספרד 🇪🇸",dates:"31 אוג׳–6 ספט׳",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Paris Major — Roland Garros",series:"Premier Padel",location:"פריז, צרפת 🇫🇷",dates:"7–13 ספטמבר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32 — רולאן גארוס"},
-  {name:"Rotterdam P2",series:"Premier Padel",location:"רוטרדם, הולנד 🇳🇱",dates:"28 ספט׳–4 אוקט׳",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Germany P2",series:"Premier Padel",location:"דיסלדורף, גרמניה 🇩🇪",dates:"5–11 אוקטובר",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Milano P1",series:"Premier Padel",location:"מילאנו, איטליה 🇮🇹",dates:"12–18 אוקטובר",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Kuwait City Major",series:"Premier Padel",location:"כווית סיטי 🇰🇼",dates:"26–31 אוקטובר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Riyadh Season P1",series:"Premier Padel",location:"ריאד, סעודיה 🇸🇦",dates:"9–14 פברואר",start:"2026-02-09",end:"2026-02-14",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"קואלו / טאפיה ניצחו"},
+  {name:"Gijón P2",series:"Premier Padel",location:"חיחון, ספרד 🇪🇸",dates:"2–8 מרץ",start:"2026-03-02",end:"2026-03-08",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"גלאן / צ׳ינגוטו ניצחו"},
+  {name:"Cancún P2",series:"Premier Padel",location:"קנקון, מקסיקו 🇲🇽",dates:"16–22 מרץ",start:"2026-03-16",end:"2026-03-22",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"טאפיה / קואלו ניצחו"},
+  {name:"Miami P1",series:"Premier Padel",location:"מיאמי, ארה״ב 🇺🇸",dates:"23–29 מרץ",start:"2026-03-23",end:"2026-03-29",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"NewGiza P2",series:"Premier Padel",location:"גיזה, מצרים 🇪🇬",dates:"13–18 אפריל",start:"2026-04-13",end:"2026-04-18",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Brussels P2",series:"Premier Padel",location:"בריסל, בלגיה 🇧🇪",dates:"20–26 אפריל",start:"2026-04-20",end:"2026-04-26",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Asunción P2",series:"Premier Padel",location:"אסונסיון, פרגוואי 🇵🇾",dates:"4–10 מאי",start:"2026-05-04",end:"2026-05-10",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Buenos Aires P1",series:"Premier Padel",location:"בואנוס איירס 🇦🇷",dates:"11–17 מאי",start:"2026-05-11",end:"2026-05-17",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Italy Major — Rome 🏆",series:"Premier Padel",location:"רומא, איטליה 🇮🇹",dates:"1–7 יוני",start:"2026-06-01",end:"2026-06-07",status:"done",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Valencia P1",series:"Premier Padel",location:"ולנסיה, ספרד 🇪🇸",dates:"8–14 יוני",start:"2026-06-08",end:"2026-06-14",status:"done",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Valladolid P2",series:"Premier Padel",location:"ויאדוליד, ספרד 🇪🇸",dates:"22–28 יוני",start:"2026-06-22",end:"2026-06-28",status:"done",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Bordeaux P2",series:"Premier Padel",location:"בורדו, צרפת 🇫🇷",dates:"29 יוני–5 יולי",start:"2026-06-29",end:"2026-07-05",status:"live",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הגמר: ראשון 5.7"},
+  {name:"Málaga P1",series:"Premier Padel",location:"מלאגה, ספרד 🇪🇸",dates:"13–19 יולי",start:"2026-07-13",end:"2026-07-19",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Pretoria P2",series:"Premier Padel",location:"פרטוריה, דרום אפריקה 🇿🇦",dates:"27 יולי–2 אוג׳",start:"2026-07-27",end:"2026-08-02",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה באפריקה"},
+  {name:"London P1",series:"Premier Padel",location:"לונדון, אנגליה 🇬🇧",dates:"3–9 אוגוסט",start:"2026-08-03",end:"2026-08-09",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"הופעת בכורה בלונדון"},
+  {name:"Madrid P1",series:"Premier Padel",location:"מדריד, ספרד 🇪🇸",dates:"31 אוג׳–6 ספט׳",start:"2026-08-31",end:"2026-09-06",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Paris Major — Roland Garros",series:"Premier Padel",location:"פריז, צרפת 🇫🇷",dates:"7–13 ספטמבר",start:"2026-09-07",end:"2026-09-13",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32 — רולאן גארוס"},
+  {name:"Rotterdam P2",series:"Premier Padel",location:"רוטרדם, הולנד 🇳🇱",dates:"28 ספט׳–4 אוקט׳",start:"2026-09-28",end:"2026-10-04",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Germany P2",series:"Premier Padel",location:"דיסלדורף, גרמניה 🇩🇪",dates:"5–11 אוקטובר",start:"2026-10-05",end:"2026-10-11",status:"upcoming",prize:"P2",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Milano P1",series:"Premier Padel",location:"מילאנו, איטליה 🇮🇹",dates:"12–18 אוקטובר",start:"2026-10-12",end:"2026-10-18",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
+  {name:"Kuwait City Major",series:"Premier Padel",location:"כווית סיטי 🇰🇼",dates:"26–31 אוקטובר",start:"2026-10-26",end:"2026-10-31",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
   {name:"Dubai P1",series:"Premier Padel",location:"דובאי 🇦🇪",dates:"נובמבר",status:"upcoming",prize:"P1",url:"https://www.redbull.tv/en/events",players:"בכירי הסיבוב"},
-  {name:"Mexico Major — Acapulco",series:"Premier Padel",location:"אקפולקו, מקסיקו 🇲🇽",dates:"23–29 נובמבר",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32"},
-  {name:"Barcelona Finals 🏆",series:"Premier Padel",location:"ברצלונה, ספרד 🇪🇸",dates:"7–13 דצמבר",status:"upcoming",prize:"Finals",url:"https://www.redbull.tv/en/events",players:"Top 16 בעולם בלבד"},
+  {name:"Mexico Major — Acapulco",series:"Premier Padel",location:"אקפולקו, מקסיקו 🇲🇽",dates:"23–29 נובמבר",start:"2026-11-23",end:"2026-11-29",status:"upcoming",prize:"Major",url:"https://www.redbull.tv/en/events",players:"Top 32"},
+  {name:"Barcelona Finals 🏆",series:"Premier Padel",location:"ברצלונה, ספרד 🇪🇸",dates:"7–13 דצמבר",start:"2026-12-07",end:"2026-12-13",status:"upcoming",prize:"Finals",url:"https://www.redbull.tv/en/events",players:"Top 16 בעולם בלבד"},
 ];
+
+// חישוב סטטוס תחרות אוטומטית לפי התאריך של היום (live/done/upcoming)
+function trStatus(tr){
+  if(!tr.start||!tr.end) return tr.status;
+  const today=new Date(); today.setHours(0,0,0,0);
+  const s=new Date(tr.start+"T00:00:00"), e=new Date(tr.end+"T23:59:59");
+  if(today>e) return "done";
+  if(today<s) return "upcoming";
+  return "live";
+}
+
 // ─── דירוג FIP (עדכון ידני) ──────────────────────────────────────────────────
 // לעדכון: היכנס ל-https://www.padelfip.com/fip-rankings , והעתק את 10 הראשונים
 // בכל קטגוריה. עדכן name / country / points / change. הדירוג הרשמי אישי (לא זוגי),
@@ -1531,8 +1542,8 @@ export default function PadelIsrael() {
                 <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:tr.prize==="Major"?"linear-gradient(90deg,#c8a96e,#e8c88a,transparent)":tr.prize==="Finals"?"linear-gradient(90deg,#c8a0ff,#9060cc,transparent)":"linear-gradient(90deg,#c8d8f0,#8aa0c0,transparent)"}} />
                 <div style={{display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
                   <div style={{flexShrink:0}}>
-                    {tr.status==="live"?(<span style={{display:"flex",alignItems:"center",gap:5,background:"rgba(239,68,68,0.15)",border:"1px solid rgba(239,68,68,0.3)",color:"#ef4444",fontSize:11,fontWeight:800,padding:"4px 10px",borderRadius:2,letterSpacing:1}}><span className="pulse" style={{width:6,height:6,background:"#ef4444",borderRadius:"50%",display:"inline-block"}}/>LIVE</span>)
-                    :tr.status==="done"?(<span style={{background:"rgba(100,140,100,0.1)",border:"1px solid rgba(100,180,100,0.2)",color:"#6ab06a",fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>✓ הסתיים</span>)
+                    {trStatus(tr)==="live"?(<span style={{display:"flex",alignItems:"center",gap:5,background:"rgba(239,68,68,0.15)",border:"1px solid rgba(239,68,68,0.3)",color:"#ef4444",fontSize:11,fontWeight:800,padding:"4px 10px",borderRadius:2,letterSpacing:1}}><span className="pulse" style={{width:6,height:6,background:"#ef4444",borderRadius:"50%",display:"inline-block"}}/>LIVE</span>)
+                    :trStatus(tr)==="done"?(<span style={{background:"rgba(100,140,100,0.1)",border:"1px solid rgba(100,180,100,0.2)",color:"#6ab06a",fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>✓ הסתיים</span>)
                     :(<span style={{background:"rgba(180,210,255,0.07)",border:`1px solid ${BORDER}`,color:DIM,fontSize:10,fontWeight:600,padding:"4px 10px",borderRadius:2,letterSpacing:1}}>UPCOMING</span>)}
                   </div>
                   <div style={{flex:1,minWidth:180}}>
