@@ -379,6 +379,21 @@ const CLUBS = [
     location:"שולמית 3, נתניה (מתחם החוף הירוק)",
     basic:true,
   },
+  {
+    name:"טופ פאדל הרצליה",
+    city:"הרצליה",
+    region:"שרון",
+    phone:"054-861-5556",
+    location:"רמת ים 100, הרצליה פיתוח (מתחם מלון דן אכדיה)",
+    basic:true,
+  },
+  {
+    name:"Padel Club Ashdod",
+    city:"אשדוד",
+    region:"דרום",
+    note:"בקרוב",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
