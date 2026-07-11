@@ -363,6 +363,22 @@ const CLUBS = [
     phone:"054-317-1163",
     basic:true,
   },
+  {
+    name:"טופ פאדל עיר ימים",
+    city:"נתניה",
+    region:"שרון",
+    phone:"054-255-3898",
+    location:"שדרות בן גוריון 170, נתניה",
+    basic:true,
+  },
+  {
+    name:"טופ פאדל פולג",
+    city:"נתניה",
+    region:"שרון",
+    phone:"054-255-3898",
+    location:"שולמית 3, נתניה (מתחם החוף הירוק)",
+    basic:true,
+  },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
 ];
 const PADEX_RACKETS = [
