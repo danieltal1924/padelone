@@ -616,7 +616,6 @@ function LiveNewsSection({t}) {
       const feeds = [
         "https://www.padelfip.com/feed/",
         "https://padel-magazine.co.uk/feed/",
-        "https://www.padelnuestro.com/blog/feed/",
       ];
       const fetchFeed = async (u) => {
         const res = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(u));
@@ -629,17 +628,21 @@ function LiveNewsSection({t}) {
         })) };
       };
 
-      // סינון איכות: רק כתבות שפאדל בכותרת שלהן, בלי אתרי חדשות מקומיים לא רלוונטיים
-      const isRealPadelNews = (a) => {
-        const title = (a.title||"").toLowerCase();
-        const url = (a.url||a.link||"").toLowerCase();
-        const blockedSites = ["chroniclelive","planning-applications","dailymail","the-sun.","liverpoolecho","manchestereveningnews","renfrewshire","dailyrecord","expressandstar","kentonline","yorkshirepost","lancs.live","walesonline","edinburghlive","glasgowlive","cheshire-live","stokesentinel","nottinghampost","leicestermercury","hulldailymail","bristolpost","plymouthherald","cornwalllive","devonlive","essexlive","hertfordshiremercury","cambridge-news","mylondon","getsurrey","hampshirelive","sussexlive"];
-        if(blockedSites.some(b=>url.includes(b))) return false;
-        // חסימת ידיעות תכנון/מועצות מקומיות — לא רלוונטי לקהל ישראלי
-        const localJunk = ["council","planning application","planning permission","plans to create","plans for","green light","approved by","unveils plan","proposal","residents","objection","neighbour","car park","leisure centre"];
-        if(localJunk.some(w=>title.includes(w))) return false;
-        return title.includes("padel") || title.includes("פאדל");
+      // אתרי חדשות מקומיים בריטיים — לא רלוונטי
+      const blockedSites = ["chroniclelive","planning-applications","dailymail","the-sun.","liverpoolecho","manchestereveningnews","renfrewshire","dailyrecord","expressandstar","kentonline","yorkshirepost","lancs.live","walesonline","edinburghlive","glasgowlive","cheshire-live","stokesentinel","nottinghampost","leicestermercury","hulldailymail","bristolpost","plymouthherald","cornwalllive","devonlive","essexlive","hertfordshiremercury","cambridge-news","mylondon","getsurrey","hampshirelive","sussexlive"];
+      // מילות זבל בכותרת: תכנון/מועצות · מעגלים זוטרים (בעיקר צרפת) · חנות/מבצעים
+      const junkWords = ["council","planning application","planning permission","plans to create","plans for","green light","approved by","unveils plan","proposal","residents","objection","neighbour","car park","leisure centre",
+        "p1000","p2000","p500","fip bronze","fip silver","fip rise","fip gold","fip platinum","fip promotion","qualifying","qualification","résultats","resultats","inscriptions","tableau","horaires","padel magalas","p1000 ft",
+        "deal","deals","discount","promo code","best padel racket","racket review","% off","descuento","oferta","rebajas","black friday","cyber monday"];
+      // חסימה כללית: אתר מקומי או כותרת זבל
+      const blocked = (a) => {
+        const title=(a.title||"").toLowerCase(), url=(a.url||a.link||"").toLowerCase();
+        if(blockedSites.some(b=>url.includes(b))) return true;
+        if(junkWords.some(w=>title.includes(w))) return true;
+        return false;
       };
+      // למקורות כלליים (API/חיפוש): חייב גם להזכיר פאדל. למקורות פאדל ייעודיים: מספיק שלא חסום.
+      const isRealPadelNews = (a) => !blocked(a) && ((a.title||"").toLowerCase().includes("padel") || (a.title||"").includes("פאדל"));
       // מושך במקביל: ה-API שלנו + פידים ישירים ממקורות פאדל איכותיים
       let cleanApi = [];
       try {
@@ -652,7 +655,7 @@ function LiveNewsSection({t}) {
       results.forEach(r => {
         if(r.status==="fulfilled" && r.value.items) {
           r.value.items.forEach(item => {
-            if(item.title && item.link && isRealPadelNews({title:item.title,url:item.link})) {
+            if(item.title && item.link && !blocked({title:item.title,url:item.link})) {
               // Calculate time ago
               const pub = new Date(item.pubDate || Date.now());
               const diff = Date.now() - pub.getTime();
@@ -675,7 +678,7 @@ function LiveNewsSection({t}) {
 
       // מאחד: כתבות RSS ממקורות רשמיים + תוצאות ה-API, מסיר כפילויות לפי כותרת
       const seen = new Set();
-      const combined = [...articles, ...cleanApi].filter(a => {
+      const combined = [...articles, ...cleanApi, ...WORLD_NEWS].filter(a => {
         const k = (a.title||"").slice(0,60);
         if(seen.has(k)) return false; seen.add(k); return true;
       });
@@ -684,22 +687,8 @@ function LiveNewsSection({t}) {
         setWorldNews(combined.slice(0,6));
         setLastUpdated(new Date().toLocaleTimeString("he-IL"));
       } else {
-        // Fallback: use GNews API with padel keyword
-        const gnews = await fetch("https://gnews.io/api/v4/search?q=padel&lang=en&max=6&apikey=demo");
-        if(gnews.ok) {
-          const gdata = await gnews.json();
-          if(gdata.articles && gdata.articles.length > 0) {
-            const mapped = gdata.articles.filter(isRealPadelNews).map(a => ({
-              title: a.title,
-              time: "לאחרונה",
-              category: "עולם",
-              hot: false,
-              url: a.url,
-            }));
-            setWorldNews(mapped);
-            setLastUpdated(new Date().toLocaleTimeString("he-IL"));
-          }
-        }
+        // אין תוצאות טריות — מציגים את הכתבות הנבחרות האיכותיות במקום תוכן זבל
+        setWorldNews(WORLD_NEWS);
       }
     } catch(e){ console.error("Fetch error:", e); }
     clearInterval(iv); setLoadingMsg(""); setLoading(false);
