@@ -299,9 +299,27 @@ const CLUBS = [
     bookingUrl:"https://lazuz.co.il",
   },
   {name:"TERO X WILSON Padel Club",city:"תל אביב",region:"מרכז",location:"שטרית 2, תל אביב",courts:6,indoor:false,image:"⚡",phone:"+972-54-219-3030",hours:"א׳–ה׳, ש׳: 06:00–01:00 | ו׳: 06:00–20:00",description:"6 מגרשים ברמה אחרת מבית MejorSet – המגרשים הרשמיים של Premier Padel.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","בקרת כניסה"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il",instagram:"https://www.instagram.com/tero_x_wilson_padel_club_tlv"},
-  {name:"כפר המכביה – פאדל ישראל",city:"רמת גן",region:"מרכז",courts:8,indoor:false,image:"🏟️",phone:"073-218-7130",hours:"א׳–ה׳: 06:00–00:00 | ו׳: 06:00–כניסת שבת",features:["חנות ציוד","פינות ישיבה","משקאות"],verified:true,bookingType:"phone"},
-  {name:"פאדליר – פארק לאומי רמת גן",city:"רמת גן",region:"מרכז",courts:6,indoor:false,image:"🌳",phone:"+972-52-475-8650",hours:"א׳–ה׳: 07:00–00:00 | ו׳: 07:00–19:00",location:"פארק לאומי, רמת גן",description:"Padeltach Panoramic + משטח Ondo Premier Padel + מצלמות PlaySight.",features:["קפיטריה","נגישות","LED","חניה","חנות","בקרת כניסה","PlaySight","Ondo"],verified:true,bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
-  {name:"מרכז הטניס – רמת השרון",city:"רמת השרון",region:"שרון",courts:24,indoor:false,image:"🏟️",phone:"054-555-0455",location:"רמת השרון",description:"24 מגרשים, 5 חמר, אצטדיון קנדה 4,000 מושבים. אחד מ-14 מרכזים.",features:["קפיטריה","נגישות","LED","חניה","חנות","מקלחות","שזירה","קיר אימון","חמר"],verified:true,note:"טניס ופאדל",bookingType:"lazuz",bookingUrl:"https://lazuz.co.il"},
+  {
+    name:"כפר המכביה – פאדל ישראל",
+    city:"רמת גן",
+    region:"מרכז",
+    phone:"073-218-7130",
+    basic:true,
+  },
+  {
+    name:"פאדליר – פארק לאומי רמת גן",
+    city:"רמת גן",
+    region:"מרכז",
+    phone:"+972-52-475-8650",
+    basic:true,
+  },
+  {
+    name:"מרכז הטניס – רמת השרון",
+    city:"רמת השרון",
+    region:"שרון",
+    phone:"054-555-0455",
+    basic:true,
+  },
 
   {
     name:"Top Padel — מרכז לרנר",
