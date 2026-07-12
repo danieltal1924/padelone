@@ -1600,7 +1600,7 @@ export default function PadelIsrael() {
               <div style={{color:"#fff",fontSize:26,fontWeight:900,marginBottom:6}}>🇮🇱 {lang==="he"?"ישראל 1":"Israel 1"}</div>
               <div style={{color:SILVER,fontSize:14,fontWeight:600,marginBottom:10}}>{lang==="he"?"2:1 בסיכום הכולל מול ישראל 2":"2-1 overall vs Israel 2"}</div>
               <div style={{color:"#c8d8f0",fontSize:13,lineHeight:1.6,borderTop:"1px solid rgba(200,169,110,0.25)",paddingTop:10}}>
-                {lang==="he"?<>במשחק הקובע: <b style={{color:GOLD}}>אהרון ונעם כהן</b> גברו על <b style={{color:SILVER}}>סשה גלושקו ודניאל בן הרוש</b> 7:6 (טאי־ברייק 7:5)</>:<>Decider: <b style={{color:GOLD}}>Aharon & Noam Cohen</b> beat <b style={{color:SILVER}}>Sasha Glushko & Daniel Ben Harosh</b> 7-6 (TB 7-5)</>}
+                {lang==="he"?<>במשחק הקובע: <b style={{color:GOLD}}>אהרון ונעם כהן</b> גברו על <b style={{color:SILVER}}>סשה גלושקו ודניאל בן הרוש</b> 6:7 (טאי־ברייק 5:7)</>:<>Decider: <b style={{color:GOLD}}>Aharon & Noam Cohen</b> beat <b style={{color:SILVER}}>Sasha Glushko & Daniel Ben Harosh</b> 7-6 (TB 7-5)</>}
               </div>
               <div style={{color:DIM,fontSize:12,marginTop:10}}>🥉 {lang==="he"?"מקום 3 — נבחרת העולים · עמיאל, חרפוף, דריי, אליה":"3rd — Olim team · Amiel, Harpuf, Dray, Eliya"}</div>
             </div>
