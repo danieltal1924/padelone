@@ -243,12 +243,15 @@ function Icon({ name, color = GOLD, size = 17 }) {
 }
 
 // === תווית דינמית בלבד (הכרטיס תמיד מוצג, בלי הסתרה) ===
-const TOURNEY_DATE = "2026-06-30"; // ← תאריך הטורניר המוצג (YYYY-MM-DD)
+const TOURNEY_DATE = "2026-06-30"; // ← תאריך פתיחת הטורניר (YYYY-MM-DD)
+const TOURNEY_END  = "2026-07-14"; // ← תאריך סיום הטורניר
 function tourneyBadge(lang) {
   const today = new Date(); today.setHours(0,0,0,0);
   const d = new Date(TOURNEY_DATE); d.setHours(0,0,0,0);
+  const end = new Date(TOURNEY_END); end.setHours(0,0,0,0);
+  if (today > end) return lang === "he" ? "🏁 התחרות הסתיימה" : "🏁 Completed";
   const diff = Math.round((d - today) / 86400000);
-  if (diff === 0) return lang === "he" ? "🔴 מתקיים היום" : "🔴 Happening today";
+  if (diff <= 0) return lang === "he" ? "🔴 מתקיים עכשיו" : "🔴 Happening now";
   if (diff === 1) return lang === "he" ? "⏰ מחר" : "⏰ Tomorrow";
   return lang === "he" ? "🏆 טורניר קרוב" : "🏆 Upcoming Tournament";
 }
@@ -1584,27 +1587,43 @@ export default function PadelIsrael() {
             <div style={{fontSize:44,marginBottom:8}}>🇮🇱</div>
             <div style={{display:"inline-block",background:"linear-gradient(135deg,#c8a96e,#e8c88a)",color:"#04080f",fontSize:11,fontWeight:800,padding:"4px 14px",borderRadius:20,letterSpacing:1,marginBottom:14}}>{tourneyBadge(lang)}</div>
             <h3 style={{fontWeight:900,fontSize:30,color:"#ffffff",marginBottom:6}}>{lang==="he"?"פאדל במכביה ה-22":"Padel at the 22nd Maccabiah"}</h3>
-            <p style={{color:GOLD,fontSize:16,fontWeight:600,marginBottom:22}}>{lang==="he"?"האולימפיאדה היהודית · נבחרות מכל העולם 🌍":"The Jewish Olympics · National teams worldwide 🌍"}</p>
+            <p style={{color:GOLD,fontSize:16,fontWeight:600,marginBottom:22}}>{lang==="he"?"האולימפיאדה היהודית · התחרות הסתיימה 🏁":"The Jewish Olympics · Competition concluded 🏁"}</p>
             <div style={{display:"flex",flexDirection:"column",gap:11,marginBottom:22,textAlign:lang==="he"?"right":"left",maxWidth:420,marginInline:"auto"}}>
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="date"/>{lang==="he"?"30 ביוני – 14 ביולי 2026":"June 30 – July 14, 2026"}</span>
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="pin"/>{lang==="he"?"ישראל · מעל 8,000 ספורטאים מ-55 מדינות":"Israel · 8,000+ athletes from 55 countries"}</span>
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="racket"/>{lang==="he"?"קטגוריות: Open · מאסטרס 35+ · מאסטרס 50+":"Categories: Open · Master 35+ · Master 50+"}</span>
               <span style={{color:"#c8d8f0",fontSize:15}}><Icon name="trophy"/>{lang==="he"?"כניסה חופשית לצפייה בתחרויות":"Free entry to watch the competitions"}</span>
             </div>
+            {/* ── גביע האומות — תוצאה סופית ── */}
+            <div style={{background:"linear-gradient(180deg,rgba(200,169,110,0.14),rgba(255,255,255,0.02))",border:"1px solid rgba(200,169,110,0.45)",borderRadius:8,padding:"18px 18px",marginBottom:14,textAlign:"center"}}>
+              <div style={{color:GOLD,fontSize:12,fontWeight:800,letterSpacing:2,marginBottom:8}}>🏆 {lang==="he"?"גביע האומות — אלופים":"Nations Cup — Champions"}</div>
+              <div style={{color:"#fff",fontSize:26,fontWeight:900,marginBottom:6}}>🇮🇱 {lang==="he"?"ישראל 1":"Israel 1"}</div>
+              <div style={{color:SILVER,fontSize:14,fontWeight:600,marginBottom:10}}>{lang==="he"?"2:1 בסיכום הכולל מול ישראל 2":"2-1 overall vs Israel 2"}</div>
+              <div style={{color:"#c8d8f0",fontSize:13,lineHeight:1.6,borderTop:"1px solid rgba(200,169,110,0.25)",paddingTop:10}}>
+                {lang==="he"?<>במשחק הקובע: <b style={{color:GOLD}}>אהרון ונעם כהן</b> גברו על <b style={{color:SILVER}}>סשה גלושקו ודניאל בן הרוש</b> 7:6 (טאי־ברייק 7:5)</>:<>Decider: <b style={{color:GOLD}}>Aharon & Noam Cohen</b> beat <b style={{color:SILVER}}>Sasha Glushko & Daniel Ben Harosh</b> 7-6 (TB 7-5)</>}
+              </div>
+              <div style={{color:DIM,fontSize:12,marginTop:10}}>🥉 {lang==="he"?"מקום 3 — נבחרת העולים · עמיאל, חרפוף, דריי, אליה":"3rd — Olim team · Amiel, Harpuf, Dray, Eliya"}</div>
+            </div>
+
+            {/* ── מדליות ── */}
             <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(200,169,110,0.3)",borderRadius:8,padding:"16px 18px",marginBottom:24,textAlign:lang==="he"?"right":"left"}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-                <div style={{color:GOLD,fontSize:13,fontWeight:800,letterSpacing:1}}>🎾 {lang==="he"?"מצב הטורניר — שלב הבתים":"Tournament status — group stage"}</div>
-                <div style={{color:DIM,fontSize:11,fontWeight:300}}>{lang==="he"?"עודכן: 4.7":"Updated: Jul 4"}</div>
+                <div style={{color:GOLD,fontSize:13,fontWeight:800,letterSpacing:1}}>🏅 {lang==="he"?"מדליות המכביה 2026":"Maccabiah 2026 medals"}</div>
+                <div style={{color:DIM,fontSize:11,fontWeight:300}}>{lang==="he"?"תוצאות סופיות":"Final results"}</div>
               </div>
               {[
-                {c:lang==="he"?"נשים Open":"Women Open", t:lang==="he"?<>‏<b style={{color:SILVER}}>פושקרבסקי/לויטין</b> ו<b style={{color:SILVER}}>אברמוביץ׳/מורבצ׳יק</b> בלי הפסד · מפגש צמרת: ראשון 20:30</>:<><b style={{color:SILVER}}>Pushkarevsky/Levitin</b> & <b style={{color:SILVER}}>Abramowicz/Muravchik</b> unbeaten · top clash Sun 20:30</>},
-                {c:lang==="he"?"גברים Open":"Men Open", t:lang==="he"?<>‏<b style={{color:SILVER}}>גלושקו/סימון</b>, <b style={{color:SILVER}}>האסקי/בואניש</b> ו<b style={{color:SILVER}}>כהן/כהן</b> שולטים בבתים</>:<><b style={{color:SILVER}}>Glushko/Simon</b>, <b style={{color:SILVER}}>Haski/Bouanish</b> & <b style={{color:SILVER}}>Cohen/Cohen</b> lead their groups</>},
-                {c:lang==="he"?"מאסטרס 35+":"Masters 35+", t:lang==="he"?<>‏<b style={{color:SILVER}}>פרידאב/אביטבול</b> ו<b style={{color:SILVER}}>אצ׳אר/אלפיה</b> מובילים ללא הפסד</>:<><b style={{color:SILVER}}>Fridaev/Abitbol</b> & <b style={{color:SILVER}}>Achar/Alfille</b> unbeaten</>},
-                {c:lang==="he"?"מאסטרס 50+":"Masters 50+", t:lang==="he"?<>‏<b style={{color:SILVER}}>בקמן/אטבול</b> ו<b style={{color:SILVER}}>צין/מור</b> בראש הבתים</>:<><b style={{color:SILVER}}>Bacman/Etbul</b> & <b style={{color:SILVER}}>Zinn/Mor</b> top their groups</>},
+                {c:lang==="he"?"גברים Open":"Men Open", g:lang==="he"?"אהרון כהן ונעם כהן":"Aharon & Noam Cohen", si:lang==="he"?"דניאל בן הרוש והוד כהן":"Ben Harosh & Hod Cohen", br:lang==="he"?"סשה גלושקו וסימון":"Glushko & Simon"},
+                {c:lang==="he"?"נשים Open":"Women Open", g:lang==="he"?"נובל לויטין ואלונה פושקרבסקי":"Noble Levitin & Alona Pushkarevsky", si:lang==="he"?"ארגנטינה":"Argentina", br:lang==="he"?"ליאור פאצה ואור בטש":"Lior Pacha & Or Batash"},
+                {c:lang==="he"?"מאסטרס 35+":"Masters 35+", g:lang==="he"?"מארק פרדייב ואריק אביטבול":"Mark Fardeev & Erik Abitbol", si:"", br:""},
+                {c:lang==="he"?"מאסטרס 50+":"Masters 50+", g:lang==="he"?"ארל צין וליאור מור":"Earl Zinn & Lior Mor", si:lang==="he"?"דן בר לב ועידו זכאי":"Dan Bar Lev & Ido Zakai", br:lang==="he"?"יקי שחר ורון גנץ":"Yaki Shahar & Ron Gantz"},
               ].map((r,i)=>(
-                <div key={i} style={{display:"flex",gap:10,padding:"8px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.05)":"none",fontSize:13,lineHeight:1.5}}>
-                  <span style={{color:"#e8c88a",fontWeight:800,whiteSpace:"nowrap",minWidth:84}}>{r.c}</span>
-                  <span style={{color:"#c8d8f0",fontWeight:300}}>{r.t}</span>
+                <div key={i} style={{padding:"9px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.05)":"none"}}>
+                  <div style={{color:"#e8c88a",fontWeight:800,fontSize:13,marginBottom:5}}>{r.c}</div>
+                  <div style={{color:"#c8d8f0",fontSize:13,lineHeight:1.7}}>
+                    <div>🥇 <b style={{color:GOLD}}>{r.g}</b></div>
+                    {r.si&&<div>🥈 {r.si}</div>}
+                    {r.br&&<div>🥉 {r.br}</div>}
+                  </div>
                 </div>
               ))}
             </div>
