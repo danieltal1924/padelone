@@ -322,10 +322,11 @@ const CLUBS = [
   },
 
   {
-    name:"Top Padel — מרכז לרנר",
+    name:"The Padel Jerusalem",
     city:"ירושלים",
     region:"ירושלים",
     phone:"054-956-1313",
+    location:"מרכז לרנר, הר הצופים, ירושלים",
     basic:true,
   },
   {
@@ -456,6 +457,58 @@ const CLUBS = [
     region:"מרכז",
     phone:"073-218-7130",
     location:"חיים לבנון 64, תל אביב",
+    basic:true,
+  },
+  {
+    name:"פאדלנט — פתח תקווה",
+    city:"פתח תקווה",
+    region:"מרכז",
+    phone:"054-344-1405",
+    location:"גרינשפן 8, פתח תקווה (ספורטן)",
+    basic:true,
+  },
+  {
+    name:"פאדלנט — נשר",
+    city:"נשר",
+    region:"צפון",
+    phone:"054-279-7492",
+    location:"דרך בר יהודה 113, נשר",
+    basic:true,
+  },
+  {
+    name:"A Padel — סביון",
+    city:"סביון",
+    region:"מרכז",
+    location:"המועדון 11, סביון",
+    basic:true,
+  },
+  {
+    name:"Future Padel — נס ציונה",
+    city:"נס ציונה",
+    region:"מרכז",
+    location:"קאנטרי נס ציונה",
+    basic:true,
+  },
+  {
+    name:"Smash Padel Club — ראשון לציון",
+    city:"ראשון לציון",
+    region:"מרכז",
+    location:"בן גוריון 45, ראשון לציון",
+    basic:true,
+  },
+  {
+    name:"Padel Club גינוסר",
+    city:"גינוסר",
+    region:"צפון",
+    location:"קיבוץ גינוסר",
+    basic:true,
+  },
+  {
+    name:"PADELZ — באר שבע",
+    city:"באר שבע",
+    region:"דרום",
+    phone:"050-934-4245",
+    location:"מתחם סטארבול, אילן רמון 36, באר שבע",
     basic:true,
   },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
@@ -1322,9 +1375,10 @@ function ClubMap3D({ clubs, onSelect, lang }){
     "עפולה":[32.610,35.289], "נצרת":[32.702,35.298], "טבריה":[32.792,35.345],
     "באר שבע":[31.252,34.791], "אשקלון":[31.669,34.574], "ראשון לציון":[31.964,34.805],
     "פתח תקווה":[32.084,34.887], "כפר סבא":[32.175,34.907], "רעננה":[32.184,34.871],
-    "רחובות":[31.894,34.809],
+    "רחובות":[31.894,34.809], "נשר":[32.767,35.043],
+    "נס ציונה":[31.930,34.799], "סביון":[32.048,34.882], "גינוסר":[32.844,35.522],
   };
-  const minLat=31.40, maxLat=33.10, minLng=34.50, maxLng=35.40;
+  const minLat=31.15, maxLat=33.10, minLng=34.45, maxLng=35.60;
   const seen={};
   const pins = clubs.map((c,i) => {
     const base = COORD[c.city] || [32.08,34.80];
@@ -1352,7 +1406,7 @@ function ClubMap3D({ clubs, onSelect, lang }){
       }
     }
     // pull back toward true position so pins don't drift far from their real city
-    pins.forEach(p => { p.x += (p.ox-p.x)*0.06; p.y += (p.oy-p.y)*0.06; });
+    pins.forEach(p => { p.x += (p.ox-p.x)*0.18; p.y += (p.oy-p.y)*0.18; });
     // clamp every iteration so nothing escapes the map
     pins.forEach(p => { p.x=Math.max(9,Math.min(91,p.x)); p.y=Math.max(10,Math.min(89,p.y)); });
   }
