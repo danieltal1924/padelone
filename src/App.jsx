@@ -1387,14 +1387,14 @@ function ClubMap3D({ clubs, onSelect, lang }){
     const n = (seen[c.city] = (seen[c.city]||0)+1) - 1;   // 0 for first in city
     const lat = base[0] + (n? (n%2? 0.010 : -0.010)*Math.ceil(n/2) : 0);
     const lng = base[1] + (n? (n%2? 0.014 : -0.014)*Math.ceil(n/2) : 0);
-    const x = 10 + (lng-minLng)/(maxLng-minLng)*80;
-    const y = 15 + (maxLat-lat)/(maxLat-minLat)*72;
+    const x = 14 + (lng-minLng)/(maxLng-minLng)*72;
+    const y = 15 + (maxLat-lat)/(maxLat-minLat)*74;
     return { c, x, y, i };
   });
   // declutter — separate overlapping pins, but keep them anchored near true location
-  const MIN = 9;
+  const MIN = 13;
   pins.forEach(p => { p.ox = p.x; p.oy = p.y; });   // original (true) position
-  for(let it=0; it<120; it++){
+  for(let it=0; it<220; it++){
     for(let a=0;a<pins.length;a++){
       for(let b=a+1;b<pins.length;b++){
         let dx=pins[b].x-pins[a].x, dy=pins[b].y-pins[a].y;
@@ -1410,7 +1410,7 @@ function ClubMap3D({ clubs, onSelect, lang }){
     // pull back toward true position so pins don't drift far from their real city
     pins.forEach(p => { p.x += (p.ox-p.x)*0.18; p.y += (p.oy-p.y)*0.18; });
     // clamp every iteration so nothing escapes the map
-    pins.forEach(p => { p.x=Math.max(11,Math.min(89,p.x)); p.y=Math.max(16,Math.min(93,p.y)); });
+    pins.forEach(p => { p.x=Math.max(8,Math.min(92,p.x)); p.y=Math.max(13,Math.min(96,p.y)); });
   }
   return (
     <div style={{marginBottom:42}}>
@@ -1418,7 +1418,7 @@ function ClubMap3D({ clubs, onSelect, lang }){
         <span style={{color:"#8fb0e0",fontSize:13}}>🗺️ {isEn?"Interactive 3D map — tap a pin to view & book a court":"מפה תלת-ממדית — לחצו על סימון לצפייה והזמנת מגרש"}</span>
         <span style={{color:"#4a6a88",fontSize:12}}>{clubs.length} {isEn?"clubs · Israel":"מועדונים · ישראל"}</span>
       </div>
-      <div style={{perspective:"1100px",height:440,borderRadius:16,overflow:"hidden",position:"relative",
+      <div style={{perspective:"1100px",height:560,borderRadius:16,overflow:"hidden",position:"relative",
         border:"1px solid rgba(53,224,255,0.22)",background:"#050f22",
         boxShadow:"0 24px 60px rgba(0,0,0,0.45), inset 0 0 70px rgba(53,224,255,0.06)"}}>
         <div style={{position:"absolute",left:"-12%",right:"-12%",top:"-10%",bottom:"-34%",transformStyle:"preserve-3d",
