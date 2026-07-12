@@ -1387,8 +1387,8 @@ function ClubMap3D({ clubs, onSelect, lang }){
     const n = (seen[c.city] = (seen[c.city]||0)+1) - 1;   // 0 for first in city
     const lat = base[0] + (n? (n%2? 0.010 : -0.010)*Math.ceil(n/2) : 0);
     const lng = base[1] + (n? (n%2? 0.014 : -0.014)*Math.ceil(n/2) : 0);
-    const x = 8 + (lng-minLng)/(maxLng-minLng)*84;
-    const y = 9 + (maxLat-lat)/(maxLat-minLat)*82;
+    const x = 10 + (lng-minLng)/(maxLng-minLng)*80;
+    const y = 15 + (maxLat-lat)/(maxLat-minLat)*72;
     return { c, x, y, i };
   });
   // declutter — separate overlapping pins, but keep them anchored near true location
@@ -1410,7 +1410,7 @@ function ClubMap3D({ clubs, onSelect, lang }){
     // pull back toward true position so pins don't drift far from their real city
     pins.forEach(p => { p.x += (p.ox-p.x)*0.18; p.y += (p.oy-p.y)*0.18; });
     // clamp every iteration so nothing escapes the map
-    pins.forEach(p => { p.x=Math.max(9,Math.min(91,p.x)); p.y=Math.max(10,Math.min(89,p.y)); });
+    pins.forEach(p => { p.x=Math.max(11,Math.min(89,p.x)); p.y=Math.max(16,Math.min(93,p.y)); });
   }
   return (
     <div style={{marginBottom:42}}>
@@ -1426,10 +1426,14 @@ function ClubMap3D({ clubs, onSelect, lang }){
           background:"repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(53,224,255,0.10) 30px,rgba(53,224,255,0.10) 31px), repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(53,224,255,0.10) 30px,rgba(53,224,255,0.10) 31px)"}}>
           {/* coastline hint (west) */}
           <div style={{position:"absolute",left:0,top:0,bottom:0,width:"13%",background:"linear-gradient(90deg,rgba(24,70,130,0.5),transparent)",borderRight:"1px dashed rgba(120,180,255,0.25)"}}/>
+        </div>
+
+        {/* pins — flat layer above the tilted grid, so every pin stays clickable */}
+        <div style={{position:"absolute",inset:0,zIndex:5}}>
           {pins.map(({c,x,y,i}) => (
             <button key={i} onClick={()=>onSelect(c)} title={c.name} aria-label={c.name}
-              style={{position:"absolute",left:x+"%",top:y+"%",zIndex:Math.round(y),
-                transform:"translate(-50%,-100%) rotateX(-52deg)",transformOrigin:"bottom center",
+              style={{position:"absolute",left:x+"%",top:y+"%",zIndex:100+Math.round(y),
+                transform:"translate(-50%,-100%)",transformOrigin:"bottom center",
                 background:"none",border:"none",cursor:"pointer",padding:0}}>
               <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
                 <div style={{background:"rgba(8,20,40,0.94)",border:"1px solid rgba(53,224,255,0.55)",borderRadius:10,
