@@ -1614,7 +1614,7 @@ export default function PadelIsrael() {
               {[
                 {c:lang==="he"?"גברים Open":"Men Open", g:lang==="he"?"אהרון כהן ונעם כהן":"Aharon & Noam Cohen", si:lang==="he"?"דניאל בן הרוש והוד כהן":"Ben Harosh & Hod Cohen", br:lang==="he"?"סשה גלושקו וסימון":"Glushko & Simon"},
                 {c:lang==="he"?"נשים Open":"Women Open", g:lang==="he"?"נובל לויטין ואלונה פושקרבסקי":"Noble Levitin & Alona Pushkarevsky", si:lang==="he"?"ארגנטינה":"Argentina", br:lang==="he"?"ליאור פאצה ואור בטש":"Lior Pacha & Or Batash"},
-                {c:lang==="he"?"מאסטרס 35+":"Masters 35+", g:lang==="he"?"מארק פרדייב ואריק אביטבול":"Mark Fardeev & Erik Abitbol", si:"", br:""},
+                {c:lang==="he"?"מאסטרס 35+":"Masters 35+", g:lang==="he"?"מארק פרדייב ואריק אביטבול":"Mark Fardeev & Erik Abitbol", si:lang==="he"?"מקסיקו":"Mexico", br:lang==="he"?"מקסיקו":"Mexico"},
                 {c:lang==="he"?"מאסטרס 50+":"Masters 50+", g:lang==="he"?"ארל צין וליאור מור":"Earl Zinn & Lior Mor", si:lang==="he"?"דן בר לב ועידו זכאי":"Dan Bar Lev & Ido Zakai", br:lang==="he"?"יקי שחר ורון גנץ":"Yaki Shahar & Ron Gantz"},
               ].map((r,i)=>(
                 <div key={i} style={{padding:"9px 0",borderBottom:i<3?"1px solid rgba(255,255,255,0.05)":"none"}}>
