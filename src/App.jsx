@@ -641,7 +641,7 @@ const RANKINGS_IL={
   ],
   women:[
     {rank:1,name:"\u05d0\u05d5\u05e8 \u05d1\u05d8\u05e9",points:"10,180"},
-    {rank:2,name:"\u05dc\u05d9\u05d0\u05d5\u05e8 \u05e4\u05d0\u05e6\u05f3\u05d4",points:"10,180"},
+    {rank:1,name:"\u05dc\u05d9\u05d0\u05d5\u05e8 \u05e4\u05d0\u05e6\u05f3\u05d4",points:"10,180"},
     {rank:3,name:"\u05e2\u05d3\u05d9 \u05d0\u05dc\u05d4/\u05de\u05d9\u05de\u05d5\u05df",points:"5,800"},
     {rank:4,name:"\u05e9\u05d9\u05e8 \u05d4\u05d5\u05e8\u05e0\u05d5\u05e0\u05d2",points:"4,600"},
     {rank:5,name:"\u05e8\u05d5\u05ea\u05dd \u05dc\u05d1\u05d9\u05d1",points:"4,050"},
