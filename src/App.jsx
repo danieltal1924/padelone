@@ -1865,13 +1865,21 @@ export default function PadelIsrael() {
         </div>
       </section>
 
+      {/* RANKINGS ISRAEL */}
+      <section id="rankings-il" style={{padding:"100px 32px 0",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
+        <span className="stag">RANKINGS IL</span>
+        <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{"\ud83c\uddee\ud83c\uddf1 \u05d3\u05d9\u05e8\u05d5\u05d2 \u05d9\u05e9\u05e8\u05d0\u05dc\u05d9"}</h2>
+        <div className="sline"/>
+        <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>{"\u05d3\u05d9\u05e8\u05d5\u05d2 \u05d0\u05e8\u05e6\u05d9 \u05db\u05dc\u05dc\u05d9 \u00b7 \u05d8\u05d5\u05e4 10 \u05d2\u05d1\u05e8\u05d9\u05dd \u05d5\u05e0\u05e9\u05d9\u05dd"}</p>
+        <IsraeliRankingsSection/>
+      </section>
+
       {/* RANKINGS */}
       <section id="rankings" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">RANKINGS</span>
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_rankings}</h2>
         <div className="sline"/>
         <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>עדכון: 15 יוני 2026 (אחרי ולנסיה P1) · מקור: FIP / Premier Padel</p>
-        <IsraeliRankingsSection/>
         <RankingsSection t={t}/>
       </section>
 
