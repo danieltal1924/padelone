@@ -626,6 +626,72 @@ const WORLD_NEWS = [
   {title:"Star Point — שיטת הניקוד החדשה של Premier Padel 2026",time:"דצמבר 2025",category:"עולם",hot:false,url:"https://www.padelnuestro.com/int/blog/premier-padel-2026-calendar"},
 ];
 
+const RANKINGS_IL={
+  men:[
+    {rank:1,name:"\u05e0\u05d5\u05e2\u05dd \u05db\u05d4\u05df",points:"7,960"},
+    {rank:2,name:"\u05d0\u05d4\u05e8\u05d5\u05df \u05db\u05d4\u05df",points:"7,780"},
+    {rank:3,name:"\u05e1\u05e2\u05e8 \u05e1\u05d9\u05de\u05d5\u05df",points:"7,000"},
+    {rank:4,name:"\u05e2\u05de\u05d9\u05ea \u05e9\u05d7\u05e8",points:"6,425"},
+    {rank:5,name:"\u05d5\u05dc\u05d3\u05d9\u05de\u05d9\u05e8 \u05d5\u05d5\u05d4 \u05d1\u05d6\u05d9\u05dc\u05d1\u05e1\u05e7\u05d9",points:"5,525"},
+    {rank:6,name:"\u05d4\u05d5\u05d3 \u05db\u05d4\u05df",points:"5,200"},
+    {rank:7,name:"\u05d1\u05df \u05d6\u05d9\u05e0\u05d9",points:"4,825"},
+    {rank:8,name:"\u05e1\u05e9\u05d4 \u05d2\u05dc\u05d5\u05e9\u05e7\u05d5",points:"4,710"},
+    {rank:9,name:"\u05d3\u05e0\u05d9\u05d0\u05dc \u05d1\u05df-\u05d4\u05e8\u05d5\u05e9",points:"4,400"},
+    {rank:10,name:"\u05d0\u05e8\u05e0\u05d5\u05df \u05e9\u05d7\u05e8",points:"4,250"},
+  ],
+  women:[
+    {rank:1,name:"\u05d0\u05d5\u05e8 \u05d1\u05d8\u05e9",points:"10,180"},
+    {rank:2,name:"\u05dc\u05d9\u05d0\u05d5\u05e8 \u05e4\u05d0\u05e6\u05f3\u05d4",points:"10,180"},
+    {rank:3,name:"\u05e2\u05d3\u05d9 \u05d0\u05dc\u05d4/\u05de\u05d9\u05de\u05d5\u05df",points:"5,800"},
+    {rank:4,name:"\u05e9\u05d9\u05e8 \u05d4\u05d5\u05e8\u05e0\u05d5\u05e0\u05d2",points:"4,600"},
+    {rank:5,name:"\u05e8\u05d5\u05ea\u05dd \u05dc\u05d1\u05d9\u05d1",points:"4,050"},
+    {rank:6,name:"\u05d0\u05dc\u05d5\u05e0\u05d4 \u05e4\u05d5\u05e9\u05e7\u05e8\u05d1\u05e1\u05e7\u05d9",points:"3,450"},
+    {rank:7,name:"\u05e0\u05d5\u05d1\u05dc \u05dc\u05d5\u05d9\u05d8\u05d9\u05df",points:"2,800"},
+    {rank:8,name:"\u05d9\u05e2\u05dc \u05e9\u05d7\u05e3",points:"2,700"},
+    {rank:9,name:"\u05d0\u05d2\u05dd \u05d4\u05d9\u05dc\u05dc",points:"2,100"},
+    {rank:10,name:"\u05e9\u05d9\u05e8\u05d4 \u05de\u05d5\u05e6\u05e4\u05d9",points:"1,980"},
+  ],
+};
+function IsraeliRankingsSection(){
+  const [tab,setTab]=useState("men");
+  const players=RANKINGS_IL[tab];
+  const L={men:"\u05d2\u05d1\u05e8\u05d9\u05dd",women:"\u05e0\u05e9\u05d9\u05dd"};
+  const H=["#","\u05e9\u05dd","\u05e0\u05d9\u05e7\u05d5\u05d3"];
+  return (
+    <div style={{marginBottom:40}}>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+        <span style={{fontSize:18}}>{"\ud83c\uddee\ud83c\uddf1"}</span>
+        <span style={{fontWeight:800,fontSize:16,color:GOLD}}>{"\u05d3\u05d9\u05e8\u05d5\u05d2 \u05d9\u05e9\u05e8\u05d0\u05dc\u05d9 \u2014 \u05d8\u05d5\u05e4 10"}</span>
+      </div>
+      <div style={{display:"flex",gap:0,marginBottom:20,border:"1px solid "+BORDER,borderRadius:3,overflow:"hidden",maxWidth:280}}>
+        {["men","women"].map(id => (
+          <button key={id} onClick={()=>setTab(id)} style={{flex:1,padding:"10px 0",border:"none",cursor:"pointer",fontFamily:"Heebo,sans-serif",fontWeight:700,fontSize:13,background:tab===id?"linear-gradient(135deg,#c8d8f0,#8aa0c0)":"transparent",color:tab===id?"#04080f":DIM,transition:"all .2s"}}>{L[id]}</button>
+        ))}
+      </div>
+      <div style={{overflowX:"auto"}}>
+        <table style={{width:"100%",borderCollapse:"collapse",minWidth:320}}>
+          <thead>
+            <tr style={{borderBottom:"1px solid "+BORDER}}>
+              {H.map((h,i)=><th key={i} style={{padding:"10px 14px",textAlign:i===0?"center":"right",color:"rgba(180,210,255,0.4)",fontSize:11,fontWeight:600,letterSpacing:1.5}}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((p,i)=>(
+              <tr key={i} style={{borderBottom:"1px solid rgba(120,160,220,0.06)"}}>
+                <td style={{padding:"14px",textAlign:"center",width:44}}>
+                  <div style={{width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto",background:p.rank===1?"linear-gradient(135deg,#c8a96e,#e8c88a)":p.rank===2?"linear-gradient(135deg,#c8d8f0,#8aa0c0)":p.rank===3?"linear-gradient(135deg,#c8956e,#d8a87e)":"rgba(180,210,255,0.07)",fontWeight:800,fontSize:12,color:p.rank<=3?"#04080f":"rgba(180,210,255,0.4)"}}>{p.rank}</div>
+                </td>
+                <td style={{padding:"14px"}}><div style={{fontWeight:700,fontSize:14}}>{p.name}</div></td>
+                <td style={{padding:"14px"}}><div style={{fontWeight:700,fontSize:14,color:p.rank<=2?GOLD:"rgba(200,216,240,0.8)"}}>{p.points}</div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ─── RANKINGS COMPONENT ───────────────────────────────────────────────────────
 function RankingsSection({t}) {
   const [tab, setTab] = useState("men");
@@ -1805,6 +1871,7 @@ export default function PadelIsrael() {
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_rankings}</h2>
         <div className="sline"/>
         <p style={{color:DIM,fontSize:14,marginBottom:28,fontWeight:300}}>עדכון: 15 יוני 2026 (אחרי ולנסיה P1) · מקור: FIP / Premier Padel</p>
+        <IsraeliRankingsSection/>
         <RankingsSection t={t}/>
       </section>
 
