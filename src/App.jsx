@@ -1649,6 +1649,33 @@ export default function PadelIsrael() {
         <span className="stag">TOURNAMENTS</span>
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_tournaments}</h2>
         <div className="sline"/>
+        {/* ILPA_BLOCK */}
+        <div style={{marginTop:20,marginBottom:28,background:"linear-gradient(160deg,rgba(38,51,140,0.18),rgba(200,169,110,0.05))",border:"1px solid rgba(200,169,110,0.3)",borderRadius:14,padding:"30px 26px"}}>
+          <div style={{textAlign:"center",marginBottom:22}}>
+            <div style={{display:"inline-block",background:"linear-gradient(135deg,#c8a96e,#e8c88a)",color:"#04080f",fontSize:11,fontWeight:800,padding:"4px 14px",borderRadius:20,letterSpacing:1,marginBottom:12}}>{"\ud83c\udfbe "+(lang==="he"?"\u05e1\u05d1\u05d1 ILPA \u05e8\u05e9\u05de\u05d9":"ILPA Official Circuit")}</div>
+            <h3 style={{fontWeight:900,fontSize:28,color:"#ffffff",marginBottom:6}}>{lang==="he"?"\u05e1\u05d1\u05d1 \u05d4\u05ea\u05d7\u05e8\u05d5\u05d9\u05d5\u05ea \u05d4\u05dc\u05d0\u05d5\u05de\u05d9 2026":"ILPA National Circuit 2026"}</h3>
+            <p style={{color:GOLD,fontSize:14,fontWeight:600}}>{lang==="he"?"\u05e1\u05e4\u05d8\u05de\u05d1\u05e8\u2013\u05d3\u05e6\u05de\u05d1\u05e8 \u00b7 \u05e0\u05d9\u05e7\u05d5\u05d3 \u05dc\u05d3\u05d9\u05e8\u05d5\u05d2 \u05d4\u05dc\u05d0\u05d5\u05de\u05d9":"Sept\u2013Dec \u00b7 National ranking points"}</p>
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:14,marginBottom:24}}>
+            {[
+              {m:lang==="he"?"\u05e1\u05e4\u05d8\u05de\u05d1\u05e8":"September",d:"3\u20136.9",p:"P1000",champ:false},
+              {m:lang==="he"?"\u05d0\u05d5\u05e7\u05d8\u05d5\u05d1\u05e8":"October",d:"8\u201311.10",p:"P2500",champ:false},
+              {m:lang==="he"?"\u05e0\u05d5\u05d1\u05de\u05d1\u05e8":"November",d:"5\u20138.11",p:"P5000",champ:true},
+              {m:lang==="he"?"\u05d3\u05e6\u05de\u05d1\u05e8":"December",d:"17\u201320.12",p:"P1000",champ:false},
+            ].map((it,i)=>(
+              <div key={i} style={{background:it.champ?"linear-gradient(150deg,rgba(196,216,46,0.14),rgba(38,51,140,0.3))":"rgba(38,51,140,0.28)",border:it.champ?"1px solid rgba(196,216,46,0.6)":"1px solid rgba(120,150,255,0.3)",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
+                <div style={{fontSize:20,fontWeight:900,color:"#ffffff"}}>{it.m}</div>
+                <div style={{fontSize:15,fontWeight:700,color:"#2ff0d6",marginTop:6}}>{it.d}</div>
+                <div style={{fontSize:22,fontWeight:900,color:GOLD,marginTop:4}}>{it.p}</div>
+                {it.champ && <div style={{marginTop:8,display:"inline-block",background:"#c4d82e",color:"#1b2570",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{lang==="he"?"\u05d0\u05dc\u05d9\u05e4\u05d5\u05ea \u05d9\u05e9\u05e8\u05d0\u05dc":"Israel Champ."}</div>}
+              </div>
+            ))}
+          </div>
+          <a href="https://ilpa.co.il" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none",display:"block"}}>
+            <button style={{background:"linear-gradient(135deg,#c8a96e,#e8c88a)",color:"#04080f",border:"none",padding:"15px 44px",borderRadius:3,fontWeight:800,fontSize:15,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1,width:"100%"}}>{lang==="he"?"\ud83c\udfbe \u05d4\u05e8\u05e9\u05de\u05d4 \u05dc\u05db\u05e8\u05d8\u05d9\u05e1 \u05e9\u05d7\u05e7\u05df \u2014 ilpa.co.il":"Register \u2014 ilpa.co.il"}</button>
+          </a>
+          <p style={{textAlign:"center",color:DIM,fontSize:13,marginTop:12,fontWeight:400}}>{lang==="he"?"\u05d1\u05e9\u05d3\u05d4 \"\u05d4\u05d5\u05e4\u05e0\u05ea\u05d9 \u05dc\u05d4\u05e8\u05e9\u05de\u05d4 \u05e2\u05f4\u05d9\" \u05e8\u05e9\u05de\u05d5 OnePadel":"In \"referred by\" field, enter OnePadel"}</p>
+        </div>
         <div style={{display:"flex",justifyContent:"center",marginTop:20}}>
           <div style={{flex:"1 1 320px",maxWidth:620,background:"linear-gradient(160deg,rgba(0,56,184,0.10),rgba(200,169,110,0.05))",border:"1px solid rgba(200,169,110,0.3)",borderRadius:14,padding:"32px 28px",textAlign:"center"}}>
             <div style={{fontSize:44,marginBottom:8}}>🇮🇱</div>
