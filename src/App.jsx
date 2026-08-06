@@ -1526,6 +1526,7 @@ export default function PadelIsrael() {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [modal, setModal] = useState(null);
+  const [openMonth,setOpenMonth]=useState(-1);
   const [search, setSearch] = useState("");
   const [regionF, setRegionF] = useState("הכל");
   const [selectedClub, setSelectedClub] = useState(null);
@@ -1663,12 +1664,12 @@ export default function PadelIsrael() {
               {m:lang==="he"?"\u05e0\u05d5\u05d1\u05de\u05d1\u05e8":"November",d:"5\u20138.11",p:"P5000",champ:true},
               {m:lang==="he"?"\u05d3\u05e6\u05de\u05d1\u05e8":"December",d:"17\u201320.12",p:"P1000",champ:false},
             ].map((it,i)=>(
-              <div key={i} style={{background:it.champ?"linear-gradient(150deg,rgba(196,216,46,0.14),rgba(38,51,140,0.3))":"rgba(38,51,140,0.28)",border:it.champ?"1px solid rgba(196,216,46,0.6)":"1px solid rgba(120,150,255,0.3)",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
+              <div key={i} onClick={()=>setOpenMonth(openMonth===i?-1:i)} style={{cursor:"pointer",background:it.champ?"linear-gradient(150deg,rgba(196,216,46,0.14),rgba(38,51,140,0.3))":"rgba(38,51,140,0.28)",border:it.champ?"1px solid rgba(196,216,46,0.6)":"1px solid rgba(120,150,255,0.3)",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
                 <div style={{fontSize:20,fontWeight:900,color:"#ffffff"}}>{it.m}</div>
                 <div style={{fontSize:15,fontWeight:700,color:"#2ff0d6",marginTop:6}}>{it.d}</div>
                 <div style={{fontSize:22,fontWeight:900,color:GOLD,marginTop:4}}>{it.p}</div>
                 {it.live && <span style={{marginTop:8,marginRight:6,display:"inline-block",background:"#ff3b3b",color:"#fff",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{"LIVE SPORT5"}</span>}
-                {it.live && <div style={{marginTop:6,fontSize:12,fontWeight:700,color:"#9fc4d6",lineHeight:1.5}}>{"Netanya \u00b7 Rishon \u00b7 Caesarea \u00b7 Ramat Efal"}</div>}
+                {openMonth===i && <div style={{marginTop:6,fontSize:12,fontWeight:700,color:"#9fc4d6",lineHeight:1.5}}>{"Netanya \u00b7 Rishon \u00b7 Caesarea \u00b7 Ramat Efal"}</div>}
                 {it.champ && <div style={{marginTop:8,display:"inline-block",background:"#c4d82e",color:"#1b2570",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{lang==="he"?"\u05d0\u05dc\u05d9\u05e4\u05d5\u05ea \u05d9\u05e9\u05e8\u05d0\u05dc":"Israel Champ."}</div>}
               </div>
             ))}
