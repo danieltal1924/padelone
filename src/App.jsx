@@ -9,7 +9,7 @@ const LANG = {
     h1a:"הכל על", h1b:"פאדל", h1c:"בישראל 🇮🇱",
     sub:"תחרויות, מועדונים, ציוד, נסיעות לחול וחדשות מהעולם — הכל במקום אחד.",
     btn1:"גלה תחרויות", btn2:"מצא מועדון", btn3:"יד-2", btn4:"🌍 תחרויות בחול", btn5:"✈️ נסיעות לחול", btn6:"📰 חדשות", btn7:"מותגים",
-    stats:["שחקנים רשומים ב-ILPA","מגרשים בישראל","תחרויות בשנה","מועדונים פעילים"],
+    stats:["שחקנים רשומים ב-ILPA","מגרשים בישראל","תחרויות רשמיות בשנה","מועדונים פעילים"],
     s_tournaments:"תחרויות קרובות 🏆", s_clubs:"מועדוני פאדל 📍", s_marketplace:"ציוד יד 2", s_brands:"מותגי פאדל 🎾", brandsSub:"המותגים המובילים בעולם הפאדל — מחבטים, דגמים ומחירים. רוצים לפרסם את המותג שלכם? דברו איתנו.", brandFeatured:"מקודם", brandVisit:"לאתר המותג", brandAdTitle:"המותג שלכם כאן", brandAdSub:"רוצים להציג את המחבטים והציוד שלכם בפני קהילת הפאדל הישראלית?", brandAdBtn:"פרסמו את המותג",
     s_world:"תחרויות עולמיות 🌍", s_rankings:"דירוג עולמי 🏅", s_travel:"טיולי פאדל לחול ✈️", s_news:"חדשות פאדל 📰",
     searchClub:"חיפוש מועדון או עיר...", allTournaments:"כל התחרויות",
@@ -1634,7 +1634,7 @@ export default function PadelIsrael() {
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))",gap:0,marginTop:80,border:`1px solid ${BORDER}`,borderRadius:3,overflow:"hidden"}}>
             {STATS_VALS.map((v,i) => (
               <Card3D key={i}>
-                <Glass style={{padding:"24px 18px",textAlign:"center",borderRight:i<3?`1px solid ${BORDER}`:"none"}}>
+                <Glass style={{padding:"24px 18px",textAlign:"center",minHeight:135,display:"flex",flexDirection:"column",justifyContent:"center",borderRight:i<3?`1px solid ${BORDER}`:"none"}}>
                   <div style={{fontSize:24,marginBottom:10}}>{["👤","🏟️","🏆","📍"][i]}</div>
                   <div style={{fontWeight:900,fontSize:24,color:SILVER}}>{v}</div>
                   <div style={{color:DIM,fontSize:11,marginTop:5,letterSpacing:.5}}>{t.stats[i]}</div>
