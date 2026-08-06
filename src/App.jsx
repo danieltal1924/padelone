@@ -1668,6 +1668,7 @@ export default function PadelIsrael() {
                 <div style={{fontSize:15,fontWeight:700,color:"#2ff0d6",marginTop:6}}>{it.d}</div>
                 <div style={{fontSize:22,fontWeight:900,color:GOLD,marginTop:4}}>{it.p}</div>
                 {it.live && <span style={{marginTop:8,marginRight:6,display:"inline-block",background:"#ff3b3b",color:"#fff",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{"LIVE SPORT5"}</span>}
+                {it.live && <div style={{marginTop:6,fontSize:12,fontWeight:700,color:"#9fc4d6",lineHeight:1.5}}>{"Netanya \u00b7 Rishon \u00b7 Caesarea \u00b7 Ramat Efal"}</div>}
                 {it.champ && <div style={{marginTop:8,display:"inline-block",background:"#c4d82e",color:"#1b2570",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{lang==="he"?"\u05d0\u05dc\u05d9\u05e4\u05d5\u05ea \u05d9\u05e9\u05e8\u05d0\u05dc":"Israel Champ."}</div>}
               </div>
             ))}
