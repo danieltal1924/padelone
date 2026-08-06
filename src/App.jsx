@@ -1634,7 +1634,7 @@ export default function PadelIsrael() {
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))",gap:0,marginTop:80,border:`1px solid ${BORDER}`,borderRadius:3,overflow:"hidden"}}>
             {STATS_VALS.map((v,i) => (
               <Card3D key={i}>
-                <Glass style={{padding:"24px 18px",textAlign:"center",minHeight:135,display:"flex",flexDirection:"column",justifyContent:"center",borderRight:i<3?`1px solid ${BORDER}`:"none"}}>
+                <Glass style={{padding:"24px 18px",textAlign:"center",minHeight:155,display:"flex",flexDirection:"column",justifyContent:"center",borderRight:i<3?`1px solid ${BORDER}`:"none"}}>
                   <div style={{fontSize:24,marginBottom:10}}>{["👤","🏟️","🏆","📍"][i]}</div>
                   <div style={{fontWeight:900,fontSize:24,color:SILVER}}>{v}</div>
                   <div style={{color:DIM,fontSize:11,marginTop:5,letterSpacing:.5}}>{t.stats[i]}</div>
