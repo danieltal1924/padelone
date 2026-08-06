@@ -1638,6 +1638,7 @@ export default function PadelIsrael() {
                   <div style={{fontSize:24,marginBottom:10}}>{["👤","🏟️","🏆","📍"][i]}</div>
                   <div style={{fontWeight:900,fontSize:24,color:SILVER}}>{v}</div>
                   <div style={{color:DIM,fontSize:11,marginTop:5,letterSpacing:.5}}>{t.stats[i]}</div>
+                  {i===2 && <div style={{color:"#c8a96e",fontSize:9,marginTop:3}}>{"ומעל 50 תחרויות פנימיות"}</div>}
                 </Glass>
               </Card3D>
             ))}
