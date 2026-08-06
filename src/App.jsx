@@ -1658,7 +1658,7 @@ export default function PadelIsrael() {
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:14,marginBottom:24}}>
             {[
-              {m:lang==="he"?"\u05e1\u05e4\u05d8\u05de\u05d1\u05e8":"September",d:"3\u20136.9",p:"P1000",champ:false},
+              {m:lang==="he"?"\u05e1\u05e4\u05d8\u05de\u05d1\u05e8":"September",live:true,d:"3\u20136.9",p:"P1000",champ:false},
               {m:lang==="he"?"\u05d0\u05d5\u05e7\u05d8\u05d5\u05d1\u05e8":"October",d:"8\u201311.10",p:"P2500",champ:false},
               {m:lang==="he"?"\u05e0\u05d5\u05d1\u05de\u05d1\u05e8":"November",d:"5\u20138.11",p:"P5000",champ:true},
               {m:lang==="he"?"\u05d3\u05e6\u05de\u05d1\u05e8":"December",d:"17\u201320.12",p:"P1000",champ:false},
@@ -1667,6 +1667,7 @@ export default function PadelIsrael() {
                 <div style={{fontSize:20,fontWeight:900,color:"#ffffff"}}>{it.m}</div>
                 <div style={{fontSize:15,fontWeight:700,color:"#2ff0d6",marginTop:6}}>{it.d}</div>
                 <div style={{fontSize:22,fontWeight:900,color:GOLD,marginTop:4}}>{it.p}</div>
+                {it.live && <span style={{marginTop:8,marginRight:6,display:"inline-block",background:"#ff3b3b",color:"#fff",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{"LIVE SPORT5"}</span>}
                 {it.champ && <div style={{marginTop:8,display:"inline-block",background:"#c4d82e",color:"#1b2570",fontSize:11,fontWeight:900,padding:"3px 10px",borderRadius:6}}>{lang==="he"?"\u05d0\u05dc\u05d9\u05e4\u05d5\u05ea \u05d9\u05e9\u05e8\u05d0\u05dc":"Israel Champ."}</div>}
               </div>
             ))}
