@@ -607,9 +607,9 @@ const RANKINGS = {
     {rank:5,name:"Ariana Sánchez",country:"🇪🇸",partner:"Andrea Ustero",partnerCountry:"🇪🇸",points:"12,826",change:"—"},
     {rank:6,name:"Claudia Fernández",country:"🇪🇸",partner:"Martina Calvo",partnerCountry:"🇪🇸",points:"11,771",change:"—"},
     {rank:7,name:"Andrea Ustero",country:"🇪🇸",partner:"Ariana Sánchez",partnerCountry:"🇪🇸",points:"9,283",change:"—"},
-    {rank:8,name:"Sofía Araújo",country:"🇵🇹",partner:"—",partnerCountry:"",points:"6,876",change:"—"},
+    {rank:8,name:"Sofía Araújo",country:"🇵🇹",partner:"Marta Ortega",partnerCountry:"🇪🇸",points:"6,876",change:"—"},
     {rank:9,name:"Martina Calvo",country:"🇪🇸",partner:"Claudia Fernández",partnerCountry:"🇪🇸",points:"6,503",change:"▲"},
-    {rank:10,name:"Tamara Icardo",country:"🇪🇸",partner:"—",partnerCountry:"",points:"6,416",change:"▼"},
+    {rank:10,name:"Tamara Icardo",country:"🇪🇸",partner:"Claudia Jensen",partnerCountry:"🇦🇷",points:"6,416",change:"▼"},
   ],
 };
 const ISRAEL_NEWS = [
