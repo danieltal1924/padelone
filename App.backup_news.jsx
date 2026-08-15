@@ -663,7 +663,6 @@ const RANKINGS = {
   ],
 };
 const ISRAEL_NEWS = [
-  {title:"ספורט 5: ערן זהבי משיק ליגת פאדל חדשה — EZ7 Padel Tour, ומתכנן עם ג'ואי לאו מתחם יוקרה ברעננה ב-12 מיליון ש\"ח",time:"אוגוסט 2026",category:"ישראל",hot:true,url:"https://www.sport5.co.il/articles.aspx?FolderID=12176&docID=556389"},
   {title:"\u05d5\u05d0\u05dc\u05d4 \u05d1\u05e8\u05d9\u05d0\u05d5\u05ea: \u05dc\u05d0 \u05e8\u05e7 \u05d8\u05e8\u05e0\u05d3 \u2014 \u05dc\u05de\u05d4 \u05d4\u05e4\u05d0\u05d3\u05dc \u05db\u05d5\u05d1\u05e9 \u05d0\u05ea \u05d4\u05e2\u05d5\u05dc\u05dd \u05d5\u05d2\u05dd \u05d0\u05ea \u05d9\u05e9\u05e8\u05d0\u05dc",time:"\u05d9\u05d5\u05dc\u05d9 2026",category:"\u05d9\u05e9\u05e8\u05d0\u05dc",hot:true,url:"https://healthy.walla.co.il/item/3856216"},
   {title:"ONE: הענף העולה — הפאדל תופס תאוצה אצל הנשים בישראל",time:"יוני 2026",category:"ישראל",hot:true,url:"https://www.one.co.il/Article/526611.html"},
   {title:"כלכליסט: מינגלינג בין החבטות — 150 מגרשים, 35 מועדונים בישראל",time:"אוגוסט 2025",category:"ישראל",hot:false,url:"https://www.calcalist.co.il/style/article/r1sqjfecll"},
