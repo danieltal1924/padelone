@@ -518,29 +518,6 @@ const CLUBS = [
   },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
   {
-    name:"פאדל נס",
-    city:"נס ציונה",
-    region:"דרום",
-    location:"הנבחרת 10, נס ציונה",
-    basic:true,
-  },
-  {
-    name:"B7 Beer Sheva Padel Club",
-    city:"באר שבע",
-    region:"דרום",
-    phone:"053-718-4218",
-    location:"חיל ההנדסה 1, באר שבע",
-    basic:true,
-  },
-  {
-    name:"Padelnet רמת אפעל",
-    city:"רמת אפעל",
-    region:"מרכז",
-    phone:"054-344-1405",
-    location:"רמת אפעל",
-    basic:true,
-  },
-  {
     name:"האוס פאדל בית ברל",
     city:"בית ברל",
     region:"שרון",
