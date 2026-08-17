@@ -357,7 +357,6 @@ const CLUBS = [
     name:"The Padel Club",
     city:"אזור",
     region:"מרכז",
-    phone:"052-701-6953",
     location:"ז'בוטינסקי 28, אזור",
     basic:true,
   },
