@@ -13,10 +13,10 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>פאדל בישראל — מועדונים, תחרויות, דירוגים, ציוד יד 2 וחדשות | Padel One</title>
+    <title>Padel One | קהילת הפאדל הישראלית — מועדונים, תחרויות, דירוג ויד-2</title>
     <meta
       name="description"
-      content="כל עולם הפאדל בישראל במקום אחד — מועדונים לפי אזור, תחרויות, דירוגים, ציוד יד שנייה וחדשות. מצאו איפה לשחק פאדל ליד הבית."
+      content="הכל על פאדל בישראל — תחרויות, מועדונים, ציוד יד 2, דירוגים וחדשות מהעולם. הבית הדיגיטלי של קהילת הפאדל הישראלית."
     />
 
     <!-- PWA -->
@@ -29,15 +29,15 @@
     <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- Open Graph — תצוגה מקדימה בוואטסאפ / פייסבוק / אינסטגרם -->
-    <meta property="og:title" content="פאדל בישראל — מועדונים, תחרויות, דירוגים ועוד | Padel One" />
+    <meta property="og:title" content="Padel One | קהילת הפאדל הישראלית" />
     <meta
       property="og:description"
-      content="כל עולם הפאדל בישראל במקום אחד — מועדונים, תחרויות, דירוגים, יד 2 וחדשות."
+      content="הכל על פאדל בישראל — תחרויות, מועדונים, ציוד יד 2, דירוגים וחדשות מהעולם."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.padelone.co.il" />
     <meta property="og:locale" content="he_IL" />
-    <meta property="og:image" content="https://www.padelone.co.il/og-image.jpg" />
+    <meta property="og:image" content="https://www.padelone.co.il/icon-512.png" />
   </head>
   <body>
     <div id="root"></div>
