@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 const LANG = {
   he: {
     dir:"rtl", join:"הצטרף",
-    nav:{ home:"בית", tournaments:"תחרויות", clubs:"מועדונים", marketplace:"יד 2", brands:"מותגים 🎾", world:"עולם 🌍", rankings:"דירוג 🏅", travel:"נסיעות", news:"חדשות" },
+    nav:{ home:"בית", tournaments:"תחרויות", clubs:"מועדונים", marketplace:"יד 2", brands:"מותגים 🎾", world:"עולם 🌍", rankings:"דירוג 🏅", travel:"נסיעות", coachone:"מאמני פאדל 🎾", news:"חדשות" },
     badge:"הפלטפורמה המובילה לפאדל בישראל",
     h1a:"הכל על", h1b:"פאדל", h1c:"בישראל 🇮🇱",
     sub:"תחרויות, מועדונים, ציוד, נסיעות לחול וחדשות מהעולם — הכל במקום אחד.",
@@ -37,7 +37,7 @@ const LANG = {
   },
   en: {
     dir:"ltr", join:"Join",
-    nav:{ home:"Home", tournaments:"Tournaments", clubs:"Clubs", marketplace:"2nd Hand", brands:"Brands 🎾", world:"World 🌍", rankings:"Rankings 🏅", travel:"Travel", news:"News" },
+    nav:{ home:"Home", tournaments:"Tournaments", clubs:"Clubs", marketplace:"2nd Hand", brands:"Brands 🎾", world:"World 🌍", rankings:"Rankings 🏅", travel:"Travel", coachone:"Coaches 🎾", news:"News" },
     badge:"Israel's Leading Padel Platform",
     h1a:"Everything about", h1b:"Padel", h1c:"in Israel 🇮🇱",
     sub:"Tournaments, clubs, gear, trips abroad and world news — all in one place.",
@@ -1326,7 +1326,7 @@ function Modal({type,onClose,lang}) {
 }
 
 // ─── APP ───────────────────────────────────────────────────────────────────────
-const NAV_IDS = ["home","tournaments","clubs","brands","marketplace","world","rankings","travel","news"];
+const NAV_IDS = ["home","tournaments","clubs","brands","marketplace","world","rankings","coachone","news"];
 
 // ─── ACCESSIBILITY MENU ─────────────────────────────────────────────────────
 function AccessibilityMenu(){
@@ -1699,7 +1699,7 @@ export default function PadelIsrael() {
               <button className="btn-ghost" onClick={()=>scrollTo("clubs")}>{t.btn2}</button>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:480,margin:"0 auto"}}>
-              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.s_coach,icon:"",id:"coachone"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
+              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
                 <button key={i} onClick={()=>scrollTo(b.id)} style={{background:b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)",border:b.silver?"1px solid rgba(200,216,240,0.35)":`1px solid ${BORDER}`,color:SILVER,padding:"14px 10px",borderRadius:3,fontWeight:600,fontSize:12,cursor:"pointer",fontFamily:"Heebo,sans-serif",transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}
                   onMouseEnter={e=>{e.currentTarget.style.background="rgba(180,210,255,0.1)";e.currentTarget.style.borderColor="rgba(200,216,240,0.4)";e.currentTarget.style.transform="translateY(-2px)"}}
                   onMouseLeave={e=>{e.currentTarget.style.background=b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)";e.currentTarget.style.borderColor=b.silver?"rgba(200,216,240,0.35)":BORDER;e.currentTarget.style.transform="translateY(0)"}}>
