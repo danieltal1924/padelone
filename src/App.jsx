@@ -12,6 +12,7 @@ const LANG = {
     stats:["שחקנים רשומים ב-ILPA","מגרשים בישראל","תחרויות רשמיות בשנה","מועדונים פעילים"],
     s_tournaments:"תחרויות קרובות 🏆", s_clubs:"מועדוני פאדל 📍", s_marketplace:"ציוד יד 2", s_brands:"מותגי פאדל 🎾", brandsSub:"המותגים המובילים בעולם הפאדל — מחבטים, דגמים ומחירים. רוצים לפרסם את המותג שלכם? דברו איתנו.", brandFeatured:"מקודם", brandVisit:"לאתר המותג", brandAdTitle:"המותג שלכם כאן", brandAdSub:"רוצים להציג את המחבטים והציוד שלכם בפני קהילת הפאדל הישראלית?", brandAdBtn:"פרסמו את המותג",
     s_world:"תחרויות עולמיות 🌍", s_rankings:"דירוג עולמי 🏅", s_travel:"טיולי פאדל לחול ✈️", s_news:"חדשות פאדל 📰",
+    s_coach:"מאמני פאדל 🎾", coachTitle:"מצא את המאמן שלך", coachSub:"CoachOne — הפלטפורמה לחיבור בין שחקנים למאמני פאדל בישראל. מאמנים מוסמכים, זמינות ואזורים — הכל במקום אחד.", coachContact:"לחצו כדי לעבור לפלטפורמת המאמנים.", coachBtn:"כניסה ל-CoachOne ←",
     searchClub:"חיפוש מועדון או עיר...", allTournaments:"כל התחרויות",
     register:"הרשמה", waitlist:"המתנה", full:"מלא", spots:"מקומות",
     bookLazuz:"🗓 הזמן מגרש — Lazuz", bookWA:"💬 הזמן ב-WhatsApp", details:"פרטים והזמנה",
@@ -44,6 +45,7 @@ const LANG = {
     stats:["Registered Players (ILPA)","Courts in Israel","Tournaments/Year","Active Clubs"],
     s_tournaments:"Upcoming Tournaments 🏆", s_clubs:"Padel Clubs 📍", s_marketplace:"2nd Hand Gear", s_brands:"Padel Brands 🎾", brandsSub:"The world's leading padel brands — rackets, models and prices. Want to feature your brand? Talk to us.", brandFeatured:"Sponsored", brandVisit:"Visit brand", brandAdTitle:"Your brand here", brandAdSub:"Want to showcase your rackets and gear to the Israeli padel community?", brandAdBtn:"Advertise your brand",
     s_world:"World Tournaments 🌍", s_rankings:"World Rankings 🏅", s_travel:"Padel Travel ✈️", s_news:"Padel News 📰",
+    s_coach:"Padel Coaches 🎾", coachTitle:"Find Your Coach", coachSub:"CoachOne — the platform connecting players with padel coaches in Israel. Certified coaches, availability and regions — all in one place.", coachContact:"Click to visit the coaches platform.", coachBtn:"Enter CoachOne ←",
     searchClub:"Search club or city...", allTournaments:"All Tournaments",
     register:"Register", waitlist:"Waitlist", full:"Full", spots:"spots",
     bookLazuz:"🗓 Book — Lazuz", bookWA:"💬 Book on WhatsApp", details:"Details & Book",
@@ -1697,7 +1699,7 @@ export default function PadelIsrael() {
               <button className="btn-ghost" onClick={()=>scrollTo("clubs")}>{t.btn2}</button>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:480,margin:"0 auto"}}>
-              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
+              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.s_coach,icon:"",id:"coachone"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
                 <button key={i} onClick={()=>scrollTo(b.id)} style={{background:b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)",border:b.silver?"1px solid rgba(200,216,240,0.35)":`1px solid ${BORDER}`,color:SILVER,padding:"14px 10px",borderRadius:3,fontWeight:600,fontSize:12,cursor:"pointer",fontFamily:"Heebo,sans-serif",transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}
                   onMouseEnter={e=>{e.currentTarget.style.background="rgba(180,210,255,0.1)";e.currentTarget.style.borderColor="rgba(200,216,240,0.4)";e.currentTarget.style.transform="translateY(-2px)"}}
                   onMouseLeave={e=>{e.currentTarget.style.background=b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)";e.currentTarget.style.borderColor=b.silver?"rgba(200,216,240,0.35)":BORDER;e.currentTarget.style.transform="translateY(0)"}}>
@@ -1924,6 +1926,24 @@ export default function PadelIsrael() {
       </section>
 
       {/* WORLD */}
+      {/* COACHONE */}
+      <section id="coachone" style={{padding:"100px 0",background:"rgba(4,8,15,0.72)",borderTop:`1px solid ${BORDER}`,position:"relative",zIndex:1}}>
+        <div style={{maxWidth:1200,margin:"0 auto",padding:"0 32px"}}>
+          <span className="stag">COACHONE</span>
+          <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_coach}</h2>
+          <div className="sline"/>
+          <div style={{textAlign:"center",padding:"80px 24px"}}>
+            <div style={{fontSize:64,marginBottom:24}}>🎾</div>
+            <h3 style={{fontWeight:800,fontSize:28,marginBottom:12,color:SILVER}}>{t.coachTitle}</h3>
+            <p style={{color:DIM,fontSize:16,maxWidth:520,margin:"0 auto 16px",lineHeight:1.7,fontWeight:300}}>{t.coachSub}</p>
+            <p style={{color:DIM,fontSize:14,maxWidth:520,margin:"0 auto 32px",fontWeight:300}}>{t.coachContact}</p>
+            <a href="https://coachone-live.netlify.app" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+              <button style={{background:"linear-gradient(135deg,#5FD3E0,#2ff0d6)",color:"#04080f",border:"none",padding:"14px 34px",borderRadius:3,fontWeight:700,fontSize:15,cursor:"pointer",fontFamily:"Heebo,sans-serif",letterSpacing:1}}>{t.coachBtn}</button>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="world" style={{padding:"100px 32px",maxWidth:1200,margin:"0 auto",position:"relative",zIndex:1}}>
         <span className="stag">WORLD</span>
         <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_world}</h2>
