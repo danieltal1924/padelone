@@ -1697,7 +1697,7 @@ export default function PadelIsrael() {
               <button className="btn-ghost" onClick={()=>scrollTo("clubs")}>{t.btn2}</button>
             </div>
             <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,maxWidth:480,margin:"0 auto"}}>
-              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn5,icon:"✈️",id:"travel"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
+              {[{label:t.btn1,icon:"🏆",id:"tournaments",silver:true},{label:t.btn2,icon:"📍",id:"clubs"},{label:t.btn3,icon:"ball",id:"marketplace"},{label:t.btn7,icon:"🎾",id:"brands"},{label:t.btn4,icon:"🌍",id:"world"},{label:t.btn6,icon:"📰",id:"news"}].map((b,i) => (
                 <button key={i} onClick={()=>scrollTo(b.id)} style={{background:b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)",border:b.silver?"1px solid rgba(200,216,240,0.35)":`1px solid ${BORDER}`,color:SILVER,padding:"14px 10px",borderRadius:3,fontWeight:600,fontSize:12,cursor:"pointer",fontFamily:"Heebo,sans-serif",transition:"all .2s",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}
                   onMouseEnter={e=>{e.currentTarget.style.background="rgba(180,210,255,0.1)";e.currentTarget.style.borderColor="rgba(200,216,240,0.4)";e.currentTarget.style.transform="translateY(-2px)"}}
                   onMouseLeave={e=>{e.currentTarget.style.background=b.silver?"linear-gradient(135deg,rgba(200,216,240,0.12),rgba(140,160,200,0.08))":"rgba(180,210,255,0.04)";e.currentTarget.style.borderColor=b.silver?"rgba(200,216,240,0.35)":BORDER;e.currentTarget.style.transform="translateY(0)"}}>
@@ -1906,7 +1906,7 @@ export default function PadelIsrael() {
       </section>
 
       {/* TRAVEL */}
-      <section id="travel" style={{padding:"100px 0",background:"rgba(4,8,15,0.72)",borderTop:`1px solid ${BORDER}`,position:"relative",zIndex:1}}>
+      <section id="travel" style={{display:"none",padding:"100px 0",background:"rgba(4,8,15,0.72)",borderTop:`1px solid ${BORDER}`,position:"relative",zIndex:1}}>
         <div style={{maxWidth:1200,margin:"0 auto",padding:"0 32px"}}>
           <span className="stag">TRAVEL</span>
           <h2 style={{fontSize:"clamp(26px,4vw,44px)",fontWeight:900,color:"#ffffff"}}>{t.s_travel}</h2>
@@ -2017,7 +2017,7 @@ export default function PadelIsrael() {
             </div>
             <div>
               <h4 style={{fontWeight:700,marginBottom:16,color:SILVER,fontSize:11,letterSpacing:2.5}}>{t.fnav}</h4>
-              {[["tournaments","home"],["clubs","clubs"],["brands","brands"],["marketplace","marketplace"],["travel","travel"],["world","world"],["rankings","rankings"],["news","news"]].map(([key,id],j) => (
+              {[["tournaments","home"],["clubs","clubs"],["brands","brands"],["marketplace","marketplace"],["world","world"],["rankings","rankings"],["news","news"]].map(([key,id],j) => (
                 <div key={j} onClick={()=>scrollTo(id)} style={{color:DIM,fontSize:13,marginBottom:11,cursor:"pointer",transition:"color .2s",fontWeight:300}}
                   onMouseEnter={e=>e.currentTarget.style.color=SILVER}
                   onMouseLeave={e=>e.currentTarget.style.color=DIM}>{t["fl_"+key]}</div>
