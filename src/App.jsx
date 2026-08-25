@@ -521,6 +521,27 @@ const CLUBS = [
   },
   // ⬇️ מועדונים נוספים יתווספו בהמשך
   {
+    name:"טופ פאדל נהריה",
+    city:"נהריה",
+    region:"צפון",
+    phone:"",
+    basic:true,
+  },
+  {
+    name:"Rooftop Padel Club רעננה",
+    city:"רעננה",
+    region:"שרון",
+    phone:"",
+    basic:true,
+  },
+  {
+    name:"גרין פאדל מבשרת ציון",
+    city:"מבשרת ציון",
+    region:"ירושלים",
+    phone:"",
+    basic:true,
+  },
+  {
     name:"פאדל נס",
     city:"נס ציונה",
     region:"דרום",
