@@ -1759,7 +1759,7 @@ export default function PadelIsrael() {
             {[
               {m:lang==="he"?"\u05e1\u05e4\u05d8\u05de\u05d1\u05e8":"September",live:true,d:"3\u20136.9",p:"P1000",champ:false,venues:[["A","Top Padel","Ir Yamim, Netanya"],["B","Padel Net","Ramat Efal"],["C","Padel Israel","Caesarea"],["D","Top Padel","Ramat Poleg, Netanya"],["W","Padel Center","Rishon"],["W+","Padel Center Pro","Rishon"]]},
               {m:lang==="he"?"\u05d0\u05d5\u05e7\u05d8\u05d5\u05d1\u05e8":"October",live:true,d:"8\u201311.10",p:"P2500",champ:false,venues:[["A","Padel Net","Ramat Efal"],["B","House Padel","Beit Berl"],["C","Padelir","Ramat Gan"],["D","Padel Club","Azor"],["W","Padel Net","Ramat Efal"],["W+","Padel Net","Ramat Efal"]]},
-              {m:lang==="he"?"\u05e0\u05d5\u05d1\u05de\u05d1\u05e8":"November",d:"5\u20138.11",p:"P5000",champ:true},
+              {m:lang==="he"?"\u05e0\u05d5\u05d1\u05de\u05d1\u05e8":"November",d:"5\u20138.11",p:"P5000",champ:true,live:true,venues:[["A","Top Padel","Netanya"],["B","Padel Savyon","Savyon"],["C","Padel Israel","Caesarea"],["D","Head Padel","Golf Caesarea"],["W","Head Padel","Golf Caesarea"],["W+","Head Padel","Golf Caesarea"]]},
               {m:lang==="he"?"\u05d3\u05e6\u05de\u05d1\u05e8":"December",d:"17\u201320.12",p:"P1000",champ:false},
             ].map((it,i)=>(
               <div key={i} onClick={()=>setOpenMonth(openMonth===i?-1:i)} style={{cursor:"pointer",background:it.champ?"linear-gradient(150deg,rgba(196,216,46,0.14),rgba(38,51,140,0.3))":"rgba(38,51,140,0.28)",border:it.champ?"1px solid rgba(196,216,46,0.6)":"1px solid rgba(120,150,255,0.3)",borderRadius:12,padding:"18px 16px",textAlign:"center"}}>
